@@ -1,14 +1,19 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Inter, Montserrat } from "next/font/google";
 import "./globals.css";
+import { ThemeProvider } from "next-themes";
+import Providers from "./provider";
+import AppShell from "./appshell";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const inter = Inter({
   subsets: ["latin"],
+  variable: "--font-inter",
+  weight: ["400", "500", "600", "700"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+const montserrat = Montserrat({
   subsets: ["latin"],
+  variable: "--font-montserrat",
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata = {
@@ -18,11 +23,19 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" className="dark">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${inter.variable} ${montserrat.variable} bg-background text-foreground transition-colors`}
       >
-        {children}
+        <ThemeProvider
+          attribute="class"
+          enableSystem={false}
+          defaultTheme="light"
+        >
+          <Providers>
+            <AppShell>{children}</AppShell>
+          </Providers>
+        </ThemeProvider>
       </body>
     </html>
   );

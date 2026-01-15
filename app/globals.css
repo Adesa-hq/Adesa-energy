@@ -1,26 +1,65 @@
 @import "tailwindcss";
 
+@config "../tailwind.config.js";
+@plugin "../hero.ts";
+
+
+/* Color variables */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --deep-blue: #22244e;
+  --burnt-orange: #f37621;
+  --charcoal-gray: #242622;
+  --light-blue: #59c6e5;
+  --dark-blue: #1d3866;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+/* Base typography */
+* {
+  font-family: "Inter", system-ui, sans-serif;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Montserrat", system-ui, sans-serif;
+}
+
+/* Utility classes that aren't worth turning into Tailwind plugins */
+.hero-gradient {
+  background: linear-gradient(
+    135deg,
+    var(--deep-blue) 0%,
+    var(--dark-blue) 100%
+  );
+}
+
+.card-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+html {
+  scroll-behavior: smooth;
 }
