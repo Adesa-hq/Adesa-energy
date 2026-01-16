@@ -59,7 +59,8 @@ export const siteConfig = {
         label: "Average fuel savings",
       },
       {
-        value: "500+",
+        value: 500 + "+",
+
         label: "Vehicles converted",
       },
       {
@@ -535,7 +536,18 @@ export const siteConfig = {
       },
     ],
 
-    socials: ["Linkedin", "Twitter", "Instagram", "Facebook"],
+    socials: [
+      {
+        name: "Linkedin",
+        url: "https://www.linkedin.com/showcase/adesa-energy/",
+      },
+      { name: "Twitter", url: "https://twitter.com/adesaenergy" },
+      {
+        name: "Instagram",
+        url: "https://www.instagram.com/adesaenergy/?igsh=MWE2YWdvdWl2aWNvZg%3D%3D#",
+      },
+      { name: "Facebook", url: "https://www.facebook.com/share/17HCMqGnz4/" },
+    ],
 
     form: {
       title: "Send us a message",
@@ -603,8 +615,11 @@ export const siteConfig = {
     socials: [
       { icon: Linkedin, href: "#" },
       { icon: Twitter, href: "#" },
-      { icon: Instagram, href: "#" },
-      { icon: Facebook, href: "#" },
+      {
+        icon: Instagram,
+        href: "https://www.instagram.com/adesaenergy/?igsh=MWE2YWdvdWl2aWNvZg%3D%3D#",
+      },
+      { icon: Facebook, href: "https://www.facebook.com/share/17HCMqGnz4/" },
     ],
   },
 

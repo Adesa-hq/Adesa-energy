@@ -69,15 +69,15 @@ const ContactInfo = () => {
           Follow us
         </h3>
         <div className="flex space-x-4">
-          {contactConfig.socials.map((name) => {
-            const Icon = socialMap[name];
+          {contactConfig.socials.map((social) => {
+            const Icon = socialMap[social.name];
             return (
               <motion.a
-                key={name}
+                key={social.name}
                 whileHover={{ scale: 1.1 }}
-                href="#"
+                href={social.url}
                 className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-[#F37621] transition"
-                aria-label={`Visit our ${name} page`}
+                aria-label={`Visit our ${social.name} page`}
               >
                 <Icon className="w-5 h-5 text-white" />
               </motion.a>
