@@ -1,7 +1,7 @@
-import HomePage from "@/components/HomePage";
+import HomePage from "@/components/Sections/HomeSection";
 
 export const metadata = {
-  title: "Mobile CNG Conversion and Refueling in Nigeria",
+  title: "Adesa Energy | Mobile CNG Conversion and Refueling",
   description:
     "Save fuel costs with Adesa Energy mobile CNG conversion and on-demand refueling. Built for fleets and personal vehicles across Nigeria.",
   alternates: {

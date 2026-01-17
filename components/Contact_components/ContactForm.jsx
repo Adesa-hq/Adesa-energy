@@ -1,3 +1,5 @@
+"use client";
+
 import { Send, CheckCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";

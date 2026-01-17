@@ -1,12 +1,9 @@
-import ResourcesSection from "@/components/ResourcesSection";
-
-export const metadata = {
- title: 'Nome da página',
- description: 'Descrição da página'
-}
+import ResourcesSection from "@/components/Sections/ResourcesSection";
 
 export default function ResourcesPage() {
- return (
-   <ResourcesSection />
- );
+  return (
+    <div className="mt-10">
+      <ResourcesSection />
+    </div>
+  );
 }

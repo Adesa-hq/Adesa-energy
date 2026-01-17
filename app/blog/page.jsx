@@ -1,13 +1,9 @@
+import BlogSection from "@/components/Sections/BlogSection";
 
-import BlogSection from "@/components/BlogSection";
-
-export const metadata = {
-  title: "Blog",
-  description: "Latest news and updates",
-};
-
-export default function Blog() {
- return (
-   <BlogSection />
- );
+export default function BlogPage() {
+  return (
+    <div className="mt-10">
+      <BlogSection />
+    </div>
+  );
 }

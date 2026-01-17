@@ -3,10 +3,30 @@
 import { ArrowRight, Fuel } from "lucide-react";
 import { motion } from "framer-motion";
 import { siteConfig } from "@/config/site";
+import { useEffect, useState } from "react";
 
 const HeroSection = ({ onNavClick }) => {
   const { hero } = siteConfig;
+  const [values, setValues] = useState(hero.stats.map(() => 0));
 
+  useEffect(() => {
+    const duration = 3500; // animation duration in ms
+    const startTime = performance.now();
+
+    function animate(now) {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+
+      setValues(hero.stats.map((stat) => Math.floor(stat.value * progress)));
+
+      if (progress < 1) {
+        requestAnimationFrame(animate);
+      }
+    }
+
+    requestAnimationFrame(animate);
+  }, [hero.stats]);
+  
   return (
     <motion.section
       id={hero.id}
@@ -58,10 +78,11 @@ const HeroSection = ({ onNavClick }) => {
             </div>
 
             <div className="grid grid-cols-3 gap-6 mt-12 pt-12 border-t border-charcoal-gray/30">
-              {hero.stats.map((stat) => (
+              {hero.stats.map((stat, idx) => (
                 <div key={stat.label}>
                   <p className="text-3xl md:text-4xl font-heading font-bold text-light-blue">
-                    {stat.value}
+                    {values[idx] || ""}
+                    {stat.suffix || ""}
                   </p>
                   <p className="text-gray-300 mt-1 font-sans">{stat.label}</p>
                 </div>

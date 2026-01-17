@@ -2,16 +2,22 @@
 import { motion } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
 import { siteConfig } from "@/config/site";
-import CalculatorHeader from "./Calculator_components/CalculatorHeader";
-import CalculatorForm from "./Calculator_components/CalculatorForm";
-import CalculatorResults from "./Calculator_components/CalculatorResults";
-import PriceCards from "./Calculator_components/PriceCards";
-import { formatCurrency } from "./Calculator_components/utils";
+import CalculatorHeader from "./CalculatorHeader";
+import CalculatorForm from "./CalculatorForm";
+import CalculatorResults from "./CalculatorResults";
+import PriceCards from "./PriceCards";
+import { formatCurrency } from "./utils";
+import { useRouter } from "next/navigation";
 
-const CalculatorSection = ({ onNavClick }) => {
+const CalculatorSection = () => {
   const [calculatorResult, setCalculatorResult] = useState(null);
   const [isCalculating, setIsCalculating] = useState(false);
   const resultsRef = useRef(null);
+  const router = useRouter();
+
+  const onNavClick = (path) => {
+    router.push(path);
+  };
 
   useEffect(() => {
     if (calculatorResult && resultsRef.current) {

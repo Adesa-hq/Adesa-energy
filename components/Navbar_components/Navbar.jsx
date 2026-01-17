@@ -13,7 +13,7 @@ export default function Navbar({ activeSection, handleNavClick }) {
     <nav className="fixed top-0 inset-x-0 z-50 bg-white dark:bg-dark-blue shadow-sm border-b border-gray-200 dark:border-charcoal-gray">
       <div className="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
         <button
-          onClick={() => handleNavClick("home")}
+          onClick={() => handleNavClick("home", "/")}
           className="flex items-center gap-2 py-2"
           aria-label="Adesa Energy Home"
         >
@@ -71,16 +71,14 @@ export default function Navbar({ activeSection, handleNavClick }) {
         <div className="mt-20 px-6 flex flex-col gap-4">
           <NavLinks
             activeSection={activeSection}
-            onNavigate={(s) => {
-              handleNavClick(s);
-              setOpen(false);
-            }}
+            onNavigate={handleNavClick}
+            closeNav={() => setOpen(false)}
             isMobile
             className="font-heading font-semibold text-2xl py-3 text-deep-blue dark:text-white border-b border-gray-200 dark:border-charcoal-gray hover:text-burnt-orange transition-colors"
           />
           <button
             onClick={() => {
-              handleNavClick("contact");
+              handleNavClick("contact", "/contact");
               setOpen(false);
             }}
             className="mt-6 bg-burnt-orange hover:bg-[#d15e15] text-white w-full px-6 py-4 rounded-lg font-heading font-semibold text-lg transition-colors shadow-md"

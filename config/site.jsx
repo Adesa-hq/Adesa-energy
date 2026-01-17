@@ -6,6 +6,7 @@ import {
   Twitter,
   Instagram,
   Facebook,
+  Mail,
 } from "lucide-react";
 
 export const siteConfig = {
@@ -20,13 +21,14 @@ export const siteConfig = {
 
   // Navigation items
   navItems: [
-    { id: "home", label: "Home" },
-    { id: "about", label: "About Us" },
-    { id: "solutions", label: "Solutions" },
-    { id: "calculator", label: "Savings Calculator" },
-    { id: "resources", label: "Resources" },
-    { id: "blog", label: "Blog" },
-    { id: "contact", label: "Contact" },
+    { id: "home", label: "Home", path: "/" },
+    { id: "about", label: "About Us", path: "/about" },
+    { id: "team", label: "Our Team", path: "/team" },
+    { id: "solutions", label: "Solutions", path: "/solutions" },
+    { id: "calculator", label: "Savings Calculator", path: "/calculator" },
+    { id: "resources", label: "Resources", path: "/resources" },
+    { id: "blog", label: "Blog", path: "/blog" },
+    { id: "contact", label: "Contact", path: "/contact" },
   ],
 
   // Hero section content
@@ -43,28 +45,29 @@ export const siteConfig = {
     ctas: {
       primary: {
         text: "Convert today",
-        target: "contact",
+        target: "/contact",
         ariaLabel: "Convert to CNG today",
       },
       secondary: {
         text: "Calculate savings",
-        target: "calculator",
+        target: "/calculator",
         ariaLabel: "Calculate your potential savings",
       },
     },
 
     stats: [
       {
-        value: "50%",
+        value: 50,
+        suffix: "%",
         label: "Average fuel savings",
       },
       {
-        value: 500 + "+",
-
+        value: 500,
+        suffix: "+",
         label: "Vehicles converted",
       },
       {
-        value: "24/7",
+        suffix: "24/7",
         label: "Support available",
       },
     ],
@@ -139,7 +142,7 @@ export const siteConfig = {
 
     cta: {
       text: "Partner with us",
-      target: "contact",
+      target: "/contact",
     },
 
     values: [
@@ -169,6 +172,70 @@ export const siteConfig = {
       label: "Trusted by industry leaders",
       count: 3,
     },
+  },
+
+  // Our Team section content
+  team: {
+    section: {
+      id: "team",
+      title: "Meet Our Leadership Team",
+      description:
+        "Visionaries driving the future of sustainable energy with decades of combined industry expertise",
+      cta: {
+        label: "Join Our Team",
+        path: "/contact",
+      },
+    },
+
+    members: [
+      {
+        name: "Sarah Johnson",
+        role: "CEO & Founder",
+        bio: "20+ years in renewable energy, former executive at national energy corporations.",
+        image: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD...",
+        social: [
+          { type: "twitter", icon: Twitter, url: "#" },
+          { type: "linkedin", icon: Linkedin, url: "#" },
+          { type: "mail", icon: Mail, url: "#" },
+        ],
+      },
+      {
+        name: "Michael Chen",
+        role: "CTO",
+        bio: "AI and energy systems expert with PhD from Stanford, 15 patents in energy efficiency.",
+        image:
+          "https://media.istockphoto.com/id/1413766112/photo/successful-mature-businessman-looking-at-camera-with-confidence.jpg",
+        social: [
+          { type: "twitter", icon: Twitter, url: "#" },
+          { type: "linkedin", icon: Linkedin, url: "#" },
+          { type: "mail", icon: Mail, url: "#" },
+        ],
+      },
+      {
+        name: "Elena Rodriguez",
+        role: "Head of Sustainability",
+        bio: "Former UN climate advisor, leading carbon neutrality initiatives across 12 countries.",
+        image:
+          "https://t3.ftcdn.net/jpg/01/33/41/86/360_F_133418675_PUUSlpHDjCTzWJ7KqTGArXUJDvMmAqoQ.jpg",
+        social: [
+          { type: "twitter", icon: Twitter, url: "#" },
+          { type: "linkedin", icon: Linkedin, url: "#" },
+          { type: "mail", icon: Mail, url: "#" },
+        ],
+      },
+      {
+        name: "David Kim",
+        role: "Lead Engineer",
+        bio: "Specialized in CNG conversion systems with 10+ years experience in fleet optimization.",
+        image:
+          "https://t4.ftcdn.net/jpg/00/77/91/73/360_F_77917361_EaOTLo6USgDgyuVFcYVqGCkhZJiZFPvK.jpg",
+        social: [
+          { type: "twitter", icon: Twitter, url: "#" },
+          { type: "linkedin", icon: Linkedin, url: "#" },
+          { type: "mail", icon: Mail, url: "#" },
+        ],
+      },
+    ],
   },
 
   // Solutions section content
@@ -226,7 +293,7 @@ export const siteConfig = {
           "Regular maintenance services to keep your CNG system running at peak performance. Our expert technicians ensure safety and efficiency.",
         cta: {
           text: "Schedule service",
-          target: "contact",
+          target: "/contact",
         },
         theme: "dark",
       },
@@ -237,7 +304,7 @@ export const siteConfig = {
           "Comprehensive training for drivers and fleet managers. Learn best practices for CNG operation and maintenance.",
         cta: {
           text: "Get training",
-          target: "contact",
+          target: "/contact",
         },
         theme: "orange",
       },
@@ -594,12 +661,13 @@ export const siteConfig = {
       "Powering progress, fueling tomorrow. Your trusted partner for CNG conversions and refueling services in Nigeria.",
     quickLinks: [
       { label: "Home", type: "route", path: "/" },
-      { label: "About Us", type: "scroll", id: "about" },
-      { label: "Solutions", type: "scroll", id: "solutions" },
-      { label: "Savings Calculator", type: "scroll", id: "calculator" },
+      { label: "About Us", type: "route", path: "/about" },
+      { label: "Solutions", type: "route", path: "/solutions" },
+      { label: "Savings Calculator", type: "route", path: "/calculator" },
       { label: "Resources", type: "route", path: "/resources" },
       { label: "Blog", type: "route", path: "/blog" },
-      { label: "Contact", type: "scroll", id: "contact" },
+      { label: "Our Team", type: "route", path: "/team" },
+      { label: "Contact", type: "route", path: "/contact" },
     ],
     services: [
       "Mobile CNG conversion",

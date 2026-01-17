@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { siteConfig } from "@/config/site";
+import { useRouter } from "next/navigation";
 
 const iconMap = {
   Car,
@@ -20,8 +21,13 @@ const iconMap = {
   GraduationCap,
 };
 
-const SolutionsSection = ({ onNavClick }) => {
+const SolutionsSection = () => {
   const { header, main, additional } = siteConfig.solutions;
+  const router = useRouter();
+
+  const onNavClick = (path) => {
+    router.push(path);
+  };
 
   return (
     <motion.section
