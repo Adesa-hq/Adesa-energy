@@ -1,7 +1,4 @@
 import {
-  Newspaper,
-  Lightbulb,
-  Megaphone,
   Linkedin,
   Twitter,
   Instagram,
@@ -77,6 +74,11 @@ export const siteConfig = {
       subtitle: "Sustainable • Affordable • Reliable",
       icon: "Fuel",
     },
+    images: [
+      "https://img.freepik.com/free-vector/realistic-polygonal-background_52683-60158.jpg?semt=ais_hybrid&w=740&q=80",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0t6Lb53B_eRRnYoAESVjjXZ5hRfOB2c8Wmw&s",
+      "https://img.freepik.com/free-vector/realistic-neon-lights-background_23-2148907367.jpg",
+    ],
   },
 
   // Features section content
@@ -502,40 +504,72 @@ export const siteConfig = {
     },
     posts: [
       {
-        icon: Newspaper,
+        icon: "Newspaper",
         title: "Nigeria's CNG adoption rate surges in 2025",
+        slug: "nigerias-cng-adoption-rate-surges-in-2025",
         excerpt:
-          "The latest statistics show a 300% increase in CNG vehicle conversions across Nigeria as fuel prices continue to rise...",
+          "Nigeria sees a 300% increase in CNG vehicle conversions in 2025 as fuel prices rise and clean energy adoption grows.",
+        content: [
+          "Nigeria is witnessing an unprecedented surge in Compressed Natural Gas (CNG) adoption in 2025. The latest statistics show a 300% increase in vehicle conversions across the country.",
+          "Rising fuel prices and government incentives for cleaner energy have fueled this growth. Fleet operators, commercial transport services, and individual car owners are switching to CNG to reduce operational costs and environmental impact.",
+          "Adesa Energy continues to support this transition with mobile conversion services, making it easier than ever for Nigerians to embrace sustainable energy solutions.",
+        ],
         tag: "Industry news",
         date: "Jan 15, 2025",
+        readingTime: "3 min read",
         gradient: "from-deep-blue to-dark-blue",
         iconBg: "bg-light-blue/10",
         iconColor: "text-light-blue",
         tagStyle: "bg-light-blue/10 text-light-blue",
+        image: "/images/blog/cng-adoption-2025.jpg", // hero image
+        ogImage: "/images/blog/cng-adoption-2025-og.jpg", // static fallback OG image
       },
       {
-        icon: Lightbulb,
+        icon: "Lightbulb",
         title: "5 things to know before converting to CNG",
+        slug: "5-things-to-know-before-converting-to-cng",
         excerpt:
-          "Thinking about making the switch? Here's everything you need to consider before converting your vehicle to CNG...",
+          "A guide to ensure your vehicle conversion to CNG is safe, cost-effective, and efficient.",
+        content: [
+          "Converting your vehicle to Compressed Natural Gas (CNG) can save you money and reduce emissions, but there are key points to consider.",
+          "1. Ensure your vehicle model is compatible with CNG conversion kits.",
+          "2. Check for authorized conversion centers to guarantee safety and quality.",
+          "3. Evaluate long-term cost savings versus upfront conversion costs.",
+          "4. Understand the availability of CNG refueling stations near you.",
+          "5. Maintain your vehicle regularly to prevent engine issues.",
+          "Adesa Energy offers professional installation and guidance to make the transition smooth.",
+        ],
         tag: "Guide",
         date: "Jan 10, 2025",
+        readingTime: "4 min read",
         gradient: "from-burnt-orange to-[#d15e15]",
         iconBg: "bg-white/10",
         iconColor: "text-white",
         tagStyle: "bg-burnt-orange/10 text-burnt-orange",
+        image: "/images/blog/cng-conversion-guide.jpg",
+        ogImage: "/images/blog/cng-conversion-guide-og.jpg",
       },
       {
-        icon: Megaphone,
+        icon: "Megaphone",
         title: "Adesa Energy expands to 5 new cities",
+        slug: "adesa-energy-expands-to-5-new-cities",
         excerpt:
-          "We're excited to announce our expansion to Abuja, Port Harcourt, Kano, Ibadan, and Benin City. Now serving more Nigerians...",
+          "Adesa Energy expands services to Abuja, Port Harcourt, Kano, Ibadan, and Benin City, bringing CNG conversion and refueling nationwide.",
+        content: [
+          "Adesa Energy is proud to announce its expansion into five new cities: Abuja, Port Harcourt, Kano, Ibadan, and Benin City. This expansion allows us to bring convenient mobile CNG conversion and on-demand refueling services to more Nigerians.",
+          "Our mobile services reduce downtime for vehicle owners. Customers no longer need to visit traditional conversion centers; our experts come to their location.",
+          "This approach simplifies the transition to CNG, saves money on fuel, and supports environmental sustainability.",
+          "By reaching these cities, we aim to provide both convenience and cost savings while contributing to a greener future.",
+        ],
         tag: "Company news",
         date: "Jan 5, 2025",
+        readingTime: "5 min read",
         gradient: "from-light-blue to-cyan-500",
         iconBg: "bg-deep-blue/10",
         iconColor: "text-deep-blue",
         tagStyle: "bg-light-blue/10 text-light-blue",
+        image: "/images/blog/adesa-expansion.jpg",
+        ogImage: "/images/blog/adesa-expansion-og.jpg",
       },
     ],
   },
