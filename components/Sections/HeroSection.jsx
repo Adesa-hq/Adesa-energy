@@ -93,7 +93,7 @@ const HeroSection = ({ onNavClick }) => {
               {hero.stats.map((stat, idx) => (
                 <div key={stat.label}>
                   <p className="text-3xl md:text-4xl font-heading font-bold text-light-blue">
-                    {values[idx]}
+                    {values[idx] || ""}
                     {stat.suffix}
                   </p>
                   <p className="text-gray-300 mt-1 font-sans">{stat.label}</p>
