@@ -195,7 +195,8 @@ export const siteConfig = {
         name: "Sarah Johnson",
         role: "CEO & Founder",
         bio: "20+ years in renewable energy, former executive at national energy corporations.",
-        image: "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD...",
+        image:
+          "https://t4.ftcdn.net/jpg/00/77/91/73/360_F_77917361_EaOTLo6USgDgyuVFcYVqGCkhZJiZFPvK.jpg",
         social: [
           { type: "twitter", icon: Twitter, url: "#" },
           { type: "linkedin", icon: Linkedin, url: "#" },
@@ -207,7 +208,7 @@ export const siteConfig = {
         role: "CTO",
         bio: "AI and energy systems expert with PhD from Stanford, 15 patents in energy efficiency.",
         image:
-          "https://media.istockphoto.com/id/1413766112/photo/successful-mature-businessman-looking-at-camera-with-confidence.jpg",
+          "https://t4.ftcdn.net/jpg/00/77/91/73/360_F_77917361_EaOTLo6USgDgyuVFcYVqGCkhZJiZFPvK.jpg",
         social: [
           { type: "twitter", icon: Twitter, url: "#" },
           { type: "linkedin", icon: Linkedin, url: "#" },
@@ -844,7 +845,7 @@ export const siteConfig = {
       title: "Career Opportunities",
       description:
         "Join Adesa Energy and help shape the future of sustainable fuel solutions in Nigeria. Explore open positions and grow with us.",
-      path: "/career",
+      path: "/careers",
     },
     contact: {
       address: "Lagos, Nigeria",

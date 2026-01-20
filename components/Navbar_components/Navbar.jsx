@@ -1,10 +1,13 @@
 "use client";
 
+import { useState } from "react";
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
-import { useState } from "react";
-import ThemeSwitch from "../ThemeSwitch";
-import NavLinks from "./NavLinks";
+
+// Lazy-load subcomponents
+const ThemeSwitch = dynamic(() => import("../ThemeSwitch"), { ssr: false });
+const NavLinks = dynamic(() => import("./NavLinks"), { ssr: false });
 
 export default function Navbar({ activeSection, handleNavClick }) {
   const [open, setOpen] = useState(false);
@@ -43,6 +46,7 @@ export default function Navbar({ activeSection, handleNavClick }) {
             Convert today
           </button>
         </div>
+
         <div className="flex items-center gap-3 lg:hidden">
           <ThemeSwitch />
           <button

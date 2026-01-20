@@ -1,9 +1,12 @@
 "use client";
 
 import { motion } from "framer-motion";
-import ContactForm from "./ContactForm";
-import ContactInfo from "./ContactInfo";
+import dynamic from "next/dynamic";
 import { siteConfig } from "@/config/site";
+
+// Lazy load the components
+const ContactForm = dynamic(() => import("./ContactForm"), { ssr: false });
+const ContactInfo = dynamic(() => import("./ContactInfo"), { ssr: false });
 
 const ContactSection = () => {
   const contactConfig = siteConfig.contact;

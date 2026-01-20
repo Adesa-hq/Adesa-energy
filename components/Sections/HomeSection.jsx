@@ -4,18 +4,18 @@ import { useRouter } from "next/navigation";
 import dynamic from "next/dynamic";
 
 // Only hero and features above the fold
-const HeroSection = dynamic(() => import("./HeroSection"));
-const FeaturesSection = dynamic(() => import("./FeaturesSection"));
+const HeroSection = dynamic(() => import("./HeroSection"), { ssr: false });
+const FeaturesSection = dynamic(() => import("./FeaturesSection"), { ssr: false });
 
 // Lazy load the rest
-const AboutSection = dynamic(() => import("./AboutSection"));
-const OurTeamSection = dynamic(() => import("./OurTeamSection"));
-const SolutionsSection = dynamic(() => import("./SolutionsSection"));
+const AboutSection = dynamic(() => import("./AboutSection"), { ssr: false });
+const OurTeamSection = dynamic(() => import("./OurTeamSection"), { ssr: false });
+const SolutionsSection = dynamic(() => import("./SolutionsSection"), { ssr: false });
 const CalculatorSection = dynamic(
-  () => import("../Calculator_components/CalculatorSection"),
+  () => import("../Calculator_components/CalculatorSection"), { ssr: false }
 );
-const TestimonialsSection = dynamic(() => import("./TestimonalsSection"));
-const ResourcesSection = dynamic(() => import("./ResourcesSection"));
+const TestimonialsSection = dynamic(() => import("./TestimonalsSection"), { ssr: false });
+const ResourcesSection = dynamic(() => import("./ResourcesSection"), {ssr: false});
 const BlogSection = dynamic(() => import("./BlogSection"), {ssr: false});
 const ContactSection = dynamic(
   () => import("../Contact_components/ContactSection"),{ssr: false}
