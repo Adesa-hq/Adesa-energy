@@ -4,6 +4,7 @@ import {
   Instagram,
   Facebook,
   Mail,
+  CheckCircle,
 } from "lucide-react";
 
 export const siteConfig = {
@@ -574,6 +575,137 @@ export const siteConfig = {
     ],
   },
 
+  // Careers section content
+  careers: {
+    hero: {
+      title: "Power the Future with Your Career",
+      subtitle:
+        "Join our mission to accelerate the global transition to sustainable energy through innovation and collaboration",
+      primaryCTA: { label: "Explore Open Positions", href: "#jobs" },
+      secondaryCTA: { label: "Our Sustainability Promise", href: "#about" },
+      backgroundGradient: "from-[#0d3b66] to-[#1a5f7a]",
+      textColor: "text-white",
+      buttonColors: {
+        primary: "bg-[#ffd166] text-[#0d3b66]",
+        secondary: "bg-white/10 text-white border border-white",
+      },
+    },
+    about: {
+      title: "Why Adesa Energy?",
+      subtitle:
+        "We're not just building renewable energy solutions—we're building the foundation for a sustainable future",
+      features: [
+        {
+          icon: CheckCircle,
+          title: "Purpose-Driven Work",
+          description:
+            "Every project directly contributes to reducing global carbon emissions",
+        },
+        {
+          icon: CheckCircle,
+          title: "Innovation First",
+          description:
+            "Access cutting-edge tools and dedicated R&D resources to push boundaries",
+        },
+        {
+          icon: CheckCircle,
+          title: "Global Community",
+          description:
+            "Collaborate with experts across 15 countries on solutions that scale",
+        },
+      ],
+    },
+    jobs: {
+      title: "Current Opportunities",
+      subtitle:
+        "Join our diverse team of engineers, designers, and sustainability experts building tomorrow's energy solutions today",
+      viewAllLabel: "Apply For Positions",
+      jobListings: [
+        {
+          id: 1,
+          title: "Software Engineer",
+          department: "Engineering",
+          type: "Full-Time",
+          location: "Lagos, Nigeria",
+          description:
+            "Develop and maintain energy management software solutions",
+          href: "mailto:careers@adesaenergy.com?subject=Software Engineer",
+        },
+        {
+          id: 2,
+          title: "Sustainability Analyst",
+          department: "Sustainability",
+          type: "Full-Time",
+          location: "Remote",
+          description: "Analyze and optimize carbon reduction initiatives",
+          href: "mailto:careers@adesaenergy.com?subject=Sustainability Analyst",
+        },
+        {
+          id: 3,
+          title: "Product Designer",
+          department: "Design",
+          type: "Full-Time",
+          location: "Lagos, Nigeria",
+          description:
+            "Design user-centric interfaces for our energy solutions",
+          href: "mailto:careers@adesaenergy.com?subject=Product Designer",
+        },
+        // Add more jobs as needed
+      ],
+    },
+    benefits: [
+      {
+        icon: CheckCircle,
+        title: "Health & Wellness",
+        description:
+          "Comprehensive health benefits to support you and your family",
+      },
+      {
+        icon: CheckCircle,
+        title: "Learning & Development",
+        description: "Continuous growth opportunities and mentorship programs",
+      },
+      {
+        icon: CheckCircle,
+        title: "Flexible Work",
+        description: "Hybrid and remote options to support work-life balance",
+      },
+      {
+        icon: CheckCircle,
+        title: "Team Events",
+        description: "Collaborative activities to strengthen team culture",
+      },
+    ],
+    culture: [
+      {
+        id: 1,
+        quote: "Adesa Energy empowers me to innovate and grow every day.",
+        author: "Jane Smith",
+        role: "Product Designer",
+      },
+      {
+        id: 2,
+        quote:
+          "I love being part of a team that's changing the energy landscape.",
+        author: "Michael Brown",
+        role: "Software Engineer",
+      },
+      // Add more testimonials as needed
+    ],
+    cta: {
+      title: "Ready to Power Your Career?",
+      subtitle:
+        "Join a team that's transforming how the world uses energy. We can't wait to build the future with you.",
+      primaryCTA: {
+        label: "Apply Now",
+        href: "mailto:careers@adesaenergy.com?subject=Job Application",
+      },
+      secondaryCTA: { label: "Contact Our Talent Team", href: "/contact" },
+      backgroundGradient: "from-[#0d3b66] to-[#1a5f7a]",
+      textColor: "text-white",
+    },
+  },
+
   // Newsletter section content
   newsletter: {
     section: {
@@ -708,6 +840,12 @@ export const siteConfig = {
       "On-demand refueling",
       "Fleet solutions",
     ],
+    career: {
+      title: "Career Opportunities",
+      description:
+        "Join Adesa Energy and help shape the future of sustainable fuel solutions in Nigeria. Explore open positions and grow with us.",
+      path: "/career",
+    },
     contact: {
       address: "Lagos, Nigeria",
       phone: "+234 812 345 6789",

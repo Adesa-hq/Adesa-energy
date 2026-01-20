@@ -8,6 +8,10 @@ import {
   ChevronUp,
   ChevronRight,
   Wrench,
+  Linkedin,
+  Twitter,
+  Instagram,
+  Facebook,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
@@ -21,40 +25,37 @@ const Footer = ({ onNavClick }) => {
   const { footer } = siteConfig;
 
   useEffect(() => {
-    const handleScroll = () => {
-      setShowScrollTop(window.scrollY > 300);
-    };
-
+    const handleScroll = () => setShowScrollTop(window.scrollY > 300);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const handleLinkClick = (item) => {
-    if (item.type === "scroll") {
-      onNavClick(item.id);
-      return;
-    }
+    if (item.type === "scroll") return onNavClick(item.id);
     router.push(item.path);
   };
 
   return (
     <footer className="bg-[#1a1a1a] text-white py-16 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+        <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-12 mb-12">
           <div>
             <AdesaLogoWithSlogan />
-            <p className="text-burnt-orange mb-4 max-w-xs">{footer.slogan}</p>
+            <p className="text-[#F37621] mb-4 max-w-xs">{footer.slogan}</p>
             <div className="flex space-x-4">
-              {footer.socials.map((item, i) => (
-                <motion.a
-                  key={i}
-                  whileHover={{ scale: 1.1, y: -2 }}
-                  href={item.href}
-                  className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-[#F37621]"
-                >
-                  <item.icon className="w-5 h-5" />
-                </motion.a>
-              ))}
+              {footer.socials.map((item, i) => {
+                const Icon = item.icon;
+                return (
+                  <motion.a
+                    key={i}
+                    whileHover={{ scale: 1.1, y: -2 }}
+                    href={item.href}
+                    className="w-10 h-10 bg-white/10 rounded-lg flex items-center justify-center hover:bg-[#F37621]"
+                  >
+                    <Icon className="w-5 h-5" />
+                  </motion.a>
+                );
+              })}
             </div>
           </div>
 
@@ -89,7 +90,7 @@ const Footer = ({ onNavClick }) => {
                 <li key={service}>
                   <motion.button
                     whileHover={{ x: 5 }}
-                    onClick={() => onNavClick("solutions")}
+                    onClick={() => router.push("/solutions")}
                     className="text-gray-400 hover:text-[#F37621]"
                   >
                     {service}
@@ -97,6 +98,21 @@ const Footer = ({ onNavClick }) => {
                 </li>
               ))}
             </ul>
+          </div>
+
+          <div>
+            <h4 className="text-md font-semibold mb-6 flex items-center">
+              <ChevronRight className="w-4 h-4 mr-2 text-[#59C6E5]" />
+              {footer.career.title}
+            </h4>
+            <p className="text-gray-400 mb-3">{footer.career.description}</p>
+            <motion.button
+              whileHover={{ x: 5 }}
+              onClick={() => router.push(footer.career.path)}
+              className="text-[#F37621]"
+            >
+              Explore Careers
+            </motion.button>
           </div>
 
           <div>
