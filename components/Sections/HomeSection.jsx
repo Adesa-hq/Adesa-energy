@@ -1,16 +1,25 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import HeroSection from "./HeroSection";
-import FeaturesSection from "./FeaturesSection";
-import AboutSection from "./AboutSection";
-import SolutionsSection from "./SolutionsSection";
-import CalculatorSection from "../Calculator_components/CalculatorSection";
-import BlogSection from "./BlogSection";
-import ResourcesSection from "./ResourcesSection";
-import TestimonialsSection from "./TestimonalsSection";
-import ContactSection from "../Contact_components/ContactSection";
-import OurTeamSection from "./OurTeamSection";
+import dynamic from "next/dynamic";
+
+// Only hero and features above the fold
+const HeroSection = dynamic(() => import("./HeroSection"));
+const FeaturesSection = dynamic(() => import("./FeaturesSection"));
+
+// Lazy load the rest
+const AboutSection = dynamic(() => import("./AboutSection"));
+const OurTeamSection = dynamic(() => import("./OurTeamSection"));
+const SolutionsSection = dynamic(() => import("./SolutionsSection"));
+const CalculatorSection = dynamic(
+  () => import("../Calculator_components/CalculatorSection"),
+);
+const TestimonialsSection = dynamic(() => import("./TestimonalsSection"));
+const ResourcesSection = dynamic(() => import("./ResourcesSection"));
+const BlogSection = dynamic(() => import("./BlogSection"), {ssr: false});
+const ContactSection = dynamic(
+  () => import("../Contact_components/ContactSection"),{ssr: false}
+);
 
 export default function HomeSection() {
   const router = useRouter();
