@@ -20,6 +20,8 @@ const BlogSection = dynamic(() => import("./BlogSection"), {ssr: false});
 const ContactSection = dynamic(
   () => import("../Contact_components/ContactSection"),{ssr: false}
 );
+const VideoSection = dynamic(() => import("./VideoSection"), { ssr: false });
+
 
 export default function HomeSection() {
   const router = useRouter();
@@ -38,6 +40,9 @@ export default function HomeSection() {
 
       {/* About Section */}
       <AboutSection/>
+      
+      {/* Video Section */}
+      <VideoSection />
 
       {/* Our Team Section */}
       <OurTeamSection />

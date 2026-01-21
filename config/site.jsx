@@ -177,6 +177,27 @@ export const siteConfig = {
     },
   },
 
+  // Video section content
+  videoSection: {
+    heading: "Powering progress, fueling tomorrow",
+    description:
+      "Mobile CNG conversions and refueling. Lower fuel cost. Cleaner energy. Built for fleets and individuals.",
+    cta: {
+      label: "Convert today",
+      href: "/contact",
+    },
+    video: {
+      src: "https://5s4crdleaswcfwbr.public.blob.vercel-storage.com/Videos/Adesa-Energy-Remastered.mp4",
+      poster: "/video/adesa-poster.jpg",
+      type: "video/mp4",
+    },
+    styles: {
+      background: "#22244E",
+      accent: "#F37621",
+      textMuted: "#d9e7ff",
+    },
+  },
+
   // Our Team section content
   team: {
     section: {
