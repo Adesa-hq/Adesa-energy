@@ -51,8 +51,10 @@ const OurTeamSection = ({ isTeamPage = false }) => {
                   transition={{ duration: 0.6, delay: index * 0.1 }}
                   className="flex flex-col md:flex-row gap-8 items-center md:items-start bg-white dark:bg-[#1D3866] rounded-2xl overflow-hidden shadow-lg border border-gray-100 dark:border-[#59C6E5]/20"
                 >
-                  <div className="md:w-1/3 shrink-0">
-                    <div className="relative w-full h-80 md:h-80">
+                  <div
+                    className={`md:w-1/3 w-full shrink-0 ${index === 2 ? "mt-10" : ""}`}
+                  >
+                    <div className="relative w-full h-64 md:h-80">
                       <Image
                         src={member.image}
                         alt={member.name}
