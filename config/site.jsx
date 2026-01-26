@@ -213,52 +213,34 @@ export const siteConfig = {
 
     members: [
       {
-        name: "Sarah Johnson",
-        role: "CEO & Founder",
-        bio: "20+ years in renewable energy, former executive at national energy corporations.",
-        image:
-          "https://t4.ftcdn.net/jpg/00/77/91/73/360_F_77917361_EaOTLo6USgDgyuVFcYVqGCkhZJiZFPvK.jpg",
-        social: [
-          { type: "twitter", icon: Twitter, url: "#" },
-          { type: "linkedin", icon: Linkedin, url: "#" },
-          { type: "mail", icon: Mail, url: "#" },
-        ],
+        name: "Femi Adeleye",
+        role: "Founder & CEO",
+        bio: "Femi Adeleye is a visionary entrepreneur and energy advocate driving the adoption of Compressed Natural Gas (CNG) in Nigeria. With a background in Petroleum Engineering and deep experience in marketing and strategy, he brings a powerful blend of technical and business acumen to Adesa Energy. Femi leads the company's mission to make clean energy accessible through innovative conversion solutions and strategic partnerships. His long-term vision is to build Africa's leading force in clean energy mobility.",
+        image: "/Femi_Adeleye.png", // Placeholder for Femi Adeleye's image
       },
       {
-        name: "Michael Chen",
-        role: "CTO",
-        bio: "AI and energy systems expert with PhD from Stanford, 15 patents in energy efficiency.",
-        image:
-          "https://t4.ftcdn.net/jpg/00/77/91/73/360_F_77917361_EaOTLo6USgDgyuVFcYVqGCkhZJiZFPvK.jpg",
-        social: [
-          { type: "twitter", icon: Twitter, url: "#" },
-          { type: "linkedin", icon: Linkedin, url: "#" },
-          { type: "mail", icon: Mail, url: "#" },
-        ],
+        name: "Solomon Adebayo",
+        role: "Chief Financial Officer",
+        bio: "Solomon Adebayo is a finance expert and business consultant with proven experience in accounting, taxation, and strategic advisory. As CFO of Adesa Energy, he oversees financial planning, modeling, and investor readiness. With a track record of supporting businesses locally and internationally, Solomon is instrumental in building scalable financial structures and driving the company's capital-raising initiatives to support expansion and innovation.",
+        image: "/Solomon_Adebayo.png", // Placeholder for Solomon Adebayo's image
       },
       {
-        name: "Elena Rodriguez",
-        role: "Head of Sustainability",
-        bio: "Former UN climate advisor, leading carbon neutrality initiatives across 12 countries.",
-        image:
-          "https://t3.ftcdn.net/jpg/01/33/41/86/360_F_133418675_PUUSlpHDjCTzWJ7KqTGArXUJDvMmAqoQ.jpg",
-        social: [
-          { type: "twitter", icon: Twitter, url: "#" },
-          { type: "linkedin", icon: Linkedin, url: "#" },
-          { type: "mail", icon: Mail, url: "#" },
-        ],
+        name: "Afolabi Araromi",
+        role: "Legal Adviser",
+        bio: "Afolabi Araromi is an experienced commercial lawyer and strategic business adviser with over a decade of practice in corporate law, regulatory compliance, and business structuring. As Legal Adviser at Adesa Energy, he provides legal oversight across all contracts, partnerships, and corporate governance matters. He is the Managing Partner at Trudo Legal, a boutique firm offering legal solutions across sectors including energy, construction, media, and technology. Afolabi has advised on landmark transactions and sits on multiple company boards. He is also a member of the Nigeria-Kazakhstan Business Council, established by the Ooni of Ife to foster economic cooperation. His deep understanding of business law and practical industry insights make him a critical voice in shaping Adesa Energy's legal and operational foundation.",
+        image: "/Afolabi_Araromi.png", // Placeholder for Afolabi Araromi's image
       },
       {
-        name: "David Kim",
-        role: "Lead Engineer",
-        bio: "Specialized in CNG conversion systems with 10+ years experience in fleet optimization.",
-        image:
-          "https://t4.ftcdn.net/jpg/00/77/91/73/360_F_77917361_EaOTLo6USgDgyuVFcYVqGCkhZJiZFPvK.jpg",
-        social: [
-          { type: "twitter", icon: Twitter, url: "#" },
-          { type: "linkedin", icon: Linkedin, url: "#" },
-          { type: "mail", icon: Mail, url: "#" },
-        ],
+        name: "Timilehin Olatunji",
+        role: "Chief Operating Officer",
+        bio: "Olatunji Timilehin is a mechanical engineering graduate with a strong operational mindset and a talent for systems thinking. As COO at Adesa Energy, he manages cross-functional coordination, process optimization, and delivery of key projects. With a multidisciplinary approach to problem-solving and a keen eye for structure, he supports the company's mission to execute clean energy solutions efficiently at scale.",
+        image: "/Timilehin_Olatunji.png", // Placeholder for Timilehin Olatunji's image
+      },
+      {
+        name: "Abdulkareem Nurat Mayowa",
+        role: "Company Secretary",
+        bio: "Mayowa is a dynamic project manager with a multidisciplinary background spanning education, public health, and business operations. At Adesa Energy, she oversees project planning, documentation, and execution while serving as the non-legal company secretary. Her attention to detail, strong communication skills, and passion for structure help ensure that internal processes and stakeholder engagement remain aligned with the company's growth vision.",
+        image: "/Nurat_Mayowa.png", // Placeholder for Abdulkareem Nurat Mayowa's image
       },
     ],
   },
@@ -651,7 +633,7 @@ export const siteConfig = {
           location: "Lagos, Nigeria",
           description:
             "Develop and maintain energy management software solutions",
-          href: "mailto:careers@adesaenergy.com?subject=Software Engineer",
+          href: "mailto:career@adesahq.com?subject=Software Engineer",
         },
         {
           id: 2,
@@ -660,7 +642,7 @@ export const siteConfig = {
           type: "Full-Time",
           location: "Remote",
           description: "Analyze and optimize carbon reduction initiatives",
-          href: "mailto:careers@adesaenergy.com?subject=Sustainability Analyst",
+          href: "mailto:career@adesahq.com?subject=Sustainability Analyst",
         },
         {
           id: 3,
@@ -670,7 +652,7 @@ export const siteConfig = {
           location: "Lagos, Nigeria",
           description:
             "Design user-centric interfaces for our energy solutions",
-          href: "mailto:careers@adesaenergy.com?subject=Product Designer",
+          href: "mailto:career@adesahq.com?subject=Product Designer",
         },
         // Add more jobs as needed
       ],
@@ -770,18 +752,18 @@ export const siteConfig = {
       {
         type: "address",
         title: "Office address",
-        value: "123 Energy Drive, Victoria Island, Lagos, Nigeria",
+        value: "2 Isheri road, Ojudu-Berger, Lagos",
       },
       {
         type: "phone",
         title: "Phone",
-        value: "+234 812 345 6789",
+        value: "+234 701 2345 154",
         note: "Mon-Sat, 8am-6pm",
       },
       {
         type: "email",
         title: "Email",
-        value: "info@adesaenergy.com",
+        value: "info@adesahq.com",
         note: "We reply within 24 hours",
       },
       {
@@ -869,13 +851,16 @@ export const siteConfig = {
       path: "/careers",
     },
     contact: {
-      address: "Lagos, Nigeria",
-      phone: "+234 812 345 6789",
-      email: "info@adesaenergy.com",
+      address: "2 Isheri road, Ojudu-Berger, Lagos",
+      phone: "+234 701 2345 154",
+      email: "info@adesahq.com",
       website: "www.adesaenergy.com",
     },
     socials: [
-      { icon: Linkedin, href: "#" },
+      {
+        icon: Linkedin,
+        href: "https://www.linkedin.com/showcase/adesa-energy/",
+      },
       { icon: Twitter, href: "#" },
       {
         icon: Instagram,
