@@ -6,40 +6,63 @@ import { Check, X } from "lucide-react";
 import { siteConfig } from "@/config/site";
 
 const NewsletterSection = () => {
-  const newsletterConfig = siteConfig.newsletter;
-  const [email, setEmail] = useState("");
-  const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitStatus, setSubmitStatus] = useState(null);
+const newsletterConfig = siteConfig.newsletter;
 
-  const { section, form, messages, behavior } = newsletterConfig;
+const [email, setEmail] = useState("");
+const [isSubmitting, setIsSubmitting] = useState(false);
+const [submitStatus, setSubmitStatus] = useState(null);
+const [message, setMessage] = useState("");
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setIsSubmitting(true);
+const { section, form, behavior } = newsletterConfig;
 
-    if (!email.trim()) {
+const handleSubmit = async (e) => {
+  e.preventDefault();
+
+  if (!email.trim()) {
+    setSubmitStatus("error");
+    setMessage("Email required");
+    return;
+  }
+
+  setIsSubmitting(true);
+
+  try {
+    const res = await fetch("/api/newsletter", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email }),
+    });
+
+    const data = await res.json();
+
+    console.log("status:", res.status);
+    console.log("response:", data);
+
+    if (!res.ok) {
       setSubmitStatus("error");
-      setIsSubmitting(false);
+      setMessage(data.message || "Subscription failed");
       return;
     }
 
+    setSubmitStatus("success");
+    setMessage(data.message || "Subscribed successfully");
+    setEmail("");
+  } catch (err) {
+    setSubmitStatus("error");
+    setMessage("Network error");
+  } finally {
+    setIsSubmitting(false);
+
     setTimeout(() => {
-      const isSuccess = Math.random() < behavior.successRate;
+      setSubmitStatus(null);
+      setMessage("");
+    }, behavior.resetDelay);
+  }
+};
 
-      if (isSuccess) {
-        setSubmitStatus("success");
-        setEmail("");
-      } else {
-        setSubmitStatus("error");
-      }
 
-      setIsSubmitting(false);
-
-      setTimeout(() => {
-        setSubmitStatus(null);
-      }, behavior.resetDelay);
-    }, behavior.apiDelay);
-  };
 
   return (
     <motion.section
@@ -155,7 +178,7 @@ const NewsletterSection = () => {
                   : "bg-red-500/20 border border-red-500 text-red-200"
               }`}
             >
-              {submitStatus === "success" ? messages.success : messages.error}
+              {submitStatus === "success" ? message : message}
             </motion.div>
           )}
         </div>

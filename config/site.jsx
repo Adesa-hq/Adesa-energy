@@ -726,10 +726,6 @@ export const siteConfig = {
       loadingText: "Subscribing...",
     },
 
-    messages: {
-      success: "Thank you! You've been successfully subscribed.",
-      error: "Please enter a valid email address.",
-    },
 
     behavior: {
       successRate: 0.8,
