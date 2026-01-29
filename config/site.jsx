@@ -76,9 +76,10 @@ export const siteConfig = {
       icon: "Fuel",
     },
     images: [
-      "https://img.freepik.com/free-vector/realistic-polygonal-background_52683-60158.jpg?semt=ais_hybrid&w=740&q=80",
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ0t6Lb53B_eRRnYoAESVjjXZ5hRfOB2c8Wmw&s",
-      "https://img.freepik.com/free-vector/realistic-neon-lights-background_23-2148907367.jpg",
+      "/Screenshot 2026-01-08 085624.png",
+      "/Screenshot 2026-01-08 085642.png",
+      "/Screenshot 2026-01-08 085807.png",
+      "/Screenshot 2026-01-13 103937.png",
     ],
   },
 
@@ -725,7 +726,6 @@ export const siteConfig = {
       buttonText: "Subscribe now",
       loadingText: "Subscribing...",
     },
-
 
     behavior: {
       successRate: 0.8,
