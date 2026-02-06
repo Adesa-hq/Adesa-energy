@@ -221,7 +221,7 @@ const WaitlistForm = () => {
               <option value="">Interest type</option>
               <option>Convert now</option>
               <option>Financing</option>
-              <option>Info only</option>
+              <option>Info only (MCC)</option>
             </select>
 
             <select
