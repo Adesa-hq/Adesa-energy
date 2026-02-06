@@ -26,7 +26,7 @@ export const siteConfig = {
     { id: "calculator", label: "Savings Calculator", path: "/calculator" },
     { id: "resources", label: "Resources", path: "/resources" },
     { id: "blog", label: "Blog", path: "/blog" },
-    { id: "contact", label: "Contact", path: "/contact" },
+    { id: "waitlist", label: "Waitlist", path: "/waitlist" },
   ],
 
   // Hero section content
@@ -43,7 +43,7 @@ export const siteConfig = {
     ctas: {
       primary: {
         text: "Convert today",
-        target: "/contact",
+        target: "/waitlist",
         ariaLabel: "Convert to CNG today",
       },
       secondary: {
@@ -146,7 +146,7 @@ export const siteConfig = {
 
     cta: {
       text: "Partner with us",
-      target: "/contact",
+      target: "/waitlist",
     },
 
     values: [
@@ -185,7 +185,7 @@ export const siteConfig = {
       "Mobile CNG conversions and refueling. Lower fuel cost. Cleaner energy. Built for fleets and individuals.",
     cta: {
       label: "Convert today",
-      href: "/contact",
+      href: "/waitlist",
     },
     video: {
       src: "https://5s4crdleaswcfwbr.public.blob.vercel-storage.com/Videos/Adesa-Energy-Remastered.mp4",
@@ -208,7 +208,7 @@ export const siteConfig = {
         "Visionaries driving the future of sustainable energy with decades of combined industry expertise",
       cta: {
         label: "Join Our Team",
-        path: "/contact",
+        path: "/waitlist",
       },
     },
 
@@ -301,7 +301,7 @@ export const siteConfig = {
           "Regular maintenance services to keep your CNG system running at peak performance. Our expert technicians ensure safety and efficiency.",
         cta: {
           text: "Schedule service",
-          target: "/contact",
+          target: "/waitlist",
         },
         theme: "dark",
       },
@@ -312,7 +312,7 @@ export const siteConfig = {
           "Comprehensive training for drivers and fleet managers. Learn best practices for CNG operation and maintenance.",
         cta: {
           text: "Get training",
-          target: "/contact",
+          target: "/waitlist",
         },
         theme: "orange",
       },
@@ -463,7 +463,7 @@ export const siteConfig = {
       {
         question: "How much does CNG conversion cost?",
         answer:
-          "Conversion costs vary based on vehicle type and requirements. For sedans, conversion typically starts from ₦450,000. SUVs and larger vehicles may cost more. We offer flexible payment plans to make conversion accessible. Contact us for a personalized quote.",
+          "Conversion costs vary based on vehicle type and requirements. For sedans, conversion typically starts from ₦450,000. SUVs and larger vehicles may cost more. We offer flexible payment plans to make conversion accessible. Waitlist us for a personalized quote.",
       },
       {
         question: "Is CNG safe for my vehicle?",
@@ -705,7 +705,7 @@ export const siteConfig = {
         label: "Apply Now",
         href: "mailto:careers@adesaenergy.com?subject=Job Application",
       },
-      secondaryCTA: { label: "Contact Our Talent Team", href: "/contact" },
+      secondaryCTA: { label: "Waitlist Our Talent Team", href: "/waitlist" },
       backgroundGradient: "from-[#0d3b66] to-[#1a5f7a]",
       textColor: "text-white",
     },
@@ -734,14 +734,14 @@ export const siteConfig = {
     },
   },
 
-  // Contact section content
-  contact: {
+  // Waitlist section content
+  waitlist: {
     section: {
-      id: "contact",
-      badge: "CONTACT US",
-      title: "Get in touch",
+      id: "waitlist",
+      badge: "WAITLIST",
+      title: "Join the waitlist",
       subtitle:
-        "Ready to start saving? Have questions? We&apos;re here to help.",
+        "Be first to access vehicle conversion, refueling, and financing updates in your area.",
     },
 
     infoCards: [
@@ -783,41 +783,81 @@ export const siteConfig = {
     ],
 
     form: {
-      title: "Send us a message",
+      title: "Join the waitlist",
       fields: {
-        name: {
-          label: "Full name",
-          placeholder: "John Doe",
+        firstName: {
+          label: "First name",
+          placeholder: "John",
         },
-        email: {
-          label: "Email address",
-          placeholder: "john@example.com",
+        lastName: {
+          label: "Last name",
+          placeholder: "Doe",
         },
         phone: {
           label: "Phone number",
           placeholder: "+234 XXX XXX XXXX",
         },
-        subject: {
-          label: "Subject",
+        vehicleType: {
+          label: "Vehicle type",
           options: [
-            { value: "conversion", label: "Vehicle conversion inquiry" },
-            { value: "refueling", label: "Refueling services" },
-            { value: "fleet", label: "Fleet solutions" },
-            { value: "support", label: "Technical support" },
+            { value: "keke", label: "Keke" },
+            { value: "taxi", label: "Taxi" },
+            { value: "private_car", label: "Private Car" },
+            { value: "truck", label: "Truck" },
+            { value: "bus", label: "Bus" },
             { value: "other", label: "Other" },
           ],
         },
-        message: {
-          label: "Message",
-          placeholder: "Tell us about your needs...",
+        location: {
+          label: "Location",
+          options: [
+            { value: "mile2_lagos", label: "Mile 2 Oke — Lagos" },
+            { value: "sango_ilorin", label: "Sango — Ilorin" },
+            { value: "kubwa_abuja", label: "Kubwa — Abuja" },
+          ],
+        },
+        vehicleYear: {
+          label: "Vehicle year",
+          placeholder: "2015",
+        },
+        referralSource: {
+          label: "How did you hear about us",
+          options: [
+            { value: "radio", label: "Radio" },
+            { value: "mechanic", label: "Mechanic" },
+            { value: "social", label: "Social media" },
+            { value: "union", label: "Union" },
+            { value: "referral", label: "Referral" },
+            { value: "dealer", label: "Dealer" },
+            { value: "other", label: "Other" },
+          ],
+        },
+        numberOfVehicles: {
+          label: "Number of cars to be converted",
+          placeholder: "1",
+        },
+        interestType: {
+          label: "Interest type",
+          options: [
+            { value: "convert_now", label: "Convert now" },
+            { value: "financing", label: "Financing" },
+            { value: "info_only", label: "Info only" },
+          ],
+        },
+        profileType: {
+          label: "Profile type",
+          options: [
+            { value: "individual", label: "Individual" },
+            { value: "organisation", label: "Organisation" },
+          ],
         },
         consent:
           "I agree to the processing of my personal data in accordance with the",
         consentLink: "Privacy Policy",
       },
-      submitText: "Send message",
+      submitText: "Join waitlist",
       successMessage:
-        "Thank you! Your message has been sent successfully. We'll get back to you within 24 hours.",
+        "You are on the waitlist. Our team will waitlist you soon.",
     },
   },
 
@@ -833,7 +873,7 @@ export const siteConfig = {
       { label: "Resources", type: "route", path: "/resources" },
       { label: "Blog", type: "route", path: "/blog" },
       { label: "Our Team", type: "route", path: "/team" },
-      { label: "Contact", type: "route", path: "/contact" },
+      { label: "Waitlist", type: "route", path: "/waitlist" },
     ],
     services: [
       "Mobile CNG conversion",

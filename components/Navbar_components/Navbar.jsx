@@ -4,6 +4,7 @@ import { useState } from "react";
 import dynamic from "next/dynamic";
 import Image from "next/image";
 import { Menu, X } from "lucide-react";
+import Link from "next/link";
 
 // Lazy-load subcomponents
 const ThemeSwitch = dynamic(() => import("../ThemeSwitch"), { ssr: false });
@@ -39,11 +40,13 @@ export default function Navbar({ activeSection, handleNavClick }) {
           />
           <ThemeSwitch />
           <button
-            onClick={() => handleNavClick("contact")}
             className="bg-burnt-orange hover:bg-[#d15e15] text-white px-5 py-2 rounded-lg font-heading font-semibold transition-colors shadow-md hover:shadow-lg"
             aria-label="Convert to CNG today"
           >
+            <Link href="/waitlist">
+            
             Convert today
+            </Link>
           </button>
         </div>
 

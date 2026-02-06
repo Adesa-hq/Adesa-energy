@@ -5,11 +5,11 @@ import dynamic from "next/dynamic";
 import { siteConfig } from "@/config/site";
 
 // Lazy load the components
-const ContactForm = dynamic(() => import("./ContactForm"), { ssr: false });
+const WaitlistForm = dynamic(() => import("./WaitlistForm"), { ssr: false });
 const ContactInfo = dynamic(() => import("./ContactInfo"), { ssr: false });
 
 const ContactSection = () => {
-  const contactConfig = siteConfig.contact;
+  const contactConfig = siteConfig.waitlist;
   const { section } = contactConfig;
 
   return (
@@ -42,7 +42,7 @@ const ContactSection = () => {
 
         <div className="grid lg:grid-cols-3 gap-8">
           <ContactInfo />
-          <ContactForm />
+          <WaitlistForm />
         </div>
       </div>
     </motion.section>

@@ -21,7 +21,7 @@ const iconMap = {
 const socialMap = { Linkedin, Twitter, Instagram, Facebook };
 
 const ContactInfo = () => {
-  const contactConfig = siteConfig.contact;
+  const contactConfig = siteConfig.waitlist;
   return (
     <div className="lg:col-span-1 space-y-6">
       {contactConfig.infoCards.map((card, index) => {

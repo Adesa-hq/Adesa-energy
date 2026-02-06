@@ -6,7 +6,7 @@ import { useState } from "react";
 import { siteConfig } from "@/config/site";
 
 const ContactForm = () => {
-  const { form } = siteConfig.contact;
+  const { form } = siteConfig.waitlist;
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
