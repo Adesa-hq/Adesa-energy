@@ -13,20 +13,20 @@ export const siteConfig = {
   siteDescription:
     "Powering progress, fueling tomorrow. Your trusted partner for CNG conversions and refueling services in Nigeria.",
   siteUrl: "https://adesaenergy.com",
-  email: "info@adesaenergy.com",
-  phone: "+234 812 345 6789",
-  address: "123 Energy Drive, Victoria Island, Lagos, Nigeria",
+  email: "info@adesahq.com",
+  phone: "+234 701 2345 154",
+  address: "2 Isheri road, Ojudu-Berger, Lagos",
 
   // Navigation items
   navItems: [
     { id: "home", label: "Home", path: "/" },
     { id: "about", label: "About Us", path: "/about" },
     { id: "team", label: "Our Team", path: "/team" },
-    { id: "solutions", label: "Solutions", path: "/solutions" },
+    { id: "waitlist", label: "Waitlist", path: "/waitlist" },
     { id: "calculator", label: "Savings Calculator", path: "/calculator" },
     { id: "resources", label: "Resources", path: "/resources" },
     { id: "blog", label: "Blog", path: "/blog" },
-    { id: "waitlist", label: "Waitlist", path: "/waitlist" },
+    { id: "solutions", label: "Solutions", path: "/solutions" },
   ],
 
   // Hero section content
@@ -50,6 +50,11 @@ export const siteConfig = {
         text: "Calculate savings",
         target: "/calculator",
         ariaLabel: "Calculate your potential savings",
+      },
+      tertiary: {
+        text: "Notify Me / Financing Interest",
+        target: "/waitlist",
+        ariaLabel: "View conversion centre locations",
       },
     },
 
@@ -451,49 +456,87 @@ export const siteConfig = {
       id: "resources",
       tag: "RESOURCES",
       title: "Frequently asked questions",
-      subtitle: "Everything you need to know about CNG and our services.",
+      subtitle:
+        "Everything you need to know about CNG conversions and our services.",
     },
 
     faqs: [
       {
         question: "What is CNG and how does it work?",
         answer:
-          "CNG (Compressed Natural Gas) is natural gas stored at high pressure. It's a cleaner alternative to petrol and diesel. When your vehicle is converted, a CNG tank and injection system are installed, allowing your engine to run on natural gas with the same performance as petrol.",
+          "CNG (Compressed Natural Gas) is a cleaner alternative to petrol and diesel. Adesa Energy converts your vehicle by installing a CNG tank and injection system, allowing your engine to run on natural gas with the same performance as petrol, reducing fuel costs and emissions.",
+      },
+      {
+        question: "Where are Adesa Energy conversion centres located?",
+        answer:
+          "We currently operate physical conversion centres in Mile 2 Oke (Lagos), Sango (Ilorin), and the Kubwa axis (Abuja). These locations allow for immediate conversions and revenue generation, as well as priority access to bank-backed financing once available.",
       },
       {
         question: "How much does CNG conversion cost?",
         answer:
-          "Conversion costs vary based on vehicle type and requirements. For sedans, conversion typically starts from ₦450,000. SUVs and larger vehicles may cost more. We offer flexible payment plans to make conversion accessible. Waitlist us for a personalized quote.",
+          "Costs vary by vehicle type and requirements. Sedans typically start from ₦450,000, with larger vehicles costing more. We offer flexible payment plans and early-bird incentives for waitlist members. Get a personalized quote by signing up on our waitlist.",
       },
       {
-        question: "Is CNG safe for my vehicle?",
+        question: "Is CNG conversion safe?",
         answer:
-          "Absolutely! CNG is one of the safest fuels available. CNG tanks are designed to withstand extreme conditions and undergo rigorous testing. The gas is lighter than air, so in case of a leak, it dissipates quickly. Our installations meet all international safety standards.",
+          "Yes. Our certified technicians follow strict SOPs and safety checks. Tanks are rigorously tested, and installations meet national and international standards. Conversions come with warranties and safety certification to give you peace of mind.",
       },
       {
-        question: "How long does the conversion process take?",
+        question: "How long does a conversion take?",
         answer:
-          "A standard conversion takes 1-2 days for most vehicles. For fleet conversions, we can process multiple vehicles simultaneously. Our mobile conversion service means you don't even need to bring your vehicle to us – we come to you.",
+          "Most vehicles are converted within 1–2 days at our centres. Fleet conversions are handled simultaneously for multiple vehicles. You can also book a slot in advance via our waitlist for guaranteed scheduling.",
       },
       {
-        question: "What maintenance does a CNG vehicle require?",
+        question: "Can I get financing for my conversion?",
         answer:
-          "CNG vehicles require less maintenance than petrol vehicles. The fuel burns cleaner, reducing engine wear. We recommend annual CNG system inspections and regular filter changes. Our maintenance packages ensure your system stays in top condition.",
+          "Yes. We maintain a segmented waitlist for ‘Convert Now’ and ‘Financing Interest.’ Early sign-ups in the financing category will get priority access to bank-backed loans when available.",
+      },
+      {
+        question: "How do I join the waitlist?",
+        answer:
+          "Sign up through our landing page, scan QR codes at our centres or transport hubs, or register during field activations. Choose between ‘Convert Now’ or ‘Notify Me / Financing Interest’ options for tailored follow-up.",
       },
       {
         question: "Where can I refuel my CNG vehicle?",
         answer:
-          "Beyond traditional CNG stations, Adesa Energy offers on-demand mobile refueling services. Our refueling trucks can come to your location – whether at home, office, or anywhere you need fuel. We're available 24/7 for your convenience.",
+          "You can refuel at certified CNG stations, and Adesa Energy also offers on-demand mobile refueling at your home, office, or fleet location. Our service is designed to be flexible, convenient, and available 24/7.",
+      },
+      {
+        question: "Who should consider converting to CNG?",
+        answer:
+          "Commercial transporters, fleet operators, private urban car owners, logistics companies, government fleets, and corporate organizations can all benefit from cost savings, reduced downtime, and environmentally-friendly fuel alternatives.",
+      },
+      {
+        question: "What incentives are available for early adopters?",
+        answer:
+          "Launch discounts, free inspections, and special offers for fleet conversions are available for the first 200 sign-ups per centre. QR-code driven field sign-ups and union activations also offer priority booking and exclusive benefits.",
       },
     ],
 
     cta: {
-      title: "Want to learn more about CNG?",
+      title: "Ready to switch to CNG?",
       description:
-        "Download our comprehensive CNG 101 guide and become an expert on clean energy solutions.",
-      buttonText: "Download CNG guide",
-      ariaLabel: "Download CNG guide",
+        "Join our waitlist to book your conversion or express financing interest, and take advantage of early-bird incentives at Adesa Energy physical centres.",
+      buttonText: "Join Waitlist",
+      ariaLabel: "Join Waitlist",
       download: "/documents/CNG_101_Guide.pdf",
+      href: "/waitlist",
+    },
+
+    cta1: {
+      buttonText: "Join Waitlist",
+      ariaLabel: "Join Waitlist",
+      href: "/waitlist",
+    },
+    cta2: {
+      buttonText: "Download Guide",
+      ariaLabel: "Download CNG Guide",
+      href: "/documents/CNG_101_Guide.pdf",
+    },
+    cta3: {
+      buttonText: "Learn More",
+      ariaLabel: "Learn more about CNG conversion",
+      href: "/solutions",
     },
   },
 
@@ -800,20 +843,20 @@ export const siteConfig = {
         vehicleType: {
           label: "Vehicle type",
           options: [
-            { value: "keke", label: "Keke" },
-            { value: "taxi", label: "Taxi" },
-            { value: "private_car", label: "Private Car" },
+            { value: "Keke", label: "Keke" },
+            { value: "Taxi", label: "Taxi" },
+            { value: "Private Car", label: "Private Car" },
             { value: "truck", label: "Truck" },
-            { value: "bus", label: "Bus" },
-            { value: "other", label: "Other" },
+            { value: "Bus", label: "Bus" },
+            { value: "Other", label: "Other" },
           ],
         },
         location: {
           label: "Location",
           options: [
-            { value: "mile2_lagos", label: "Mile 2 Oke — Lagos" },
-            { value: "sango_ilorin", label: "Sango — Ilorin" },
-            { value: "kubwa_abuja", label: "Kubwa — Abuja" },
+            { value: "Mile 2 Oke — Lagos", label: "Mile 2 Oke — Lagos" },
+            { value: "Sango — Ilorin", label: "Sango — Ilorin" },
+            { value: "Kubwa — Abuja", label: "Kubwa — Abuja" },
           ],
         },
         vehicleYear: {
@@ -823,13 +866,13 @@ export const siteConfig = {
         referralSource: {
           label: "How did you hear about us",
           options: [
-            { value: "radio", label: "Radio" },
-            { value: "mechanic", label: "Mechanic" },
-            { value: "social", label: "Social media" },
-            { value: "union", label: "Union" },
-            { value: "referral", label: "Referral" },
-            { value: "dealer", label: "Dealer" },
-            { value: "other", label: "Other" },
+            { value: "Radio", label: "Radio" },
+            { value: "Mechanic", label: "Mechanic" },
+            { value: "Social media", label: "Social media" },
+            { value: "Union", label: "Union" },
+            { value: "Referral", label: "Referral" },
+            { value: "Dealer", label: "Dealer" },
+            { value: "Other", label: "Other" },
           ],
         },
         numberOfVehicles: {
@@ -839,20 +882,19 @@ export const siteConfig = {
         interestType: {
           label: "Interest type",
           options: [
-            { value: "convert_now", label: "Convert now" },
-            { value: "financing", label: "Financing" },
-            { value: "info_only", label: "Info only" },
+            { value: "Convert now", label: "Convert now" },
+            { value: "Financing", label: "Financing" },
+            { value: "Info only (MCC)", label: "Info only (MCC)" },
           ],
         },
         profileType: {
           label: "Profile type",
           options: [
-            { value: "individual", label: "Individual" },
-            { value: "organisation", label: "Organisation" },
+            { value: "Individual", label: "Individual" },
+            { value: "Organisation", label: "Organisation" },
           ],
         },
-        consent:
-          "I agree to the processing of my personal data in accordance with the",
+        consent: "I agree to the processing of my personal data in accordance",
         consentLink: "Privacy Policy",
       },
       submitText: "Join waitlist",

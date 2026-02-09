@@ -92,3 +92,55 @@ export async function POST(req) {
     );
   }
 }
+
+
+//sheet
+
+// import { NextResponse } from "next/server";
+// import { z } from "zod";
+
+// // Define schema
+// const emailSchema = z.object({
+//   email: z.string().trim().email("Invalid email address"),
+// });
+
+// export async function POST(req) {
+//   try {
+//     const body = await req.json();
+
+//     // Validate with Zod
+//     const parsed = emailSchema.safeParse(body);
+//     if (!parsed.success) {
+//       return NextResponse.json(
+//         { message: parsed.error.errors[0].message },
+//         { status: 400 },
+//       );
+//     }
+
+//     const { email } = parsed.data;
+
+//     const res = await fetch(process.env.NEWSLETTER_SCRIPT_URL, {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify({ email }),
+//     });
+
+//     const data = await res.json();
+
+//     if (!res.ok || data.success === false) {
+//       return NextResponse.json(
+//         { message: data.error || data.message || "Subscription failed" },
+//         { status: 400 },
+//       );
+//     }
+
+//     return NextResponse.json(
+//       { message: data.message || "Subscribed successfully" },
+//       { status: 200 },
+//     );
+//   } catch (error) {
+//     return NextResponse.json({ message: "Network error" }, { status: 500 });
+//   }
+// }

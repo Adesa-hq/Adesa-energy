@@ -71,7 +71,7 @@ export default function NavLinks({
           </button>
 
           {moreOpen && (
-            <div className="absolute right-0 mt-1 w-40 bg-white dark:bg-dark-blue border border-gray-200 dark:border-gray-700 rounded-md shadow-lg z-50 flex flex-col">
+            <div className="absolute hover:text-burnt-orange  right-0 mt-1 w-40 bg-white dark:bg-dark-blue border border-gray-200 dark:border-gray-700 rounded-md shadow-lg z-50 flex flex-col">
               {extraLinks.map((item) => renderLink(item, true))}
             </div>
           )}

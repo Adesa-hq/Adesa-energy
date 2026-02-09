@@ -1,9 +1,10 @@
 "use client";
 
-import { Download, ChevronDown } from "lucide-react";
+import { Download, ChevronDown, ArrowBigRight, ListCheck, Book } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { siteConfig } from "@/config/site";
+import Link from "next/link";
 
 
 const ResourcesSection = () => {
@@ -14,7 +15,7 @@ const ResourcesSection = () => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
-  const { section, faqs, cta } = resourcesConfig;
+  const { section, faqs, cta, cta1, cta2, cta3 } = resourcesConfig;
 
   return (
     <motion.section
@@ -106,15 +107,32 @@ const ResourcesSection = () => {
               <p className="text-gray-300 mb-6 font-sans max-w-2xl mx-auto">
                 {cta.description}
               </p>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="inline-flex items-center bg-burnt-orange hover:bg-[#d15e15] text-white px-8 py-4 rounded-lg font-heading font-semibold transition focus:outline-none focus:ring-2 focus:ring-burnt-orange focus:ring-offset-2 focus:ring-offset-deep-blue"
-                aria-label={cta.ariaLabel}
-              >
-                <Download className="w-5 h-5 mr-2" aria-hidden="true" />
-                {cta.buttonText}
-              </motion.button>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {/* Top 2 buttons */}
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="inline-flex items-center justify-center bg-burnt-orange hover:bg-[#d15e15] text-white px-8 py-4 rounded-lg font-heading font-semibold transition focus:outline-none focus:ring-2 focus:ring-burnt-orange focus:ring-offset-2 focus:ring-offset-deep-blue"
+                  aria-label={cta1.ariaLabel}
+                >
+                  <Link href={cta1.href} className="flex items-center gap-2">
+                    {cta1.buttonText}
+                   <ListCheck />
+                  </Link>
+                </motion.button>
+
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="inline-flex items-center justify-center bg-burnt-orange hover:bg-[#d15e15] text-white px-8 py-4 rounded-lg font-heading font-semibold transition focus:outline-none focus:ring-2 focus:ring-burnt-orange focus:ring-offset-2 focus:ring-offset-deep-blue"
+                  aria-label={cta2.ariaLabel}
+                >
+                  <Link href={cta2.href} className="flex items-center gap-2">
+                    {cta2.buttonText}
+                    <Download />
+                  </Link>
+                </motion.button>
+              </div>
             </div>
           </motion.div>
         </div>

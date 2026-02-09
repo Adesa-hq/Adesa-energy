@@ -66,13 +66,13 @@ const HeroSection = ({ onNavClick }) => {
               {hero.description}
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4">
+            <div className="grid grid-cols-2 gap-4 max-w-xl">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => onNavClick(hero.ctas.primary.target)}
                 aria-label={hero.ctas.primary.ariaLabel}
-                className="bg-burnt-orange hover:bg-[#d15e15] text-white px-8 py-4 rounded-lg font-heading font-semibold text-lg transition inline-flex items-center justify-center"
+                className="bg-burnt-orange hover:bg-[#d15e15] sm:text-sm md:text-md text-white px-8 py-4 rounded-lg font-heading font-semibold lg:text-lg transition inline-flex items-center justify-center"
               >
                 {hero.ctas.primary.text}
                 <ArrowRight className="w-5 h-5 ml-2" />
@@ -83,9 +83,19 @@ const HeroSection = ({ onNavClick }) => {
                 whileTap={{ scale: 0.95 }}
                 onClick={() => onNavClick(hero.ctas.secondary.target)}
                 aria-label={hero.ctas.secondary.ariaLabel}
-                className="border-2 border-white hover:bg-white hover:text-deep-blue text-white px-8 py-4 rounded-lg font-heading font-semibold text-lg transition inline-flex items-center justify-center"
+                className="border-2 border-white hover:bg-white hover:text-deep-blue text-white px-8 py-4 rounded-lg font-heading font-semibold sm:text-sm md:text-md lg:text-lg transition inline-flex items-center justify-center"
               >
                 {hero.ctas.secondary.text}
+              </motion.button>
+
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                onClick={() => onNavClick(hero.ctas.tertiary.target)}
+                aria-label={hero.ctas.tertiary.ariaLabel}
+                className="col-span-2 bg-white/10 hover:bg-white/20 text-white px-8 py-4 rounded-lg font-heading font-semibold text-lg transition inline-flex items-center justify-center"
+              >
+                {hero.ctas.tertiary.text}
               </motion.button>
             </div>
 
