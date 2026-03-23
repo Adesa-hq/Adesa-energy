@@ -1,4 +1,3 @@
-"use client";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Flame, Calculator, ChevronDown } from "lucide-react";
@@ -66,7 +65,6 @@ const CalculatorForm = ({ onSubmit, isCalculating }) => {
                   .toString()
                   .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                 onChange={(e) => {
-                  // Remove commas for internal state
                   const rawValue = e.target.value.replace(/,/g, "");
                   if (!isNaN(rawValue)) {
                     setMonthlySpend(rawValue);
@@ -98,7 +96,6 @@ const CalculatorForm = ({ onSubmit, isCalculating }) => {
                   .toString()
                   .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                 onChange={(e) => {
-                  // Remove commas for internal state
                   const rawValue = e.target.value.replace(/,/g, "");
                   if (!isNaN(rawValue)) {
                     setMonthlyLiters(rawValue);
@@ -171,7 +168,7 @@ const CalculatorForm = ({ onSubmit, isCalculating }) => {
             {siteConfig.calculator.form.disclaimer
               .replace(
                 "{petrolPrice}",
-                siteConfig.calculator.priceDisplay.petrol
+                siteConfig.calculator.priceDisplay.petrol,
               )
               .replace("{cngPrice}", siteConfig.calculator.priceDisplay.cng)}
           </span>

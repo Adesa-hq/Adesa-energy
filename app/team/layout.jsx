@@ -1,11 +1,11 @@
-export const metadata = {
+import { constructMetadata } from "@/lib/metadata";
+
+export const metadata = constructMetadata({
   title: "Our Team - Adesa Energy Leadership and Operations",
   description:
     "Meet the team behind Adesa Energy. Engineers, operators, and leaders focused on mobile CNG conversion and refueling across Nigeria.",
-  alternates: {
-    canonical: "https://www.adesaenergy.com/team",
-  },
-};
+  path: "/team",
+});
 
 export default function OurTeamLayout({ children }) {
   return (

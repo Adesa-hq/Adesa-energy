@@ -99,7 +99,7 @@ const CalculatorResults = ({ calculatorResult, onNavClick }) => {
                   {siteConfig.calculator.results.co2ReductionLabel}
                 </p>
                 <p className="text-2xl font-bold text-green-600 mt-1 font-heading">
-                  {formatNumber(calculatorResult.co2Reduction)} kg/month
+                  {calculatorResult.co2Reduction} kg/month
                 </p>
               </div>
             </div>
@@ -108,7 +108,7 @@ const CalculatorResults = ({ calculatorResult, onNavClick }) => {
           <motion.button
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
-            onClick={() => onNavClick("/contact")}
+            onClick={() => onNavClick("/waitlist")}
             className="mt-6 w-full bg-linear-to-r from-burnt-orange to-[#EE3E23] text-white py-3.5 rounded-lg font-bold text-center hover:shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-burnt-orange focus:ring-offset-2 font-sans"
           >
             {siteConfig.calculator.results.convertButton}

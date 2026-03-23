@@ -1,11 +1,11 @@
-export const metadata = {
+import { constructMetadata } from "@/lib/metadata";
+
+export const metadata = constructMetadata({
   title: "CNG Resources and Guides",
   description:
     "Explore CNG guides, fuel cost insights, and educational resources from Adesa Energy to help you reduce fuel spend and improve vehicle efficiency.",
-  alternates: {
-    canonical: "https://www.adesaenergy.com/resources",
-  },
-};
+  path: "/resources",
+});
 
 export default function ResourcesLayout({ children }) {
   return (

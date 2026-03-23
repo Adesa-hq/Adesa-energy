@@ -1,11 +1,11 @@
-export const metadata = {
+import { constructMetadata } from "@/lib/metadata";
+
+export const metadata = constructMetadata({
   title: "Contact Adesa Energy",
   description:
     "Contact Adesa Energy for mobile CNG conversion, on-demand refueling, and fleet fuel solutions across Nigeria.",
-  alternates: {
-    canonical: "https://www.adesaenergy.com/contact",
-  },
-};
+  path: "/contact",
+});
 
 export default function ContactLayout({ children }) {
   return (

@@ -82,7 +82,7 @@ const WaitlistForm = () => {
   };
 
   const inputStyle =
-    "w-full px-4 py-3 rounded-lg bg-charcoal-gray focus:ring-2 focus:ring-[#F37621] focus:border-[#F37621]";
+    "w-full px-4 py-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-[#F37621] focus:border-[#F37621] transition bg-white dark:bg-[#242622] text-gray-900 dark:text-white";
 
   return (
     <div className="lg:col-span-2">
@@ -93,7 +93,9 @@ const WaitlistForm = () => {
         transition={{ duration: 0.5 }}
         className="bg-white dark:bg-[#2E302C] rounded-2xl p-8 shadow-sm"
       >
-        <h3 className="text-xl font-semibold mb-6">{form.title}</h3>
+        <h3 className="text-xl font-semibold text-[#22244E] dark:text-white mb-6 font-montserrat">
+          {form.title}
+        </h3>
 
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -259,11 +261,23 @@ const WaitlistForm = () => {
             </div>
           </div>
 
-          <div className="flex items-start">
-            <input type="checkbox" {...register("consent")} />
-            <p className="ml-2 text-sm">{form.fields.consent}</p>
+          <div className="flex items-start cursor-pointer">
+            <input
+              id="consent"
+              name="consent"
+              type="checkbox"
+              {...register("consent")}
+            />
+            <label
+              htmlFor="consent"
+              className="ml-2 text-sm text-gray-600 dark:text-gray-300 font-inter"
+            >
+              {form.fields.consent}
+            </label>
             {errors.consent && (
-              <p className="text-red-500 text-sm">{errors.consent.message}</p>
+              <span className="text-red-500 text-sm">
+                {errors.consent.message}
+              </span>
             )}
           </div>
 
@@ -283,7 +297,7 @@ const WaitlistForm = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0 }}
-              className={`mt-6 p-4 rounded-lg ${submitStatus === "success" ? "bg-green-600" : "bg-red-50"}`}
+              className={`mt-6 p-4 rounded-lg ${submitStatus === "success" ? "bg-green-600" : "bg-red-500 text-white"}`}
             >
               <div className="flex items-center">
                 {submitStatus === "success" ? <CheckCircle /> : <XCircle />}

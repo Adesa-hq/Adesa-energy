@@ -11,13 +11,18 @@ import { useRouter } from "next/navigation";
 const CalculatorHeader = dynamic(() => import("./CalculatorHeader"), {
   ssr: false,
 });
-const CalculatorForm = dynamic(() => import("./CalculatorForm"), { ssr: false });
-const CalculatorResults = dynamic(() => import("./CalculatorResults"), { ssr: false });
+const CalculatorForm = dynamic(() => import("./CalculatorForm"), {
+  ssr: false,
+});
+const CalculatorResults = dynamic(() => import("./CalculatorResults"), {
+  ssr: false,
+});
 const PriceCards = dynamic(() => import("./PriceCards"), { ssr: false });
 
 const CalculatorSection = () => {
   const [calculatorResult, setCalculatorResult] = useState(null);
   const [isCalculating, setIsCalculating] = useState(false);
+  const { prices, co2PerLiter, vehicleMultipliers } = siteConfig.calculator;
   const resultsRef = useRef(null);
   const router = useRouter();
 
@@ -29,6 +34,11 @@ const CalculatorSection = () => {
     }
   }, [calculatorResult]);
 
+  // Calculate the savings percentage based on the price difference between petrol and CNG
+  const savingsPercentage =
+    ((prices.petrol - prices.cng) / prices.petrol) * 100;
+
+  // Function for handling savings and CO2 reduction calculations
   const handleCalculatorSubmit = (e, values) => {
     e.preventDefault();
     setIsCalculating(true);
@@ -42,34 +52,34 @@ const CalculatorSection = () => {
     const parsedLiters =
       calculatorInputType === "liters" ? parseFloat(monthlyLiters) || 0 : 0;
 
-    let monthlyPetrolSpend, monthlyPetrolLiters;
+    let monthlyFuelSpend, monthlyFuelLiters;
 
+    // Calculating fuel spend or liters based on input type (spend or liters)
     if (calculatorInputType === "spend") {
-      monthlyPetrolSpend = parsedSpend;
-      monthlyPetrolLiters =
-        monthlyPetrolSpend / siteConfig.calculator.prices.petrol;
+      monthlyFuelSpend = parsedSpend;
+      monthlyFuelLiters = monthlyFuelSpend / prices.petrol; // Always using petrol price
     } else {
-      monthlyPetrolLiters = parsedLiters;
-      monthlyPetrolSpend =
-        monthlyPetrolLiters * siteConfig.calculator.prices.petrol;
+      monthlyFuelLiters = parsedLiters;
+      monthlyFuelSpend = monthlyFuelLiters * prices.petrol; // Always using petrol price
     }
 
-    const monthlySavings =
-      monthlyPetrolSpend * (siteConfig.calculator.savingsPercentage / 100);
+    // Monthly and yearly savings stay fixed, do NOT apply vehicle multiplier here
+    const monthlySavings = monthlyFuelSpend * (savingsPercentage / 100);
     const yearlySavings = monthlySavings * 12;
-    const co2Reduction =
-      monthlyPetrolLiters * siteConfig.calculator.co2PerLiter;
-    const multiplier =
-      siteConfig.calculator.vehicleMultipliers[vehicleType] || 1;
+
+    // CO2 reduction calculation
+    // CO2 reduction per month = liters used * CO2 per liter
+    const baseCO2Reduction = monthlyFuelLiters * co2PerLiter;
+    const multiplier = vehicleMultipliers[vehicleType.toLowerCase()] || 1;
+    const co2Reduction = baseCO2Reduction * multiplier; // vehicle type affects only CO2
 
     setCalculatorResult({
-      monthlySavings: formatCurrency(monthlySavings * multiplier),
-      yearlySavings: formatCurrency(yearlySavings * multiplier),
-      savingsPercentage: siteConfig.calculator.savingsPercentage,
-      co2Reduction: Math.round(co2Reduction * multiplier),
+      monthlySavings: formatCurrency(monthlySavings),
+      yearlySavings: formatCurrency(yearlySavings),
+      savingsPercentage: savingsPercentage.toFixed(2),
+      co2Reduction: Math.round(co2Reduction), // CO2 reduction in kg/month
       vehicleType: vehicleType.charAt(0).toUpperCase() + vehicleType.slice(1),
     });
-
     setTimeout(() => setIsCalculating(false), 300);
   };
 
@@ -96,10 +106,10 @@ const CalculatorSection = () => {
             />
           </div>
         </div>
-        <PriceCards />
+        <PriceCards savings={savingsPercentage.toFixed(2)} petrol={prices.petrol} cng={prices.cng} />
       </div>
     </motion.section>
   );
-};
+};;
 
 export default CalculatorSection;

@@ -1,13 +1,12 @@
 import HomePage from "@/components/Sections/HomeSection";
+import { constructMetadata } from "@/lib/metadata";
 
-export const metadata = {
+export const metadata = constructMetadata({
   title: "Adesa Energy | Mobile CNG Conversion and Refueling",
   description:
     "Save fuel costs with Adesa Energy mobile CNG conversion and on-demand refueling. Built for fleets and personal vehicles across Nigeria.",
-  alternates: {
-    canonical: "https://www.adesaenergy.com/",
-  },
-};
+  path: "/",
+});
 
 export default function Home() {
   return (

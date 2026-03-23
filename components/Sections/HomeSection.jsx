@@ -18,7 +18,7 @@ const TestimonialsSection = dynamic(() => import("./TestimonalsSection"), { ssr:
 const ResourcesSection = dynamic(() => import("./ResourcesSection"), {ssr: false});
 const BlogSection = dynamic(() => import("./BlogSection"), {ssr: false});
 const ContactSection = dynamic(
-  () => import("../Contact_components/ContactSection"),{ssr: false}
+  () => import("@/components/Contact_components/ContactSection"),{ssr: false}
 );
 const VideoSection = dynamic(() => import("./VideoSection"), { ssr: false });
 

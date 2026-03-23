@@ -3,8 +3,9 @@ import "./globals.css";
 import { ThemeProvider } from "next-themes";
 import Providers from "./provider";
 import AppShell from "./appshell";
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { constructMetadata } from "@/lib/metadata";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -18,64 +19,7 @@ const montserrat = Montserrat({
   weight: ["400", "500", "600", "700"],
 });
 
-export const metadata = {
-  metadataBase: new URL("https://www.adesaenergy.com"),
-  title: {
-    default: "Adesa Energy | Mobile CNG Conversion and Refueling",
-    template: "%s | Adesa Energy",
-  },
-  description:
-    "Adesa Energy delivers mobile CNG conversion and on-demand refueling services. Cut fuel costs. Improve efficiency. Power fleets and personal vehicles across Nigeria.",
-  keywords: [
-    "Adesa Energy",
-    "CNG conversion Nigeria",
-    "mobile CNG refueling",
-    "compressed natural gas",
-    "fleet fuel solutions",
-    "alternative fuel Nigeria",
-  ],
-  authors: [{ name: "Adesa Energy" }],
-  creator: "Adesa Energy",
-  publisher: "Adesa Energy",
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-    },
-  },
-  openGraph: {
-    type: "website",
-    locale: "en_NG",
-    url: "https://www.adesaenergy.com",
-    siteName: "Adesa Energy",
-    title: "Adesa Energy | Powering Progress, Fueling Tomorrow",
-    description:
-      "Mobile CNG conversion and refueling built for savings, efficiency, and cleaner transport.",
-    images: [
-      {
-        url: "/adesa-energy.png",
-        width: 1200,
-        height: 630,
-        alt: "Adesa Energy Mobile CNG Services",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Adesa Energy | Mobile CNG Solutions",
-    description:
-      "Mobile CNG conversion and refueling for fleets and individuals.",
-    images: ["/adesa-energy.png"],
-  },
-  icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon-16x16.png",
-    apple: "/apple-touch-icon.png",
-  },
-  themeColor: "#22244E",
-};
+export const metadata = constructMetadata();
 
 export const viewport = {
   width: "device-width",
@@ -85,8 +29,6 @@ export const viewport = {
     { media: "(prefers-color-scheme: dark)", color: "#22244E" },
   ],
 };
-
-
 
 export default function RootLayout({ children }) {
   return (
@@ -105,6 +47,22 @@ export default function RootLayout({ children }) {
         </ThemeProvider>
         <Analytics />
         <SpeedInsights />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              name: "Adesa Energy",
+              url: "https://www.adesaenergy.com",
+              logo: "https://www.adesaenergy.com/adesa-energy.png",
+              sameAs: [
+                "https://twitter.com/adesaenergy",
+                "https://linkedin.com/company/adesa-energy",
+              ],
+            }),
+          }}
+        />
       </body>
     </html>
   );

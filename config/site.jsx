@@ -8,6 +8,15 @@ import {
 } from "lucide-react";
 
 export const siteConfig = {
+  name: "Adesa Energy",
+  description:
+    "Adesa Energy delivers mobile CNG conversion and on-demand refueling services. Cut fuel costs, improve efficiency, and power fleets and personal vehicles across Nigeria.",
+  url: "https://www.adesaenergy.com",
+  ogImage: "/adesa-energy.png",
+  links: {
+    twitter: "https://twitter.com/adesaenergy",
+    linkedin: "https://linkedin.com/company/adesa-energy",
+  },
   // Global site settings
   siteName: "Adesa Energy",
   siteDescription:
@@ -351,10 +360,10 @@ export const siteConfig = {
       litersPlaceholder: "e.g., 150",
       vehicleTypeLabel: "Vehicle Type",
       vehicleOptions: [
-        { value: "sedan", label: "Sedan / Saloon Car" },
-        { value: "suv", label: "SUV / Crossover" },
+        { value: "sedan", label: "Sedan Car" },
+        { value: "suv", label: "SUV" },
         { value: "pickup", label: "Pickup Truck" },
-        { value: "bus", label: "Bus / Minibus" },
+        { value: "bus", label: "Bus" },
         { value: "truck", label: "Commercial Truck" },
       ],
       calculateButton: "Calculate My Savings",
@@ -366,7 +375,7 @@ export const siteConfig = {
       title: "Your CNG Savings Potential",
       monthlySavingsLabel: "Monthly Savings",
       yearlySavingsLabel: "Yearly Savings",
-      avgSavingsLabel: "Avg. Savings",
+      avgSavingsLabel: "Savings",
       co2ReductionLabel: "CO₂ Reduction",
       vehicleTypePrefix: "For a",
       convertButton: "Convert My Vehicle Today",
@@ -393,7 +402,7 @@ export const siteConfig = {
         color: "text-[#59C6E5]",
       },
       {
-        title: "Average Savings",
+        title: "Savings Percentage",
         valueKey: "savings",
         icon: "Percent",
         color: "text-[#F37621]",
@@ -406,11 +415,11 @@ export const siteConfig = {
       },
     ],
     prices: {
-      petrol: 737, // NGN per liter
-      cng: 350, // NGN per liter
+      petrol: 1200, // NGN per liter
+      cng: 450, // NGN per liter
     },
     co2PerLiter: 2.3, // kg CO2 per liter of petrol
-    savingsPercentage: 20, // Default savings percentage
+    savingsPercentage: 50, // Default savings percentage
     vehicleMultipliers: {
       sedan: 1.0,
       suv: 1.2,
@@ -419,9 +428,9 @@ export const siteConfig = {
       truck: 3.0,
     },
     priceDisplay: {
-      petrol: "₦737/L",
-      cng: "₦350/L",
-      savings: "~20%",
+      petrol: "₦1200/L",
+      cng: "₦450/L",
+      savings: "~50%",
       co2Reduction: "~30%",
     },
   },
@@ -756,27 +765,13 @@ export const siteConfig = {
 
   // Newsletter section content
   newsletter: {
-    section: {
-      title: "Stay updated with CNG insights",
-      description:
-        "Get the latest news, tips, and exclusive offers delivered to your inbox.",
-      footerNote:
-        "By subscribing, you agree to our Privacy Policy. Unsubscribe anytime.",
-    },
-
-    form: {
-      placeholder: "Enter your email",
-      buttonText: "Subscribe now",
-      loadingText: "Subscribing...",
-    },
-
-    behavior: {
-      successRate: 0.8,
-      apiDelay: 1000,
-      resetDelay: 5000,
-    },
+    title: "Weekly Insights",
+    description:
+      "Join 5,000+ subscribers receiving our weekly growth insights.",
+    placeholder: "Email address",
+    submitLabel: "Subscribe",
+    url: "https://www.linkedin.com/newsletters/the-adesa-lens-7352962421847638016/",
   },
-
   // Waitlist section content
   waitlist: {
     section: {

@@ -1,11 +1,11 @@
-export const metadata = {
+import { constructMetadata } from "@/lib/metadata";
+
+export const metadata = constructMetadata({
   title: "Careers at Adesa Energy | Mobile CNG Conversion & Refueling",
   description:
     "Join Adesa Energy to power smarter, more sustainable transport. Explore careers in mobile CNG conversion and refueling services across Nigeria.",
-  alternates: {
-    canonical: "https://www.adesaenergy.com/careers",
-  },
-};
+  path: "/careers",
+});
 
 export default function CareerLayout({ children }) {
   return (
