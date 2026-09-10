@@ -1,20 +1,12 @@
 "use client";
 
 import { usePathname, useRouter } from "next/navigation";
-import dynamic from "next/dynamic";
-
-const Navbar = dynamic(() => import("@/components/Navbar_components/Navbar"), {
-  ssr: false,
-});
-const Footer = dynamic(() => import("@/components/Footer"), { ssr: false });
-const NewsletterSection = dynamic(
-  () => import("@/components/Sections/NewsletterSection"),
-  { ssr: false }
-);
-const TestimonialsSection = dynamic(
-  () => import("@/components/Sections/TestimonalsSection"),
-  { ssr: false }
-);
+import Navbar from "@/components/Navbar_components/Navbar";
+import Footer from "@/components/Footer";
+import NewsletterSection from "@/components/Sections/NewsletterSection";
+import TestimonialsSection from "@/components/Sections/TestimonalsSection";
+import FirstVisitIntro from "@/components/FirstVisitIntro";
+import WhatsAppSupport from "@/components/WhatsAppSupport";
 
 export default function AppShell({ children }) {
   const pathname = usePathname();
@@ -27,28 +19,22 @@ export default function AppShell({ children }) {
     router.push(path);
   };
 
+  const isHome = pathname === "/";
+
   return (
-    <>
+    <div className="flex min-h-screen min-w-0 flex-col overflow-x-clip">
+      <FirstVisitIntro />
       <Navbar activeSection={activeSection} handleNavClick={handleNavClick} />
-      {children}
-      <TestimonialsSection />
+      <main id="main-content" className="min-w-0 grow pt-24 sm:pt-28">
+        {children}
+      </main>
+      {!isHome && <TestimonialsSection />}
       <NewsletterSection
         buttonText="Subscribe on LinkedIn"
-        className="
-    w-full
-    px-4
-    sm:px-8
-    lg:px-16
-    py-12
-    sm:py-16
-    lg:py-24
-    flex
-    flex-col
-    items-center
-    justify-center
-  "
+        className="w-full px-4 sm:px-8 lg:px-16 py-12 sm:py-16 lg:py-20 flex flex-col items-center justify-center"
       />
       <Footer onNavClick={handleNavClick} />
-    </>
+      <WhatsAppSupport />
+    </div>
   );
 }

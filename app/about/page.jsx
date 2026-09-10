@@ -3,7 +3,7 @@ import OurTeamSection from "@/components/Sections/OurTeamSection";
 
 export default function AboutPage() {
   return (
-    <div className="mt-10">
+    <div>
       <AboutSection />
       <OurTeamSection />
     </div>

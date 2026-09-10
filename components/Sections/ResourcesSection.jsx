@@ -1,30 +1,25 @@
 "use client";
 
-import { Download, ChevronDown, ArrowBigRight, ListCheck, Book } from "lucide-react";
+import { Download, ChevronDown, ListCheck, HelpCircle, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { siteConfig } from "@/config/site";
 import Link from "next/link";
 
-
 const ResourcesSection = () => {
   const resourcesConfig = siteConfig.resources;
-  const [openIndex, setOpenIndex] = useState(null);
-  
+  const [openIndex, setOpenIndex] = useState(0);
+
   const toggleAccordion = (index) => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
-  const { section, faqs, cta, cta1, cta2, cta3 } = resourcesConfig;
+  const { section, faqs, cta, cta1, cta2 } = resourcesConfig;
 
   return (
-    <motion.section
+    <section
       id={section.id}
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6 }}
-      className="py-20 bg-gray-50 dark:bg-charcoal-gray"
+      className="py-20 lg:py-28 bg-slate-50 dark:bg-[#060b17] transition-colors relative overflow-hidden"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
@@ -32,112 +27,122 @@ const ResourcesSection = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-16"
+          className="text-center max-w-3xl mx-auto mb-16 space-y-3"
         >
-          <p className="text-burnt-orange font-semibold mb-2 font-sans uppercase tracking-wider">
-            {section.tag}
-          </p>
-          <h2 className="text-3xl md:text-4xl font-heading font-bold text-deep-blue dark:text-white mb-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-burnt-orange/10 border border-burnt-orange/20 text-burnt-orange font-semibold text-xs uppercase tracking-wider">
+            <HelpCircle className="w-3.5 h-3.5" />
+            <span>{section.tag || "Resources & Knowledge"}</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold text-slate-900 dark:text-white tracking-tight">
             {section.title}
           </h2>
-          <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto font-sans">
+          <p className="text-slate-600 dark:text-slate-400 text-base sm:text-lg font-sans">
             {section.subtitle}
           </p>
         </motion.div>
 
-        <div className="max-w-3xl mx-auto">
-          <div className="space-y-4">
-            {faqs.map((faq, index) => (
+        <div className="max-w-3xl mx-auto space-y-4">
+          {faqs.map((faq, index) => {
+            const isOpen = openIndex === index;
+
+            return (
               <motion.div
                 key={index}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-white dark:bg-dark-blue rounded-xl shadow-sm overflow-hidden border border-gray-200 dark:border-charcoal-gray"
+                transition={{ duration: 0.4, delay: index * 0.08 }}
+                className={`rounded-2xl border transition-all duration-200 overflow-hidden ${
+                  isOpen
+                    ? "bg-white dark:bg-[#0E1A38] border-burnt-orange/30 shadow-md"
+                    : "bg-white dark:bg-[#0E1A38]/70 border-slate-200/80 dark:border-white/10 hover:border-slate-300 dark:hover:border-white/20"
+                }`}
               >
                 <button
                   onClick={() => toggleAccordion(index)}
-                  className="w-full flex items-center justify-between p-6 text-left focus:outline-none focus:ring-2 focus:ring-burnt-orange focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-dark-blue"
-                  aria-expanded={openIndex === index}
+                  className="w-full flex items-center justify-between p-5 sm:p-6 text-left focus:outline-none cursor-pointer gap-4"
+                  aria-expanded={isOpen}
                   aria-controls={`faq-answer-${index}`}
                 >
-                  <span className="font-heading font-semibold text-deep-blue dark:text-white">
+                  <span className="font-heading font-bold text-base sm:text-lg text-slate-900 dark:text-white">
                     {faq.question}
                   </span>
-                  <ChevronDown
-                    className={`w-5 h-5 text-burnt-orange transition-transform duration-300 ${
-                      openIndex === index ? "rotate-180" : ""
+                  <div
+                    className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 transition-colors ${
+                      isOpen
+                        ? "bg-burnt-orange text-white"
+                        : "bg-slate-100 dark:bg-white/10 text-slate-600 dark:text-slate-300"
                     }`}
-                    aria-hidden="true"
-                  />
+                  >
+                    <ChevronDown
+                      className={`w-4 h-4 transition-transform duration-300 ${
+                        isOpen ? "rotate-180" : ""
+                      }`}
+                      aria-hidden="true"
+                    />
+                  </div>
                 </button>
 
                 <AnimatePresence initial={false}>
-                  {openIndex === index && (
+                  {isOpen && (
                     <motion.div
                       initial={{ opacity: 0, height: 0 }}
                       animate={{ opacity: 1, height: "auto" }}
                       exit={{ opacity: 0, height: 0 }}
-                      transition={{ duration: 0.3 }}
-                      className="px-6 pb-6 overflow-hidden"
+                      transition={{ duration: 0.25 }}
+                      className="px-5 sm:px-6 pb-6 overflow-hidden"
                       id={`faq-answer-${index}`}
                     >
-                      <p className="text-gray-600 dark:text-gray-300 font-sans leading-relaxed">
+                      <p className="text-slate-600 dark:text-slate-300 font-sans leading-relaxed text-sm sm:text-base pt-2 border-t border-slate-100 dark:border-white/5">
                         {faq.answer}
                       </p>
                     </motion.div>
                   )}
                 </AnimatePresence>
               </motion.div>
-            ))}
-          </div>
+            );
+          })}
 
+          {/* Download & Conversion Resource Card */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 25 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.6 }}
-            className="mt-12 bg-linear-to-br from-deep-blue to-dark-blue rounded-2xl p-8 text-center relative overflow-hidden"
+            transition={{ duration: 0.5, delay: 0.3 }}
+            className="mt-12 bg-linear-to-br from-[#0B1530] via-[#0E1A38] to-[#13224A] rounded-3xl p-8 sm:p-10 text-center relative overflow-hidden border border-white/10 shadow-xl"
           >
-            <div className="relative z-10">
-              <h3 className="text-2xl font-heading font-semibold text-white mb-4">
+            <div className="absolute top-0 right-0 w-80 h-80 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+
+            <div className="relative z-10 space-y-4">
+              <h3 className="text-2xl sm:text-3xl font-heading font-bold text-white">
                 {cta.title}
               </h3>
-              <p className="text-gray-300 mb-6 font-sans max-w-2xl mx-auto">
+              <p className="text-slate-300 font-sans max-w-xl mx-auto text-sm sm:text-base leading-relaxed">
                 {cta.description}
               </p>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {/* Top 2 buttons */}
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="inline-flex items-center justify-center bg-burnt-orange hover:bg-[#d15e15] text-white px-8 py-4 rounded-lg font-heading font-semibold transition focus:outline-none focus:ring-2 focus:ring-burnt-orange focus:ring-offset-2 focus:ring-offset-deep-blue"
-                  aria-label={cta1.ariaLabel}
-                >
-                  <Link href={cta1.href} className="flex items-center gap-2">
-                    {cta1.buttonText}
-                   <ListCheck />
-                  </Link>
-                </motion.button>
 
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="inline-flex items-center justify-center bg-burnt-orange hover:bg-[#d15e15] text-white px-8 py-4 rounded-lg font-heading font-semibold transition focus:outline-none focus:ring-2 focus:ring-burnt-orange focus:ring-offset-2 focus:ring-offset-deep-blue"
-                  aria-label={cta2.ariaLabel}
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
+                <Link
+                  href={cta1.href}
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-linear-to-r from-[#F37621] to-[#F59E0B] hover:shadow-orange-500/30 text-white px-7 py-3.5 rounded-xl font-heading font-bold text-sm shadow-md hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
                 >
-                  <Link href={cta2.href} className="flex items-center gap-2">
-                    {cta2.buttonText}
-                    <Download />
-                  </Link>
-                </motion.button>
+                  <span>{cta1.buttonText}</span>
+                  <ListCheck className="w-4 h-4" />
+                </Link>
+
+                <Link
+                  href={cta2.href}
+                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/15 text-white border border-white/20 px-7 py-3.5 rounded-xl font-heading font-semibold text-sm backdrop-blur-md hover:scale-[1.02] active:scale-[0.98] transition-all cursor-pointer"
+                >
+                  <span>{cta2.buttonText}</span>
+                  <Download className="w-4 h-4" />
+                </Link>
               </div>
             </div>
           </motion.div>
         </div>
       </div>
-    </motion.section>
+    </section>
   );
 };
 

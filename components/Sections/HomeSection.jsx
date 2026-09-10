@@ -1,68 +1,37 @@
-"use client";
+import AboutSection from "./AboutSection";
+import BlogSection from "./BlogSection";
+import FeaturesSection from "./FeaturesSection";
+import HeroSection from "./HeroSection";
+import LiveNewsSection from "./LiveNewsSection";
+import OurTeamSection from "./OurTeamSection";
+import ResourcesSection from "./ResourcesSection";
+import SolutionsSection from "./SolutionsSection";
+import TestimonialsSection from "./TestimonalsSection";
+import VideoSection from "./VideoSection";
+import CalculatorSection from "../Calculator_components/CalculatorSection";
+import ContactSection from "../Contact_components/ContactSection";
+import { getNigeriaEnergyNews } from "@/lib/news";
 
-import { useRouter } from "next/navigation";
-import dynamic from "next/dynamic";
-
-// Only hero and features above the fold
-const HeroSection = dynamic(() => import("./HeroSection"), { ssr: false });
-const FeaturesSection = dynamic(() => import("./FeaturesSection"), { ssr: false });
-
-// Lazy load the rest
-const AboutSection = dynamic(() => import("./AboutSection"), { ssr: false });
-const OurTeamSection = dynamic(() => import("./OurTeamSection"), { ssr: false });
-const SolutionsSection = dynamic(() => import("./SolutionsSection"), { ssr: false });
-const CalculatorSection = dynamic(
-  () => import("../Calculator_components/CalculatorSection"), { ssr: false }
-);
-const TestimonialsSection = dynamic(() => import("./TestimonalsSection"), { ssr: false });
-const ResourcesSection = dynamic(() => import("./ResourcesSection"), {ssr: false});
-const BlogSection = dynamic(() => import("./BlogSection"), {ssr: false});
-const ContactSection = dynamic(
-  () => import("@/components/Contact_components/ContactSection"),{ssr: false}
-);
-const VideoSection = dynamic(() => import("./VideoSection"), { ssr: false });
-
-
-export default function HomeSection() {
-  const router = useRouter();
-
-  const handleNavClick = (path) => {
-    router.push(path);
-  };
+export default async function HomeSection() {
+  const liveNews = await getNigeriaEnergyNews({ limit: 3 });
 
   return (
-    <div className="text-charcoal-gray min-h-screen">
-      {/* Hero Section */}
-      <HeroSection onNavClick={handleNavClick} />
-
-      {/* Features Section */}
+    <div className="min-h-screen min-w-0 overflow-x-clip text-charcoal-gray">
+      <HeroSection />
       <FeaturesSection />
-
-      {/* About Section */}
-      <AboutSection/>
-      
-      {/* Video Section */}
+      <AboutSection />
       <VideoSection />
-
-      {/* Our Team Section */}
       <OurTeamSection />
-
-      {/* Solutions Section */}
       <SolutionsSection />
-
-      {/* CNG Calculator Section */}
       <CalculatorSection />
-
-      {/* Testimonials Section */}
       <TestimonialsSection />
-
-      {/* Resources/FAQ Section */}
       <ResourcesSection />
-
-      {/* Blog Section */}
-      <BlogSection />
-
-      {/* Contact Section */}
+      <LiveNewsSection
+        articles={liveNews.articles}
+        unavailable={liveNews.unavailable}
+        variant="home"
+      />
+      <BlogSection variant="home" />
       <ContactSection />
     </div>
   );

@@ -2,7 +2,7 @@ import CalculatorSection from "@/components/Calculator_components/CalculatorSect
 
 export default function CalculatorPage() {
   return (
-    <div className="mt-10">
+    <div>
       <CalculatorSection />
     </div>
   );

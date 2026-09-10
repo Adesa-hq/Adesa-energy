@@ -1,10 +1,9 @@
 "use client";
 import { motion } from "framer-motion";
-import { PiggyBank, Percent, TrendingUp, Leaf, Truck } from "lucide-react";
+import { PiggyBank, Percent, TrendingUp, Leaf, Truck, ArrowRight } from "lucide-react";
 import { siteConfig } from "@/config/site";
 
 const CalculatorResults = ({ calculatorResult, onNavClick }) => {
-  // Fail-safe number formatter
   const formatNumber = (amount) => {
     if (amount >= 1_000_000) return `₦${(amount / 1_000_000).toFixed(1)}M`;
     if (amount >= 1_000) return `₦${(amount / 1_000).toFixed(0)}K`;
@@ -18,37 +17,38 @@ const CalculatorResults = ({ calculatorResult, onNavClick }) => {
 
   return (
     <div
-      className="bg-charcoal-gray/5 p-6 sm:p-8 border-l border-gray-200 flex flex-col"
+      className="p-7 sm:p-8 bg-slate-50 dark:bg-[#091329] border-t lg:border-t-0 lg:border-l border-slate-200/80 dark:border-white/10 flex flex-col justify-between h-full"
       id="calculatorResults"
     >
       {calculatorResult ? (
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0, transition: { duration: 0.5 } }}
-          className="flex flex-col h-full"
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+          className="flex flex-col h-full justify-between space-y-6"
         >
-          <div className="text-center mb-6">
-            <div className="w-14 h-14 bg-burnt-orange rounded-xl flex items-center justify-center mx-auto mb-4 shadow-md">
-              <PiggyBank className="w-7 h-7 text-white" />
+          <div>
+            <div className="text-center mb-6">
+              <div className="w-12 h-12 bg-linear-to-br from-[#F37621] to-[#F59E0B] rounded-2xl flex items-center justify-center mx-auto mb-3 shadow-md shadow-orange-500/20 text-white">
+                <PiggyBank className="w-6 h-6" />
+              </div>
+              <h3 className="text-xl font-heading font-bold text-slate-900 dark:text-white">
+                {siteConfig.calculator.results.title}
+              </h3>
+              <p className="text-xs font-semibold uppercase tracking-wider text-burnt-orange mt-1">
+                {siteConfig.calculator.results.vehicleTypePrefix}{" "}
+                {calculatorResult.vehicleType}
+              </p>
             </div>
-            <h3 className="text-xl font-bold text-deep-blue font-heading">
-              {siteConfig.calculator.results.title}
-            </h3>
-            <p className="text-gray-600 mt-1 font-sans font-medium">
-              {siteConfig.calculator.results.vehicleTypePrefix}{" "}
-              {calculatorResult.vehicleType}
-            </p>
-          </div>
 
-          <div className="space-y-4 grow">
-            <div className="bg-white rounded-xl p-5 border-l-4 border-burnt-orange shadow-sm transition-all hover:shadow-md">
-              <div className="flex items-start justify-between">
+            <div className="space-y-3">
+              {/* Monthly Savings Card */}
+              <div className="bg-white dark:bg-[#0E1A38] rounded-2xl p-4 sm:p-5 border-l-4 border-burnt-orange border border-slate-200/80 dark:border-white/10 shadow-sm flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-500 font-sans flex items-center font-medium">
-                    <Percent className="w-4 h-4 mr-1 text-burnt-orange" />
+                  <p className="text-xs text-slate-500 dark:text-slate-400 font-heading font-semibold uppercase tracking-wider">
                     {siteConfig.calculator.results.monthlySavingsLabel}
                   </p>
-                  <p className="text-3xl font-bold text-deep-blue mt-1 font-heading">
+                  <p className="text-2xl sm:text-3xl font-heading font-extrabold text-slate-900 dark:text-white mt-1">
                     {formatNumber(
                       parseInt(
                         calculatorResult.monthlySavings.replace(/[^0-9]/g, "")
@@ -56,20 +56,18 @@ const CalculatorResults = ({ calculatorResult, onNavClick }) => {
                     )}
                   </p>
                 </div>
-                <div className="bg-burnt-orange/10 p-2 rounded-lg">
-                  <Percent className="w-6 h-6 text-burnt-orange" />
+                <div className="w-10 h-10 rounded-xl bg-burnt-orange/10 text-burnt-orange flex items-center justify-center">
+                  <Percent className="w-5 h-5" />
                 </div>
               </div>
-            </div>
 
-            <div className="bg-white rounded-xl p-5 border-l-4 border-light-blue shadow-sm transition-all hover:shadow-md">
-              <div className="flex items-start justify-between">
+              {/* Yearly Savings Card */}
+              <div className="bg-white dark:bg-[#0E1A38] rounded-2xl p-4 sm:p-5 border-l-4 border-sky-500 border border-slate-200/80 dark:border-white/10 shadow-sm flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-500 font-sans flex items-center font-medium">
-                    <TrendingUp className="w-4 h-4 mr-1 text-light-blue" />
+                  <p className="text-xs text-slate-500 dark:text-slate-400 font-heading font-semibold uppercase tracking-wider">
                     {siteConfig.calculator.results.yearlySavingsLabel}
                   </p>
-                  <p className="text-3xl font-bold text-deep-blue mt-1 font-heading">
+                  <p className="text-2xl sm:text-3xl font-heading font-extrabold text-sky-500 dark:text-sky-400 mt-1">
                     {formatNumber(
                       parseInt(
                         calculatorResult.yearlySavings.replace(/[^0-9]/g, "")
@@ -77,67 +75,68 @@ const CalculatorResults = ({ calculatorResult, onNavClick }) => {
                     )}
                   </p>
                 </div>
-                <div className="bg-light-blue/10 p-2 rounded-lg">
-                  <TrendingUp className="w-6 h-6 text-light-blue" />
+                <div className="w-10 h-10 rounded-xl bg-sky-500/10 text-sky-500 flex items-center justify-center">
+                  <TrendingUp className="w-5 h-5" />
+                </div>
+              </div>
+
+              {/* Metrics row */}
+              <div className="grid grid-cols-2 gap-3 pt-1">
+                <div className="bg-white dark:bg-[#0E1A38] rounded-2xl p-3.5 text-center border border-slate-200/80 dark:border-white/10 shadow-sm">
+                  <p className="text-xs text-slate-500 dark:text-slate-400 font-semibold">
+                    {siteConfig.calculator.results.avgSavingsLabel}
+                  </p>
+                  <p className="text-xl font-heading font-bold text-burnt-orange mt-0.5">
+                    {calculatorResult.savingsPercentage}%
+                  </p>
+                </div>
+                <div className="bg-white dark:bg-[#0E1A38] rounded-2xl p-3.5 text-center border border-slate-200/80 dark:border-white/10 shadow-sm">
+                  <p className="text-xs text-slate-500 dark:text-slate-400 font-semibold">
+                    CO2 Cut
+                  </p>
+                  <p className="text-xl font-heading font-bold text-emerald-500 mt-0.5">
+                    {calculatorResult.co2Reduction} kg
+                  </p>
                 </div>
               </div>
             </div>
-
-            <div className="grid grid-cols-2 gap-3">
-              <div className="bg-white rounded-xl p-4 flex flex-col justify-around text-center shadow-sm border border-gray-100 transition-all hover:border-burnt-orange/50">
-                <p className="text-sm text-gray-500 font-sans font-medium flex justify-center items-center">
-                  <Percent className="w-4 h-4 mr-1 text-burnt-orange" />
-                  {siteConfig.calculator.results.avgSavingsLabel}
-                </p>
-                <p className="text-2xl font-bold text-burnt-orange mt-1 font-heading">
-                  {calculatorResult.savingsPercentage}%
-                </p>
-              </div>
-              <div className="bg-white rounded-xl p-4 flex flex-col justify-around text-center shadow-sm border border-gray-100 transition-all hover:border-green-500/50">
-                <p className="text-sm text-gray-500 font-sans font-medium flex justify-center items-center">
-                  <Leaf className="w-4 h-4 mr-1 text-green-600" />
-                  {siteConfig.calculator.results.co2ReductionLabel}
-                </p>
-                <p className="text-2xl font-bold text-green-600 mt-1 font-heading">
-                  {calculatorResult.co2Reduction} kg/month
-                </p>
-              </div>
-            </div>
           </div>
 
-          <motion.button
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            onClick={() => onNavClick("/waitlist")}
-            className="mt-6 w-full bg-linear-to-r from-burnt-orange to-[#EE3E23] text-white py-3.5 rounded-lg font-bold text-center hover:shadow-lg transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-burnt-orange focus:ring-offset-2 font-sans"
-          >
-            {siteConfig.calculator.results.convertButton}
-          </motion.button>
-          <p className="text-xs text-gray-500 text-center mt-2 font-sans">
-            {siteConfig.calculator.results.footerText}
-          </p>
+          <div>
+            <motion.button
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => onNavClick("/convert")}
+              className="w-full inline-flex items-center justify-center gap-2 bg-linear-to-r from-[#F37621] to-[#F59E0B] text-white py-3.5 rounded-xl font-heading font-bold text-sm shadow-md hover:shadow-orange-500/30 transition-all cursor-pointer"
+            >
+              <span>{siteConfig.calculator.results.convertButton}</span>
+              <ArrowRight className="w-4 h-4" />
+            </motion.button>
+            <p className="text-[11px] text-slate-500 dark:text-slate-400 text-center mt-2.5 font-sans">
+              {siteConfig.calculator.results.footerText}
+            </p>
+          </div>
         </motion.div>
       ) : (
-        <div className="h-full flex flex-col justify-center items-center text-center p-4">
-          <div className="w-14 h-14 bg-light-blue/20 rounded-xl flex items-center justify-center mb-4">
-            <Truck className="w-7 h-7 text-deep-blue" />
+        <div className="h-full flex flex-col justify-center items-center text-center py-10 px-4 space-y-4">
+          <div className="w-14 h-14 bg-sky-500/10 border border-sky-500/20 rounded-2xl flex items-center justify-center text-sky-400 shadow-sm">
+            <Truck className="w-7 h-7" />
           </div>
-          <h3 className="text-xl font-bold text-deep-blue mb-2 font-heading">
-            {siteConfig.calculator.results.noResult.title}
-          </h3>
-          <p className="text-gray-600 max-w-xs font-sans">
-            {siteConfig.calculator.results.noResult.description}
-          </p>
-          <div className="mt-6 grid grid-cols-2 gap-3 w-full max-w-xs">
-            <div className="bg-burnt-orange/10 p-3 rounded-lg border border-dashed border-burnt-orange">
-              <p className="text-xs text-deep-blue font-sans font-medium">
-                {siteConfig.calculator.results.noResult.bullet1}
-              </p>
+          <div className="space-y-1">
+            <h3 className="text-lg font-heading font-bold text-slate-900 dark:text-white">
+              {siteConfig.calculator.results.noResult.title}
+            </h3>
+            <p className="text-slate-500 dark:text-slate-400 text-xs max-w-xs font-sans">
+              {siteConfig.calculator.results.noResult.description}
+            </p>
+          </div>
+
+          <div className="grid grid-cols-2 gap-2.5 w-full max-w-xs pt-2">
+            <div className="bg-amber-500/10 dark:bg-amber-500/5 p-2.5 rounded-xl border border-amber-500/20 text-xs font-semibold text-burnt-orange text-center">
+              {siteConfig.calculator.results.noResult.bullet1}
             </div>
-            <div className="bg-light-blue/10 p-3 rounded-lg border border-dashed border-light-blue">
-              <p className="text-xs text-deep-blue font-sans font-medium">
-                {siteConfig.calculator.results.noResult.bullet2}
-              </p>
+            <div className="bg-sky-500/10 dark:bg-sky-500/5 p-2.5 rounded-xl border border-sky-500/20 text-xs font-semibold text-sky-500 dark:text-sky-400 text-center">
+              {siteConfig.calculator.results.noResult.bullet2}
             </div>
           </div>
         </div>

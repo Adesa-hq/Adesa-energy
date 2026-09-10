@@ -1,0 +1,31 @@
+# Adesa Energy
+
+> Adesa Energy (a subsidiary of Adesa HQ) provides mobile compressed natural gas (CNG) vehicle conversion, on-demand refueling, fleet conversion packages, maintenance, support, and training in Nigeria.
+
+Canonical website: https://www.adesaenergy.com
+Primary language: English (Nigeria)
+Service area: Nigeria
+
+## Primary pages
+
+- [Home](https://www.adesaenergy.com/): Mobile CNG conversion and refueling overview.
+- [Solutions](https://www.adesaenergy.com/solutions): Conversion, refueling, fleet, maintenance, and training services.
+- [Savings calculator](https://www.adesaenergy.com/calculator): Estimate petrol-to-CNG fuel savings.
+- [Resources and FAQs](https://www.adesaenergy.com/resources): Practical CNG guidance and common questions.
+- [Blog](https://www.adesaenergy.com/blog): Adesa Energy articles about CNG adoption, conversion, and company updates.
+- [About](https://www.adesaenergy.com/about): Company mission, vision, and operating approach.
+- [Convert to CNG](https://www.adesaenergy.com/convert): Request a vehicle conversion or fleet consultation.
+- [Contact](https://www.adesaenergy.com/contact): Customer support and office locations.
+
+## Discovery
+
+- [XML sitemap](https://www.adesaenergy.com/sitemap.xml)
+- [RSS feed](https://www.adesaenergy.com/feed.xml)
+- [Robots policy](https://www.adesaenergy.com/robots.txt)
+
+## Contact
+
+- Email: info@adesahq.com
+- Phone: +234 816 882 3730
+- Office hours: Mon-Fri, 9am-5pm
+- Address: 2 Isheri Road, Ojodu-Berger, Lagos, Nigeria

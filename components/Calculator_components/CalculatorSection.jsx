@@ -2,22 +2,14 @@
 
 import { motion } from "framer-motion";
 import { useState, useEffect, useRef } from "react";
-import dynamic from "next/dynamic";
 import { siteConfig } from "@/config/site";
 import { formatCurrency } from "./utils";
 import { useRouter } from "next/navigation";
+import CalculatorHeader from "./CalculatorHeader";
+import CalculatorForm from "./CalculatorForm";
+import CalculatorResults from "./CalculatorResults";
+import PriceCards from "./PriceCards";
 
-// Dynamic imports
-const CalculatorHeader = dynamic(() => import("./CalculatorHeader"), {
-  ssr: false,
-});
-const CalculatorForm = dynamic(() => import("./CalculatorForm"), {
-  ssr: false,
-});
-const CalculatorResults = dynamic(() => import("./CalculatorResults"), {
-  ssr: false,
-});
-const PriceCards = dynamic(() => import("./PriceCards"), { ssr: false });
 
 const CalculatorSection = () => {
   const [calculatorResult, setCalculatorResult] = useState(null);
@@ -84,32 +76,38 @@ const CalculatorSection = () => {
   };
 
   return (
-    <motion.section
+    <section
       id="calculator"
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6 }}
-      className="py-20 bg-linear-to-br from-deep-blue via-dark-blue to-deep-blue text-white relative overflow-hidden"
+      className="py-20 lg:py-28 bg-[#081126] text-white relative overflow-hidden transition-colors"
     >
-      <CalculatorHeader />
-      <div className="max-w-4xl mx-auto">
-        <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl overflow-hidden border border-white/10 grid lg:grid-cols-2">
-          <CalculatorForm
-            onSubmit={handleCalculatorSubmit}
-            isCalculating={isCalculating}
-          />
-          <div ref={resultsRef}>
-            <CalculatorResults
-              calculatorResult={calculatorResult}
-              onNavClick={onNavClick}
+      {/* Ambient background glows */}
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-sky-500/10 rounded-full blur-[140px] pointer-events-none -z-10" />
+      <div className="absolute bottom-10 right-10 w-[450px] h-[450px] bg-amber-500/10 rounded-full blur-[130px] pointer-events-none -z-10" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <CalculatorHeader />
+        <div className="max-w-4xl mx-auto">
+          <div className="bg-white dark:bg-[#0E1A38] rounded-3xl shadow-2xl overflow-hidden border border-slate-200/80 dark:border-white/10 grid lg:grid-cols-2">
+            <CalculatorForm
+              onSubmit={handleCalculatorSubmit}
+              isCalculating={isCalculating}
             />
+            <div ref={resultsRef}>
+              <CalculatorResults
+                calculatorResult={calculatorResult}
+                onNavClick={onNavClick}
+              />
+            </div>
           </div>
+          <PriceCards
+            savings={savingsPercentage.toFixed(2)}
+            petrol={prices.petrol}
+            cng={prices.cng}
+          />
         </div>
-        <PriceCards savings={savingsPercentage.toFixed(2)} petrol={prices.petrol} cng={prices.cng} />
       </div>
-    </motion.section>
+    </section>
   );
-};;
+};
 
 export default CalculatorSection;

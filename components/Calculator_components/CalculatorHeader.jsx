@@ -9,25 +9,22 @@ const CalculatorHeader = () => (
     whileInView={{ opacity: 1, y: 0 }}
     viewport={{ once: true }}
     transition={{ duration: 0.5 }}
-    className="text-center mb-12"
+    className="text-center max-w-3xl mx-auto mb-14 space-y-3"
   >
-    <motion.div
-      initial={{ scale: 0 }}
-      animate={{ scale: 1 }}
-      transition={{ delay: 0.2 }}
-      className="inline-block bg-burnt-orange/15 border border-burnt-orange/30 px-4 py-1.5 rounded-full mb-4"
-    >
-      <span className="font-semibold font-sans text-white">
-        {siteConfig.calculator.header.title}
-      </span>
-    </motion.div>
-    <h2 className="text-3xl md:text-4xl font-bold font-heading mb-3 text-white">
+    <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-burnt-orange/15 border border-burnt-orange/30 text-amber-300 font-semibold text-xs uppercase tracking-wider">
+      <Calculator className="w-3.5 h-3.5" />
+      <span>{siteConfig.calculator.header.title || "Cost Savings Engine"}</span>
+    </div>
+
+    <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold text-white tracking-tight">
       {siteConfig.calculator.header.subtitle}
     </h2>
-    <p className="text-light-blue font-bold text-lg mb-2 font-heading">
+
+    <p className="text-sky-300 font-heading font-semibold text-base sm:text-lg">
       {siteConfig.calculator.header.tagline}
     </p>
-    <p className="text-gray-200 max-w-2xl mx-auto font-sans text-lg opacity-90">
+
+    <p className="text-slate-300 font-sans text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
       {siteConfig.calculator.header.description}
     </p>
   </motion.div>

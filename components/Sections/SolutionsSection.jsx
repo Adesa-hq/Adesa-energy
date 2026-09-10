@@ -5,7 +5,7 @@ import {
   Fuel,
   Car,
   Truck,
-  CheckCircle,
+  CheckCircle2,
   Wrench,
   GraduationCap,
 } from "lucide-react";
@@ -26,111 +26,128 @@ const SolutionsSection = () => {
   const router = useRouter();
 
   const onNavClick = (path) => {
-    router.push(path);
+    if (path.startsWith("/")) {
+      router.push(path);
+    } else {
+      router.push(`/${path}`);
+    }
   };
 
   return (
-    <motion.section
+    <section
       id="solutions"
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 0.6 }}
-      className="py-20 bg-white dark:bg-[#242622]"
+      className="py-20 lg:py-28 bg-slate-50 dark:bg-[#060b17] transition-colors relative overflow-hidden"
     >
+      {/* Ambient background decoration */}
+      <div className="absolute top-1/3 right-0 w-[500px] h-[500px] bg-amber-500/5 dark:bg-amber-500/10 rounded-full blur-[140px] pointer-events-none -z-10" />
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-16"
+          className="text-center max-w-3xl mx-auto mb-16 space-y-3"
         >
-          <p className="text-[#F37621] font-semibold mb-2 font-inter">
-            {header.tagline}
-          </p>
-          <h2 className="text-3xl md:text-4xl font-bold text-[#22244E] dark:text-white font-montserrat mb-4">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-burnt-orange/10 border border-burnt-orange/20 text-burnt-orange font-semibold text-xs uppercase tracking-wider">
+            <span>{header.tagline}</span>
+          </div>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-heading font-bold text-slate-900 dark:text-white tracking-tight">
             {header.headline}
           </h2>
-          <p className="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto font-inter">
+          <p className="text-slate-600 dark:text-slate-400 text-base sm:text-lg">
             {header.description}
           </p>
         </motion.div>
 
+        {/* 3 Main Solutions Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {main.map((solution, index) => {
-            const Icon = iconMap[solution.icon];
+            const Icon = iconMap[solution.icon] || Car;
 
             return (
               <motion.div
                 key={solution.title}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 25 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="bg-gray-50 dark:bg-[#2E302C] rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300 border border-gray-200 dark:border-gray-800 hover:border-[#59C6E5] dark:hover:border-[#59C6E5]"
+                whileHover={{ y: -6 }}
+                className="bg-white dark:bg-[#0E1A38] rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl border border-slate-200/80 dark:border-white/10 flex flex-col justify-between transition-all duration-300 group"
               >
-                <div
-                  className={`h-48 bg-linear-to-br ${solution.gradient} flex items-center justify-center`}
-                >
-                  <Icon className="w-20 h-20 text-white" />
-                </div>
-                <div className="p-6">
-                  <h3 className="text-xl font-semibold text-[#22244E] dark:text-white mb-3 font-montserrat">
-                    {solution.title}
-                  </h3>
-                  <p className="text-gray-600 dark:text-gray-300 mb-4 font-inter">
-                    {solution.desc}
-                  </p>
-                  <ul className="space-y-2 mb-6">
-                    {solution.items.map((item) => (
-                      <li
-                        key={item}
-                        className="flex items-center text-sm text-gray-600 dark:text-gray-300 font-inter"
-                      >
-                        <CheckCircle className="w-4 h-4 text-[#F37621] mr-2 shrink-0" />
-                        <span>{item}</span>
-                      </li>
-                    ))}
-                  </ul>
-                  <motion.button
-                    whileHover={{ x: 5 }}
-                    onClick={() => onNavClick("contact")}
-                    className="text-[#F37621] font-semibold hover:underline inline-flex items-center focus:outline-none font-inter"
+                <div>
+                  {/* Top Gradient Banner with Icon */}
+                  <div
+                    className={`h-44 bg-linear-to-br ${solution.gradient} flex items-center justify-center relative overflow-hidden`}
                   >
-                    Learn more <ArrowRight className="w-4 h-4 ml-1" />
-                  </motion.button>
+                    <div className="absolute inset-0 bg-black/10" />
+                    <div className="w-20 h-20 rounded-2xl bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center shadow-lg transition-transform group-hover:scale-110">
+                      <Icon className="w-10 h-10 text-white" />
+                    </div>
+                  </div>
+
+                  <div className="p-7">
+                    <h3 className="text-xl font-heading font-bold text-slate-900 dark:text-white mb-2.5">
+                      {solution.title}
+                    </h3>
+                    <p className="text-slate-600 dark:text-slate-300 text-sm leading-relaxed mb-6">
+                      {solution.desc}
+                    </p>
+
+                    <div className="space-y-2.5">
+                      {solution.items.map((item) => (
+                        <div
+                          key={item}
+                          className="flex items-center text-xs sm:text-sm text-slate-700 dark:text-slate-300 font-medium gap-2.5"
+                        >
+                          <CheckCircle2 className="w-4 h-4 text-emerald-500 shrink-0" />
+                          <span>{item}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="p-7 pt-0">
+                  <button
+                    onClick={() => onNavClick("convert", "/convert")}
+                    className="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-xl bg-slate-100 dark:bg-white/5 hover:bg-burnt-orange hover:text-white dark:hover:bg-burnt-orange dark:hover:text-white text-slate-800 dark:text-slate-200 text-sm font-heading font-semibold transition-all cursor-pointer group/btn"
+                  >
+                    <span>Request Solution</span>
+                    <ArrowRight className="w-4 h-4 transition-transform group-hover/btn:translate-x-1" />
+                  </button>
                 </div>
               </motion.div>
             );
           })}
         </div>
 
-        <div className="mt-16 grid md:grid-cols-2 gap-8">
+        {/* 2 Additional Solutions Cards */}
+        <div className="mt-12 lg:mt-16 grid md:grid-cols-2 gap-8">
           {additional.map((item, index) => {
-            const Icon = iconMap[item.icon];
-
+            const Icon = iconMap[item.icon] || Wrench;
             const isDark = item.theme === "dark";
 
             return (
               <motion.div
                 key={item.title}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 25 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
+                whileHover={{ y: -4 }}
                 className={
                   isDark
-                    ? "bg-[#22244E] rounded-2xl p-8 text-white"
-                    : "bg-[#F37621] rounded-2xl p-8 text-white"
+                    ? "bg-linear-to-br from-[#0B1530] via-[#0E1A38] to-[#13224A] rounded-3xl p-8 text-white border border-white/10 shadow-xl relative overflow-hidden"
+                    : "bg-linear-to-br from-[#F37621] to-[#EA580C] rounded-3xl p-8 text-white shadow-xl shadow-orange-500/20 relative overflow-hidden"
                 }
               >
-                <div className="flex items-start space-x-4">
+                <div className="flex flex-col sm:flex-row items-start gap-5">
                   <div
                     className={
                       isDark
-                        ? "w-14 h-14 bg-[#F37621] rounded-xl flex items-center justify-center shrink-0"
-                        : "w-14 h-14 bg-white rounded-xl flex items-center justify-center shrink-0"
+                        ? "w-14 h-14 bg-burnt-orange rounded-2xl flex items-center justify-center shrink-0 shadow-lg shadow-orange-500/30"
+                        : "w-14 h-14 bg-white rounded-2xl flex items-center justify-center shrink-0 shadow-lg shadow-black/10"
                     }
                   >
                     <Icon
@@ -139,30 +156,32 @@ const SolutionsSection = () => {
                       }
                     />
                   </div>
-                  <div>
-                    <h3 className="text-xl font-semibold mb-2 font-montserrat">
+
+                  <div className="space-y-3">
+                    <h3 className="text-xl font-heading font-bold text-white">
                       {item.title}
                     </h3>
                     <p
                       className={
                         isDark
-                          ? "text-gray-300 mb-4 font-inter"
-                          : "text-white/90 mb-4 font-inter"
+                          ? "text-slate-300 text-sm leading-relaxed"
+                          : "text-white/90 text-sm leading-relaxed"
                       }
                     >
                       {item.description}
                     </p>
-                    <motion.button
-                      whileHover={{ x: 5 }}
+
+                    <button
                       onClick={() => onNavClick(item.cta.target)}
                       className={
                         isDark
-                          ? "text-[#59C6E5] font-semibold hover:underline inline-flex items-center focus:outline-none font-inter"
-                          : "text-[#22244E] font-semibold inline-flex items-center bg-white px-4 py-2 rounded-lg focus:outline-none font-inter"
+                          ? "inline-flex items-center gap-2 text-sky-400 hover:text-sky-300 font-heading font-semibold text-sm transition-colors cursor-pointer pt-2"
+                          : "inline-flex items-center gap-2 bg-white text-slate-900 px-5 py-2.5 rounded-xl font-heading font-bold text-sm hover:bg-slate-100 transition-all shadow-md cursor-pointer pt-2"
                       }
                     >
-                      {item.cta.text} <ArrowRight className="w-4 h-4 ml-1" />
-                    </motion.button>
+                      <span>{item.cta.text}</span>
+                      <ArrowRight className="w-4 h-4" />
+                    </button>
                   </div>
                 </div>
               </motion.div>
@@ -170,7 +189,7 @@ const SolutionsSection = () => {
           })}
         </div>
       </div>
-    </motion.section>
+    </section>
   );
 };
 

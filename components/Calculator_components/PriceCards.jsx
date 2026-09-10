@@ -1,9 +1,9 @@
 "use client";
 import { motion } from "framer-motion";
-import { Flame, Leaf, Percent } from "lucide-react";
+import { Flame, Leaf, Percent, Zap } from "lucide-react";
 import { siteConfig } from "@/config/site";
 
-const icons = { Flame, Leaf, Percent };
+const icons = { Flame, Leaf, Percent, Zap };
 
 const PriceCards = ({ savings = 60, petrol = 1200, cng = 450 }) => {
   return (
@@ -11,100 +11,40 @@ const PriceCards = ({ savings = 60, petrol = 1200, cng = 450 }) => {
       {siteConfig.calculator.priceCards.map((item, index) => {
         const IconComponent = icons[item.icon] || Flame;
 
-        // Check for each valueKey and render corresponding values
+        let displayValue = "~60%";
         if (item.valueKey === "savings") {
-          return (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-white/10 backdrop-blur rounded-xl p-4 text-center border border-white/15 hover:border-white/30 transition-all duration-300"
-            >
-              <div className="flex justify-center mb-2">
-                <IconComponent className={`w-6 h-6 ${item.color}`} />
-              </div>
-              <p className="text-light-blue text-sm mb-1 font-sans font-medium">
-                {item.title}
-              </p>
-              <p
-                className={`text-xl md:text-2xl font-bold ${item.color} font-heading`}
-              >
-                ~{savings}%
-              </p>
-            </motion.div>
-          );
+          displayValue = `~${savings}%`;
         } else if (item.valueKey === "petrol") {
-          return (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-white/10 backdrop-blur rounded-xl p-4 text-center border border-white/15 hover:border-white/30 transition-all duration-300"
-            >
-              <div className="flex justify-center mb-2">
-                <IconComponent className={`w-6 h-6 ${item.color}`} />
-              </div>
-              <p className="text-light-blue text-sm mb-1 font-sans font-medium">
-                {item.title}
-              </p>
-              <p
-                className={`text-xl md:text-2xl font-bold ${item.color} font-heading`}
-              >
-                ₦{petrol.toLocaleString()} {/* Format the petrol value */}
-              </p>
-            </motion.div>
-          );
+          displayValue = `₦${petrol.toLocaleString()}`;
         } else if (item.valueKey === "cng") {
-          return (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-white/10 backdrop-blur rounded-xl p-4 text-center border border-white/15 hover:border-white/30 transition-all duration-300"
-            >
-              <div className="flex justify-center mb-2">
-                <IconComponent className={`w-6 h-6 ${item.color}`} />
-              </div>
-              <p className="text-light-blue text-sm mb-1 font-sans font-medium">
-                {item.title}
-              </p>
-              <p
-                className={`text-xl md:text-2xl font-bold ${item.color} font-heading`}
-              >
-                ₦{cng.toLocaleString()} {/* Format the CNG value */}
-              </p>
-            </motion.div>
-          );
+          displayValue = `₦${cng.toLocaleString()}`;
         } else {
-          return (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-white/10 backdrop-blur rounded-xl p-4 text-center border border-white/15 hover:border-white/30 transition-all duration-300"
-            >
-              <div className="flex justify-center mb-2">
-                <IconComponent className={`w-6 h-6 ${item.color}`} />
-              </div>
-              <p className="text-light-blue text-sm mb-1 font-sans font-medium">
+          displayValue = siteConfig.calculator.priceDisplay[item.valueKey] || "₦1,200";
+        }
+
+        return (
+          <motion.div
+            key={index}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: index * 0.08 }}
+            whileHover={{ y: -4 }}
+            className="bg-white/5 backdrop-blur-md rounded-2xl p-5 text-center border border-white/10 hover:border-white/20 transition-all shadow-sm flex flex-col items-center justify-center space-y-2"
+          >
+            <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-white">
+              <IconComponent className={`w-5 h-5 ${item.color || "text-burnt-orange"}`} />
+            </div>
+            <div>
+              <p className="text-slate-300 text-xs font-heading font-medium tracking-wide">
                 {item.title}
               </p>
-              <p
-                className={`text-xl md:text-2xl font-bold ${item.color} font-heading`}
-              >
-                {siteConfig.calculator.priceDisplay[item.valueKey]}
+              <p className="text-xl sm:text-2xl font-heading font-bold text-white mt-0.5">
+                {displayValue}
               </p>
-            </motion.div>
-          );
-        }
+            </div>
+          </motion.div>
+        );
       })}
     </div>
   );

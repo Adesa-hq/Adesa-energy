@@ -1,74 +1,74 @@
-"use client";
+import { ArrowLeft, Calendar, Clock3 } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
 
-import { ArrowRight } from "lucide-react";
-import { motion } from "framer-motion";
-import { useRouter } from "next/navigation";
-
-const BlogDetailClient = ({ currentPost }) => {
-  const router = useRouter();
-
+export default function BlogDetailClient({ currentPost }) {
   return (
-    <motion.section
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.6 }}
-      className="bg-white dark:bg-charcoal-gray py-24 min-h-screen"
-    >
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Breadcrumb */}
-        <div className="mb-6 text-sm text-gray-500 dark:text-gray-400">
-          <span
-            className="cursor-pointer hover:underline"
-            onClick={() => router.push("/blog")}
-          >
+    <article className="min-h-screen min-w-0 bg-white py-12 dark:bg-[#081126] sm:py-16 lg:py-20">
+      <div className="mx-auto w-full max-w-4xl px-4 sm:px-6 lg:px-8">
+        <nav aria-label="Breadcrumb" className="mb-6 min-w-0 text-sm text-slate-500 dark:text-slate-400">
+          <Link href="/blog" className="font-semibold transition-colors hover:text-burnt-orange">
             Blog
-          </span>
-          <span> / </span>
-          <span className="text-gray-700 dark:text-burnt-orange font-semibold">
+          </Link>
+          <span aria-hidden="true"> / </span>
+          <span className="break-words text-slate-700 dark:text-slate-200">
             {currentPost.title}
           </span>
+        </nav>
+
+        <header className="mb-8 sm:mb-10">
+          <h1 className="max-w-3xl text-balance font-heading text-3xl font-bold leading-tight tracking-tight text-slate-900 dark:text-white sm:text-4xl lg:text-5xl">
+            {currentPost.title}
+          </h1>
+
+          <div className="mt-5 flex flex-wrap items-center gap-3 text-xs text-slate-500 dark:text-slate-400 sm:text-sm">
+            <span className={`rounded-full px-3 py-1 font-semibold ${currentPost.tagStyle}`}>
+              {currentPost.tag}
+            </span>
+            <span className="inline-flex items-center gap-1.5">
+              <Calendar className="h-4 w-4" aria-hidden="true" />
+              {currentPost.date}
+            </span>
+            {currentPost.readingTime && (
+              <span className="inline-flex items-center gap-1.5">
+                <Clock3 className="h-4 w-4" aria-hidden="true" />
+                {currentPost.readingTime}
+              </span>
+            )}
+          </div>
+        </header>
+
+        <div className="relative mb-10 aspect-[16/9] overflow-hidden rounded-2xl bg-slate-900 shadow-xl sm:mb-12 sm:rounded-3xl">
+          <Image
+            src={currentPost.image}
+            alt={currentPost.title}
+            fill
+            priority
+            sizes="(max-width: 896px) 100vw, 896px"
+            className="object-cover"
+          />
+          <div className="absolute inset-0 bg-linear-to-t from-slate-950/35 via-transparent to-transparent" />
         </div>
 
-        {/* Title */}
-        <h1 className="font-heading font-bold text-4xl md:text-5xl text-deep-blue dark:text-light-blue mb-6">
-          {currentPost.title}
-        </h1>
-
-        {/* Meta info */}
-        <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mb-12">
-          <span className={`px-3 py-1 rounded-full ${currentPost.tagStyle}`}>
-            {currentPost.tag}
-          </span>
-          <span>{currentPost.date}</span>
+        <div className="max-w-3xl space-y-5 text-pretty text-base leading-8 text-slate-700 dark:text-slate-300 sm:text-lg">
+          <p className="font-medium text-slate-800 dark:text-slate-200">
+            {currentPost.excerpt}
+          </p>
+          {currentPost.content?.map((paragraph) => (
+            <p key={paragraph}>{paragraph}</p>
+          ))}
         </div>
 
-        {/* Featured image / icon */}
-        <div
-          className={`h-64 bg-linear-to-br ${currentPost.gradient} flex items-center justify-center rounded-2xl mb-12`}
-        >
-          <currentPost.icon className={`w-16 h-16 ${currentPost.iconColor}`} />
+        <div className="mt-12 border-t border-slate-200 pt-8 dark:border-white/10 sm:mt-16">
+          <Link
+            href="/blog"
+            className="touch-target inline-flex items-center gap-2 rounded-xl bg-burnt-orange px-5 py-3 font-heading text-sm font-semibold text-white transition-[background-color,transform] hover:bg-[#d15e15] active:scale-[0.98]"
+          >
+            <ArrowLeft className="h-4 w-4" aria-hidden="true" />
+            Back to the newsroom
+          </Link>
         </div>
-
-        {/* Content */}
-        <div className="prose prose-lg dark:prose-invert max-w-none text-gray-700 dark:text-gray-300 mb-16">
-          <p>{currentPost.excerpt}</p>
-          {currentPost.content &&
-            currentPost.content.map((paragraph, index) => (
-              <p key={index}>{paragraph}</p>
-            ))}
-        </div>
-
-        {/* Back button */}
-        <button
-          onClick={() => router.push("/blog")}
-          className="inline-flex items-center px-6 py-3 rounded-full bg-burnt-orange text-white font-heading font-semibold hover:opacity-90 transition-opacity"
-        >
-          Back to Blog
-          <ArrowRight className="w-4 h-4 ml-2" />
-        </button>
       </div>
-    </motion.section>
+    </article>
   );
-};
-
-export default BlogDetailClient;
+}

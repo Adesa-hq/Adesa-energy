@@ -2,7 +2,6 @@
 
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import Link from "next/link";
 
 export default function JobsSection({ jobs }) {
   const sectionVariants = {
@@ -78,9 +77,9 @@ export default function JobsSection({ jobs }) {
                 whileHover={{ x: 5 }}
                 className="inline-flex items-center font-heading font-semibold text-burnt-orange hover:text-burnt-orange/80"
               >
-                <Link href={job.href} className="flex items-center">
+                <a href={job.href} className="flex items-center">
                   {jobs.viewAllLabel} <ArrowRight className="ml-2 w-5 h-5" />
-                </Link>
+                </a>
               </motion.div>
             </motion.div>
           ))}

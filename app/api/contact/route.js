@@ -1,17 +1,14 @@
 import { contactEmailTemplate } from "@/components/Email/contactEmailTemplate";
 import { Resend } from "resend";
 import { z } from "zod";
+import { NextResponse } from "next/server";
 
 const resend = new Resend(process.env.RESEND_CONTACT_API_KEY);
 
-// Zod schema for validation
 const contactSchema = z.object({
   name: z.string().min(1, "Full name is required"),
-  email: z.email("Invalid email address"),
-  phone: z
-    .string()
-    .optional()
-    .transform((val) => (val ? Number(val.replace(/\D/g, "")) : null)),
+  email: z.string().email("Invalid email address"),
+  phone: z.string().optional().or(z.literal("")),
   subject: z.string().min(1, "Subject is required"),
   message: z.string().min(1, "Message is required"),
 });
@@ -22,17 +19,17 @@ export async function POST(req) {
     const parsed = contactSchema.safeParse(body);
 
     if (!parsed.success) {
-      const errors = parsed.error.format(); // replaces flatten()
+      const errors = parsed.error.format();
       const fieldErrors = Object.values(errors)
         .map((e) => (Array.isArray(e) ? e.join(", ") : ""))
         .filter(Boolean)
         .join(", ");
 
-      return new Response(
-        JSON.stringify({
+      return NextResponse.json(
+        {
           status: "error",
-          message: fieldErrors,
-        }),
+          message: fieldErrors || "Invalid input data",
+        },
         { status: 400 },
       );
     }
@@ -40,10 +37,10 @@ export async function POST(req) {
     const { name, email, phone, subject, message } = parsed.data;
 
     await resend.emails.send({
-      from: `Adesa Energy Contact <${process.env.RESEND_FROM}>`,
-      to: ["info@adesahq.com"],
+      from: `Adesa Energy Contact <${process.env.RESEND_FROM || "adeinfo@adesahq.com"}>`,
+      to: ["adeinfo@adesahq.com"],
       replyTo: email,
-      subject: `Contact form submission: ${subject}`,
+      subject: `New Contact Submission: ${subject} (${name})`,
       html: contactEmailTemplate({
         name,
         email,
@@ -53,20 +50,19 @@ export async function POST(req) {
       }),
     });
 
-    return new Response(
-      JSON.stringify({
+    return NextResponse.json(
+      {
         status: "success",
-        message: "Message sent successfully",
-      }),
+        message: "Your message has been sent successfully. We will get back to you soon.",
+      },
       { status: 200 },
     );
   } catch (err) {
-
-    return new Response(
-      JSON.stringify({
+    return NextResponse.json(
+      {
         status: "error",
-        message: "Failed to send message",
-      }),
+        message: "Failed to send message. Please try again later or contact us directly.",
+      },
       { status: 500 },
     );
   }

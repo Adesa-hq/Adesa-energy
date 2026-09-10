@@ -12,8 +12,9 @@ export default function AdesaLogoWithSlogan() {
         />
       </div>
       <div className="w-full h-full flex flex-col items-center -ml-3">
-        <p className="text-[#59C6E5] text-sm  font-inter">Powering Progress,</p>
+        <p className="text-[#59C6E5] text-sm font-inter">Powering Progress,</p>
         <p className="text-[#59C6E5] text-sm font-inter">Fueling tomorrow</p>
+        <p className="text-burnt-orange text-[11px] font-medium tracking-wide uppercase mt-1">A subsidiary of Adesa HQ</p>
       </div>
     </div>
   );

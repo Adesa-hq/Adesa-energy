@@ -1,8 +1,8 @@
 import SolutionsSection from "@/components/Sections/SolutionsSection";
 
-export default function ResourcesPage() {
+export default function SolutionsPage() {
   return (
-    <div className="mt-10">
+    <div>
       <SolutionsSection />
     </div>
   );

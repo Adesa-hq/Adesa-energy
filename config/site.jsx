@@ -7,10 +7,41 @@ import {
   CheckCircle,
 } from "lucide-react";
 
+const CAREERS_EMAIL = "adecareer@adesahq.com";
+
+function createCareerMailHref({ title, general = false }) {
+  const subject = general
+    ? "Adesa Energy General Application — [Your Desired Role]"
+    : `Adesa Energy Career Application — ${title}`;
+  const body = [
+    "Hello Adesa Energy Careers Team,",
+    "",
+    general
+      ? "I would like to submit a general application for future opportunities at Adesa Energy."
+      : `I would like to apply for the ${title} position at Adesa Energy.`,
+    "",
+    "Full name:",
+    "Phone number:",
+    "Current location:",
+    ...(general ? ["Desired role:", "Area of interest:"] : []),
+    "LinkedIn or portfolio (optional):",
+    "",
+    general ? "How I could contribute:" : "Application note:",
+    "",
+    "",
+    "I have attached my CV for your review.",
+    "",
+    "Kind regards,",
+    "[Your full name]",
+  ].join("\n");
+
+  return `mailto:${CAREERS_EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+
 export const siteConfig = {
   name: "Adesa Energy",
   description:
-    "Adesa Energy delivers mobile CNG conversion and on-demand refueling services. Cut fuel costs, improve efficiency, and power fleets and personal vehicles across Nigeria.",
+    "Adesa Energy (a subsidiary of Adesa HQ) delivers mobile CNG conversion and on-demand refueling services. Cut fuel costs, improve efficiency, and power fleets and personal vehicles across Nigeria.",
   url: "https://www.adesaenergy.com",
   ogImage: "/adesa-energy.png",
   links: {
@@ -20,22 +51,24 @@ export const siteConfig = {
   // Global site settings
   siteName: "Adesa Energy",
   siteDescription:
-    "Powering progress, fueling tomorrow. Your trusted partner for CNG conversions and refueling services in Nigeria.",
-  siteUrl: "https://adesaenergy.com",
-  email: "info@adesahq.com",
-  phone: "+234 701 2345 154",
+    "A subsidiary of Adesa HQ. Powering progress, fueling tomorrow. Your trusted partner for CNG conversions and refueling services in Nigeria.",
+  siteUrl: "https://www.adesaenergy.com",
+  email: "adeinfo@adesahq.com",
+  phone: "+2348168823730",
   address: "2 Isheri road, Ojudu-Berger, Lagos",
-
   // Navigation items
   navItems: [
     { id: "home", label: "Home", path: "/" },
     { id: "about", label: "About Us", path: "/about" },
     { id: "team", label: "Our Team", path: "/team" },
-    { id: "waitlist", label: "Waitlist", path: "/waitlist" },
+    { id: "convert", label: "Convert to CNG", path: "/convert" },
     { id: "calculator", label: "Savings Calculator", path: "/calculator" },
     { id: "resources", label: "Resources", path: "/resources" },
     { id: "blog", label: "Blog", path: "/blog" },
     { id: "solutions", label: "Solutions", path: "/solutions" },
+    { id: "careers", label: "Careers", path: "/careers" },
+    { id: "investors", label: "Investors", path: "/investors" },
+    { id: "contact", label: "Contact Us", path: "/contact" },
   ],
 
   // Hero section content
@@ -51,8 +84,8 @@ export const siteConfig = {
 
     ctas: {
       primary: {
-        text: "Convert today",
-        target: "/waitlist",
+        text: "Convert to CNG",
+        target: "/convert",
         ariaLabel: "Convert to CNG today",
       },
       secondary: {
@@ -61,9 +94,9 @@ export const siteConfig = {
         ariaLabel: "Calculate your potential savings",
       },
       tertiary: {
-        text: "Notify Me / Financing Interest",
-        target: "/waitlist",
-        ariaLabel: "View conversion centre locations",
+        text: "Contact Us",
+        target: "/contact",
+        ariaLabel: "Contact Adesa Energy",
       },
     },
 
@@ -79,7 +112,7 @@ export const siteConfig = {
         label: "Vehicles converted",
       },
       {
-        suffix: "24/7",
+        displayValue: "24/7",
         label: "Support available",
       },
     ],
@@ -90,9 +123,9 @@ export const siteConfig = {
       icon: "Fuel",
     },
     images: [
-      "/Screenshot 2026-01-08 085624.png",
-      "/Screenshot 2026-01-08 085642.png",
-      "/Screenshot 2026-01-08 085807.png",
+      "/blog-cng-adoption.webp",
+      "/blog-cng-conversion-guide.webp",
+      "/blog-adesa-expansion.webp",
       "/Screenshot 2026-01-13 103937.png",
     ],
   },
@@ -142,7 +175,7 @@ export const siteConfig = {
     headline: "Powering progress, fueling tomorrow",
 
     description: [
-      "Adesa Energy is a pioneering clean energy company dedicated to revolutionizing the way Nigeria powers its vehicles. Founded with a vision to make sustainable fuel accessible to everyone, we specialize in mobile CNG conversions and on-demand refueling services.",
+      "Adesa Energy is a pioneering clean energy company and a subsidiary of Adesa HQ, dedicated to revolutionizing the way Nigeria powers its vehicles. Founded with a vision to make sustainable fuel accessible to everyone, we specialize in mobile CNG conversions and on-demand refueling services.",
       "Our mission is simple: to help businesses and individuals reduce their fuel costs while contributing to a cleaner environment. With our innovative approach and commitment to excellence, we're making CNG adoption effortless and rewarding.",
     ],
 
@@ -160,7 +193,7 @@ export const siteConfig = {
 
     cta: {
       text: "Partner with us",
-      target: "/waitlist",
+      target: "/contact",
     },
 
     values: [
@@ -198,8 +231,8 @@ export const siteConfig = {
     description:
       "Mobile CNG conversions and refueling. Lower fuel cost. Cleaner energy. Built for fleets and individuals.",
     cta: {
-      label: "Convert today",
-      href: "/waitlist",
+      label: "Convert to CNG",
+      href: "/convert",
     },
     video: {
       src: "https://5s4crdleaswcfwbr.public.blob.vercel-storage.com/Videos/Adesa-Energy-Remastered.mp4",
@@ -221,8 +254,8 @@ export const siteConfig = {
       description:
         "Visionaries driving the future of sustainable energy with decades of combined industry expertise",
       cta: {
-        label: "Join Our Team",
-        path: "/waitlist",
+        label: "Contact Our Team",
+        path: "/contact",
       },
     },
 
@@ -231,31 +264,31 @@ export const siteConfig = {
         name: "Femi Adeleye",
         role: "Founder & CEO",
         bio: "Femi Adeleye is a visionary entrepreneur and energy advocate driving the adoption of Compressed Natural Gas (CNG) in Nigeria. With a background in Petroleum Engineering and deep experience in marketing and strategy, he brings a powerful blend of technical and business acumen to Adesa Energy. Femi leads the company's mission to make clean energy accessible through innovative conversion solutions and strategic partnerships. His long-term vision is to build Africa's leading force in clean energy mobility.",
-        image: "/Femi_Adeleye.png", // Placeholder for Femi Adeleye's image
+        image: "/Femi_Adeleye.png",
       },
       {
         name: "Solomon Adebayo",
         role: "Chief Financial Officer",
         bio: "Solomon Adebayo is a finance expert and business consultant with proven experience in accounting, taxation, and strategic advisory. As CFO of Adesa Energy, he oversees financial planning, modeling, and investor readiness. With a track record of supporting businesses locally and internationally, Solomon is instrumental in building scalable financial structures and driving the company's capital-raising initiatives to support expansion and innovation.",
-        image: "/Solomon_Adebayo.png", // Placeholder for Solomon Adebayo's image
+        image: "/Solomon_Adebayo.png",
       },
       {
         name: "Afolabi Araromi",
         role: "Legal Adviser",
         bio: "Afolabi Araromi is an experienced commercial lawyer and strategic business adviser with over a decade of practice in corporate law, regulatory compliance, and business structuring. As Legal Adviser at Adesa Energy, he provides legal oversight across all contracts, partnerships, and corporate governance matters. He is the Managing Partner at Trudo Legal, a boutique firm offering legal solutions across sectors including energy, construction, media, and technology. Afolabi has advised on landmark transactions and sits on multiple company boards. He is also a member of the Nigeria-Kazakhstan Business Council, established by the Ooni of Ife to foster economic cooperation. His deep understanding of business law and practical industry insights make him a critical voice in shaping Adesa Energy's legal and operational foundation.",
-        image: "/Afolabi_Araromi.png", // Placeholder for Afolabi Araromi's image
+        image: "/Afolabi_Araromi.png",
       },
       {
         name: "Timilehin Olatunji",
         role: "Chief Operating Officer",
         bio: "Olatunji Timilehin is a mechanical engineering graduate with a strong operational mindset and a talent for systems thinking. As COO at Adesa Energy, he manages cross-functional coordination, process optimization, and delivery of key projects. With a multidisciplinary approach to problem-solving and a keen eye for structure, he supports the company's mission to execute clean energy solutions efficiently at scale.",
-        image: "/Timilehin_Olatunji.png", // Placeholder for Timilehin Olatunji's image
+        image: "/Timilehin_Olatunji.png",
       },
       {
         name: "Abdulkareem Nurat Mayowa",
         role: "Company Secretary",
         bio: "Mayowa is a dynamic project manager with a multidisciplinary background spanning education, public health, and business operations. At Adesa Energy, she oversees project planning, documentation, and execution while serving as the non-legal company secretary. Her attention to detail, strong communication skills, and passion for structure help ensure that internal processes and stakeholder engagement remain aligned with the company's growth vision.",
-        image: "/Nurat_Mayowa.png", // Placeholder for Abdulkareem Nurat Mayowa's image
+        image: "/Nurat_Mayowa.png",
       },
     ],
   },
@@ -315,7 +348,7 @@ export const siteConfig = {
           "Regular maintenance services to keep your CNG system running at peak performance. Our expert technicians ensure safety and efficiency.",
         cta: {
           text: "Schedule service",
-          target: "/waitlist",
+          target: "/contact",
         },
         theme: "dark",
       },
@@ -326,7 +359,7 @@ export const siteConfig = {
           "Comprehensive training for drivers and fleet managers. Learn best practices for CNG operation and maintenance.",
         cta: {
           text: "Get training",
-          target: "/waitlist",
+          target: "/contact",
         },
         theme: "orange",
       },
@@ -483,7 +516,7 @@ export const siteConfig = {
       {
         question: "How much does CNG conversion cost?",
         answer:
-          "Costs vary by vehicle type and requirements. Sedans typically start from ₦450,000, with larger vehicles costing more. We offer flexible payment plans and early-bird incentives for waitlist members. Get a personalized quote by signing up on our waitlist.",
+          "Costs vary by vehicle type and requirements. Sedans typically start from ₦450,000, with larger vehicles costing more. We offer flexible payment plans and early-bird incentives. Get a personalized quote by requesting a conversion on our Convert page.",
       },
       {
         question: "Is CNG conversion safe?",
@@ -493,17 +526,17 @@ export const siteConfig = {
       {
         question: "How long does a conversion take?",
         answer:
-          "Most vehicles are converted within 1–2 days at our centres. Fleet conversions are handled simultaneously for multiple vehicles. You can also book a slot in advance via our waitlist for guaranteed scheduling.",
+          "Most vehicles are converted within 1–2 days at our centres. Fleet conversions are handled simultaneously for multiple vehicles. You can also book a slot in advance for guaranteed scheduling.",
       },
       {
         question: "Can I get financing for my conversion?",
         answer:
-          "Yes. We maintain a segmented waitlist for ‘Convert Now’ and ‘Financing Interest.’ Early sign-ups in the financing category will get priority access to bank-backed loans when available.",
+          "Yes. We maintain options for ‘Convert Now’ and ‘Financing Interest.’ Contact us or submit a conversion request to explore bank-backed loan options.",
       },
       {
-        question: "How do I join the waitlist?",
+        question: "How do I book a CNG conversion?",
         answer:
-          "Sign up through our landing page, scan QR codes at our centres or transport hubs, or register during field activations. Choose between ‘Convert Now’ or ‘Notify Me / Financing Interest’ options for tailored follow-up.",
+          "Submit your details on our Convert page (/convert), visit our centres in Lagos, Ilorin, or Abuja, or reach out to our team directly via our Contact page.",
       },
       {
         question: "Where can I refuel my CNG vehicle?",
@@ -518,24 +551,24 @@ export const siteConfig = {
       {
         question: "What incentives are available for early adopters?",
         answer:
-          "Launch discounts, free inspections, and special offers for fleet conversions are available for the first 200 sign-ups per centre. QR-code driven field sign-ups and union activations also offer priority booking and exclusive benefits.",
+          "Launch discounts, free inspections, and special offers for fleet conversions are available. Early sign-ups receive priority booking and exclusive benefits.",
       },
     ],
 
     cta: {
       title: "Ready to switch to CNG?",
       description:
-        "Join our waitlist to book your conversion or express financing interest, and take advantage of early-bird incentives at Adesa Energy physical centres.",
-      buttonText: "Join Waitlist",
-      ariaLabel: "Join Waitlist",
+        "Book your vehicle conversion today, explore fleet solutions, or talk to our certified engineers across Nigeria.",
+      buttonText: "Convert to CNG",
+      ariaLabel: "Convert to CNG",
       download: "/documents/CNG_101_Guide.pdf",
-      href: "/waitlist",
+      href: "/convert",
     },
 
     cta1: {
-      buttonText: "Join Waitlist",
-      ariaLabel: "Join Waitlist",
-      href: "/waitlist",
+      buttonText: "Convert to CNG",
+      ariaLabel: "Convert to CNG",
+      href: "/convert",
     },
     cta2: {
       buttonText: "Download Guide",
@@ -579,8 +612,8 @@ export const siteConfig = {
         iconBg: "bg-light-blue/10",
         iconColor: "text-light-blue",
         tagStyle: "bg-light-blue/10 text-light-blue",
-        image: "/images/blog/cng-adoption-2025.jpg", // hero image
-        ogImage: "/images/blog/cng-adoption-2025-og.jpg", // static fallback OG image
+        image: "/blog-cng-adoption.webp",
+        ogImage: "/blog-cng-adoption.webp",
       },
       {
         icon: "Lightbulb",
@@ -604,8 +637,8 @@ export const siteConfig = {
         iconBg: "bg-white/10",
         iconColor: "text-white",
         tagStyle: "bg-burnt-orange/10 text-burnt-orange",
-        image: "/images/blog/cng-conversion-guide.jpg",
-        ogImage: "/images/blog/cng-conversion-guide-og.jpg",
+        image: "/blog-cng-conversion-guide.webp",
+        ogImage: "/blog-cng-conversion-guide.webp",
       },
       {
         icon: "Megaphone",
@@ -626,49 +659,43 @@ export const siteConfig = {
         iconBg: "bg-deep-blue/10",
         iconColor: "text-deep-blue",
         tagStyle: "bg-light-blue/10 text-light-blue",
-        image: "/images/blog/adesa-expansion.jpg",
-        ogImage: "/images/blog/adesa-expansion-og.jpg",
+        image: "/blog-adesa-expansion.webp",
+        ogImage: "/blog-adesa-expansion.webp",
       },
     ],
   },
 
   // Careers section content
   careers: {
+    email: CAREERS_EMAIL,
     hero: {
-      title: "Power the Future with Your Career",
+      eyebrow: "Build what moves Nigeria",
+      title: "Do work that powers real progress.",
       subtitle:
-        "Join our mission to accelerate the global transition to sustainable energy through innovation and collaboration",
-      primaryCTA: { label: "Explore Open Positions", href: "#jobs" },
-      secondaryCTA: { label: "Our Sustainability Promise", href: "#about" },
-      backgroundGradient: "from-[#0d3b66] to-[#1a5f7a]",
-      textColor: "text-white",
-      buttonColors: {
-        primary: "bg-[#ffd166] text-[#0d3b66]",
-        secondary: "bg-white/10 text-white border border-white",
-      },
+        "Join the team making cleaner, more affordable mobility practical for businesses and drivers across Nigeria.",
+      primaryCTA: { label: "Explore open roles", href: "#jobs" },
+      secondaryCTA: { label: "Meet the team", href: "/team" },
+      image: "/blog-cng-conversion-guide.webp",
     },
     about: {
-      title: "Why Adesa Energy?",
+      title: "The energy transition needs builders.",
       subtitle:
-        "We're not just building renewable energy solutions—we're building the foundation for a sustainable future",
+        "At Adesa Energy, your work connects directly to lower operating costs, cleaner transport, and infrastructure that serves everyday journeys.",
       features: [
         {
-          icon: CheckCircle,
-          title: "Purpose-Driven Work",
+          title: "Visible impact",
           description:
-            "Every project directly contributes to reducing global carbon emissions",
+            "See ideas move from planning into vehicles, fleets, and communities.",
         },
         {
-          icon: CheckCircle,
-          title: "Innovation First",
+          title: "Practical innovation",
           description:
-            "Access cutting-edge tools and dedicated R&D resources to push boundaries",
+            "Solve operational challenges with technology, engineering, and disciplined execution.",
         },
         {
-          icon: CheckCircle,
-          title: "Global Community",
+          title: "Shared ownership",
           description:
-            "Collaborate with experts across 15 countries on solutions that scale",
+            "Work closely across functions and take responsibility for outcomes, not just tasks.",
         },
       ],
     },
@@ -680,35 +707,54 @@ export const siteConfig = {
       jobListings: [
         {
           id: 1,
+          slug: "software-engineer",
           title: "Software Engineer",
           department: "Engineering",
           type: "Full-Time",
           location: "Lagos, Nigeria",
           description:
             "Develop and maintain energy management software solutions",
-          href: "mailto:career@adesahq.com?subject=Software Engineer",
+          href: createCareerMailHref({ title: "Software Engineer" }),
+          datePosted: "2026-05-01",
+          validThrough: "2026-12-31",
         },
         {
           id: 2,
+          slug: "sustainability-analyst",
           title: "Sustainability Analyst",
           department: "Sustainability",
           type: "Full-Time",
           location: "Remote",
           description: "Analyze and optimize carbon reduction initiatives",
-          href: "mailto:career@adesahq.com?subject=Sustainability Analyst",
+          href: createCareerMailHref({ title: "Sustainability Analyst" }),
+          datePosted: "2026-05-01",
+          validThrough: "2026-12-31",
         },
         {
           id: 3,
+          slug: "product-designer",
           title: "Product Designer",
           department: "Design",
           type: "Full-Time",
           location: "Lagos, Nigeria",
           description:
             "Design user-centric interfaces for our energy solutions",
-          href: "mailto:career@adesahq.com?subject=Product Designer",
+          href: createCareerMailHref({ title: "Product Designer" }),
+          datePosted: "2026-05-01",
+          validThrough: "2026-12-31",
         },
-        // Add more jobs as needed
       ],
+    },
+    generalApplication: {
+      id: "general-application",
+      slug: "general-application",
+      title: "General Application",
+      department: "Talent Network",
+      type: "Future Opportunities",
+      location: "Nigeria",
+      description:
+        "Tell us where your experience could contribute to Adesa Energy's mission and future growth.",
+      href: createCareerMailHref({ title: "General Application", general: true }),
     },
     benefits: [
       {
@@ -733,33 +779,126 @@ export const siteConfig = {
         description: "Collaborative activities to strengthen team culture",
       },
     ],
-    culture: [
+    principles: [
       {
-        id: 1,
-        quote: "Adesa Energy empowers me to innovate and grow every day.",
-        author: "Jane Smith",
-        role: "Product Designer",
+        title: "Start with the customer",
+        description: "Understand the operational reality before designing the solution.",
       },
       {
-        id: 2,
-        quote:
-          "I love being part of a team that's changing the energy landscape.",
-        author: "Michael Brown",
-        role: "Software Engineer",
+        title: "Build with discipline",
+        description: "Move quickly, document decisions, and never compromise on safety.",
       },
-      // Add more testimonials as needed
+      {
+        title: "Learn in the open",
+        description: "Share context early, welcome scrutiny, and improve as one team.",
+      },
+      {
+        title: "Own the outcome",
+        description: "Take responsibility from the first question through delivery.",
+      },
+    ],
+    hiringSteps: [
+      {
+        title: "Apply",
+        description: "Send your CV and a short note about the work you want to do.",
+      },
+      {
+        title: "Conversation",
+        description: "Meet the team and explore mutual fit, motivation, and expectations.",
+      },
+      {
+        title: "Practical review",
+        description: "Discuss relevant work or complete a focused role exercise.",
+      },
+      {
+        title: "Decision",
+        description: "Receive a clear outcome and next steps from our talent team.",
+      },
     ],
     cta: {
-      title: "Ready to Power Your Career?",
+      title: "Your role is not listed yet?",
       subtitle:
-        "Join a team that's transforming how the world uses energy. We can't wait to build the future with you.",
+        "Exceptional people do not always fit neatly into an open requisition. Tell us where you can make a difference.",
       primaryCTA: {
-        label: "Apply Now",
-        href: "mailto:careers@adesaenergy.com?subject=Job Application",
+        label: "Submit a general application",
+        href: createCareerMailHref({ title: "General Application", general: true }),
       },
-      secondaryCTA: { label: "Waitlist Our Talent Team", href: "/waitlist" },
-      backgroundGradient: "from-[#0d3b66] to-[#1a5f7a]",
-      textColor: "text-white",
+      secondaryCTA: { label: "Meet our leadership", href: "/team" },
+    },
+  },
+
+  investors: {
+    hero: {
+      eyebrow: "Investor overview",
+      title: "Invest in Nigeria's cleaner mobility transition.",
+      description:
+        "Adesa Energy is building the service infrastructure that helps fleets and drivers adopt CNG with less friction, lower operating costs, and less downtime.",
+      primaryCTA: {
+        label: "Talk to our investor team",
+        href: "mailto:adeinfo@adesahq.com?subject=Investor Inquiry",
+      },
+      secondaryCTA: { label: "See how we operate", href: "/solutions" },
+      image: "/blog-cng-adoption.webp",
+    },
+    traction: [
+      { value: "Up to 50%", label: "fuel-cost savings for customers" },
+      { value: "500+", label: "vehicles converted" },
+      { value: "3", label: "active Nigerian locations" },
+      { value: "24/7", label: "customer support" },
+    ],
+    market: {
+      title: "A costly mobility problem is creating demand for a practical alternative.",
+      description:
+        "Fuel-price pressure affects household budgets, fleet margins, and the cost of moving goods. CNG can lower operating costs, but adoption depends on conversion access, refueling availability, and reliable support.",
+      points: [
+        "Large addressable base of petrol and diesel vehicles",
+        "Clear economic incentive for high-mileage fleets and drivers",
+        "Growing public and commercial attention around alternative fuels",
+      ],
+    },
+    advantages: [
+      {
+        title: "Mobile by design",
+        description: "Conversion services move closer to customers, reducing disruption and avoidable downtime.",
+      },
+      {
+        title: "Conversion plus refueling",
+        description: "A connected service model supports customers beyond the initial vehicle conversion.",
+      },
+      {
+        title: "Fleet and individual demand",
+        description: "The model serves commercial operators while remaining accessible to everyday drivers.",
+      },
+      {
+        title: "Local operating knowledge",
+        description: "Execution is shaped around Nigerian routes, customer behavior, and infrastructure realities.",
+      },
+    ],
+    scaleSteps: [
+      "Deploy mobile units",
+      "Serve concentrated fleet demand",
+      "Build local adoption",
+      "Expand refueling coverage",
+      "Enter the next city",
+    ],
+    whyNow: [
+      "Fuel-cost pressure makes the customer value proposition immediate.",
+      "Interest in alternative mobility fuels is moving into practical adoption.",
+      "Adesa has an operating foundation ready for disciplined expansion.",
+    ],
+    capitalUses: [
+      "Expand the mobile service fleet",
+      "Increase conversion capacity",
+      "Strengthen refueling infrastructure",
+      "Improve customer and operations technology",
+      "Launch into additional Nigerian markets",
+    ],
+    cta: {
+      title: "Build the next chapter of cleaner mobility with us.",
+      description:
+        "Detailed commercial information is available through direct, confidential engagement with the Adesa Energy leadership team.",
+      href: "mailto:adeinfo@adesahq.com?subject=Investor Inquiry",
+      label: "Request an investor conversation",
     },
   },
 
@@ -772,37 +911,38 @@ export const siteConfig = {
     submitLabel: "Subscribe",
     url: "https://www.linkedin.com/newsletters/the-adesa-lens-7352962421847638016/",
   },
-  // Waitlist section content
-  waitlist: {
+
+  // Convert to CNG section content
+  convert: {
     section: {
-      id: "waitlist",
-      badge: "WAITLIST",
-      title: "Join the waitlist",
+      id: "convert",
+      badge: "CONVERT TO CNG",
+      title: "Convert to CNG today",
       subtitle:
-        "Be first to access vehicle conversion, refueling, and financing updates in your area.",
+        "Save up to 50% on vehicle operating costs. Book your professional conversion at our certified centres or request mobile service.",
     },
 
     infoCards: [
       {
         type: "address",
-        title: "Office address",
-        value: "2 Isheri road, Ojudu-Berger, Lagos",
+        title: "Conversion Centres",
+        value: "Mile 2 Oke (Lagos) • Sango (Ilorin) • Kubwa (Abuja)",
       },
       {
         type: "phone",
-        title: "Phone",
-        value: "+234 701 2345 154",
-        note: "Mon-Sat, 8am-6pm",
+        title: "Booking Line",
+        value: "+2348168823730",
+        note: "Mon-Fri, 9am-5pm",
       },
       {
         type: "email",
-        title: "Email",
-        value: "info@adesahq.com",
-        note: "We reply within 24 hours",
+        title: "Email Support",
+        value: "adeinfo@adesahq.com",
+        note: "Response within 24 hours",
       },
       {
         type: "website",
-        title: "Website",
+        title: "Official Website",
         value: "www.adesaenergy.com",
       },
     ],
@@ -821,7 +961,7 @@ export const siteConfig = {
     ],
 
     form: {
-      title: "Join the waitlist",
+      title: "Book Your CNG Conversion",
       fields: {
         firstName: {
           label: "First name",
@@ -833,69 +973,170 @@ export const siteConfig = {
         },
         phone: {
           label: "Phone number",
-          placeholder: "+234 XXX XXX XXXX",
+          placeholder: "+234 800 000 0000",
+        },
+        email: {
+          label: "Email address (optional)",
+          placeholder: "john@example.com",
         },
         vehicleType: {
           label: "Vehicle type",
           options: [
-            { value: "Keke", label: "Keke" },
-            { value: "Taxi", label: "Taxi" },
-            { value: "Private Car", label: "Private Car" },
-            { value: "truck", label: "Truck" },
-            { value: "Bus", label: "Bus" },
+            { value: "Sedan / Saloon Car", label: "Sedan / Saloon Car" },
+            { value: "SUV / Crossover", label: "SUV / Crossover" },
+            { value: "Taxi / Ride-hail", label: "Taxi / Ride-hail" },
+            { value: "Keke (Tricycle)", label: "Keke (Tricycle)" },
+            { value: "Bus (Commercial / Staff)", label: "Bus (Commercial / Staff)" },
+            { value: "Pickup / Delivery Van", label: "Pickup / Delivery Van" },
+            { value: "Heavy Truck / Haulage", label: "Heavy Truck / Haulage" },
             { value: "Other", label: "Other" },
           ],
         },
         location: {
-          label: "Location",
+          label: "Preferred Conversion Centre",
           options: [
             { value: "Mile 2 Oke — Lagos", label: "Mile 2 Oke — Lagos" },
             { value: "Sango — Ilorin", label: "Sango — Ilorin" },
             { value: "Kubwa — Abuja", label: "Kubwa — Abuja" },
+            { value: "On-site / Mobile Conversion (Fleets)", label: "On-site / Mobile Conversion (Fleets)" },
           ],
         },
         vehicleYear: {
           label: "Vehicle year",
-          placeholder: "2015",
+          placeholder: "2018",
         },
         referralSource: {
           label: "How did you hear about us",
           options: [
-            { value: "Radio", label: "Radio" },
-            { value: "Mechanic", label: "Mechanic" },
             { value: "Social media", label: "Social media" },
-            { value: "Union", label: "Union" },
-            { value: "Referral", label: "Referral" },
-            { value: "Dealer", label: "Dealer" },
+            { value: "Radio / News", label: "Radio / News" },
+            { value: "Mechanic / Workshop", label: "Mechanic / Workshop" },
+            { value: "Transport Union", label: "Transport Union" },
+            { value: "Referral / Word of mouth", label: "Referral / Word of mouth" },
+            { value: "Car Dealer", label: "Car Dealer" },
             { value: "Other", label: "Other" },
           ],
         },
         numberOfVehicles: {
-          label: "Number of cars to be converted",
+          label: "Number of vehicles to convert",
           placeholder: "1",
         },
         interestType: {
-          label: "Interest type",
+          label: "Interest category",
           options: [
-            { value: "Convert now", label: "Convert now" },
-            { value: "Financing", label: "Financing" },
-            { value: "Info only (MCC)", label: "Info only (MCC)" },
+            { value: "Convert now (Self-funded)", label: "Convert now (Self-funded)" },
+            { value: "Financing / Loan interest", label: "Financing / Loan interest" },
+            { value: "Corporate Fleet Consultation", label: "Corporate Fleet Consultation" },
           ],
         },
         profileType: {
           label: "Profile type",
           options: [
-            { value: "Individual", label: "Individual" },
-            { value: "Organisation", label: "Organisation" },
+            { value: "Individual", label: "Individual Car Owner" },
+            { value: "Organisation", label: "Corporate / Fleet Owner" },
           ],
         },
-        consent: "I agree to the processing of my personal data in accordance",
+        consent: "I agree to the processing of my personal data in accordance with the",
         consentLink: "Privacy Policy",
       },
-      submitText: "Join waitlist",
+      submitText: "Request Conversion",
       successMessage:
-        "You are on the waitlist. Our team will waitlist you soon.",
+        "Your conversion request has been received! An Adesa Energy engineer will contact you shortly to confirm your schedule.",
     },
+  },
+
+  // Contact section content
+  contact: {
+    section: {
+      id: "contact",
+      badge: "CONTACT US",
+      title: "Get in touch with our team",
+      subtitle:
+        "Have questions about CNG conversion kits, corporate fleet partnerships, mobile refueling, or maintenance? We are here to help.",
+    },
+
+    infoCards: [
+      {
+        type: "address",
+        title: "Headquarters",
+        value: "2 Isheri road, Ojudu-Berger, Lagos",
+      },
+      {
+        type: "phone",
+        title: "Phone Support",
+        value: "+2348168823730",
+        note: "Mon-Fri, 9am-5pm",
+      },
+      {
+        type: "email",
+        title: "Email Inquiries",
+        value: "adeinfo@adesahq.com",
+        note: "We reply within 24 hours",
+      },
+      {
+        type: "website",
+        title: "Official Website",
+        value: "www.adesaenergy.com",
+      },
+    ],
+
+    socials: [
+      {
+        name: "Linkedin",
+        url: "https://www.linkedin.com/showcase/adesa-energy/",
+      },
+      { name: "Twitter", url: "https://twitter.com/adesaenergy" },
+      {
+        name: "Instagram",
+        url: "https://www.instagram.com/adesaenergy/?igsh=MWE2YWdvdWl2aWNvZg%3D%3D#",
+      },
+      { name: "Facebook", url: "https://www.facebook.com/share/17HCMqGnz4/" },
+    ],
+
+    form: {
+      title: "Send Us a Message",
+      fields: {
+        name: {
+          label: "Full Name",
+          placeholder: "John Doe",
+        },
+        email: {
+          label: "Email Address",
+          placeholder: "john@example.com",
+        },
+        phone: {
+          label: "Phone Number",
+          placeholder: "+234 800 000 0000",
+        },
+        subject: {
+          label: "Subject",
+          options: [
+            { value: "CNG Conversion Inquiry", label: "CNG Conversion Inquiry" },
+            { value: "Fleet Refueling & Services", label: "Fleet Refueling & Services" },
+            { value: "Partnership / Corporate Inquiry", label: "Partnership / Corporate Inquiry" },
+            { value: "Media & Press", label: "Media & Press" },
+            { value: "Customer Support & Maintenance", label: "Customer Support & Maintenance" },
+            { value: "Other", label: "Other" },
+          ],
+        },
+        message: {
+          label: "Your Message",
+          placeholder: "How can our clean energy experts help you?",
+        },
+        consent: "I agree to the processing of my contact information in accordance with the",
+        consentLink: "Privacy Policy",
+      },
+      submitText: "Send Message",
+      successMessage: "Your message has been sent successfully. We will get back to you shortly.",
+    },
+  },
+
+  // Backward compatibility alias
+  waitlist: {
+    get section() { return siteConfig.convert.section; },
+    get infoCards() { return siteConfig.convert.infoCards; },
+    get socials() { return siteConfig.convert.socials; },
+    get form() { return siteConfig.convert.form; },
   },
 
   // FooterSection content
@@ -905,12 +1146,15 @@ export const siteConfig = {
     quickLinks: [
       { label: "Home", type: "route", path: "/" },
       { label: "About Us", type: "route", path: "/about" },
+      { label: "Convert to CNG", type: "route", path: "/convert" },
       { label: "Solutions", type: "route", path: "/solutions" },
       { label: "Savings Calculator", type: "route", path: "/calculator" },
       { label: "Resources", type: "route", path: "/resources" },
       { label: "Blog", type: "route", path: "/blog" },
       { label: "Our Team", type: "route", path: "/team" },
-      { label: "Waitlist", type: "route", path: "/waitlist" },
+      { label: "Careers", type: "route", path: "/careers" },
+      { label: "Investors", type: "route", path: "/investors" },
+      { label: "Contact Us", type: "route", path: "/contact" },
     ],
     services: [
       "Mobile CNG conversion",
@@ -925,9 +1169,10 @@ export const siteConfig = {
     },
     contact: {
       address: "2 Isheri road, Ojudu-Berger, Lagos",
-      phone: "+234 701 2345 154",
-      email: "info@adesahq.com",
+      phone: "+2348168823730",
+      email: "adeinfo@adesahq.com",
       website: "www.adesaenergy.com",
+      hours: "Mon-Fri, 9am-5pm",
     },
     socials: [
       {
