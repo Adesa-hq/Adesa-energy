@@ -18,6 +18,8 @@ const Footer = ({ onNavClick }) => {
   const router = useRouter();
   const [showScrollTop, setShowScrollTop] = useState(false);
   const { footer } = siteConfig;
+  const mapQuery = encodeURIComponent(footer.contact.address);
+  const mapUrl = `https://www.google.com/maps/search/?api=1&query=${mapQuery}`;
 
   useEffect(() => {
     const handleScroll = () => setShowScrollTop(window.scrollY > 300);
@@ -147,8 +149,25 @@ const Footer = ({ onNavClick }) => {
                 <span>{footer.contact.hours || "Mon-Fri, 9am-5pm"}</span>
               </li>
             </ul>
+
           </div>
         </div>
+
+            <div className="mt-7 w-full overflow-hidden rounded-xl border border-white/10 bg-white/5">
+              <iframe
+                title="Aerial map of Adesa Energy office location"
+                src={`https://maps.google.com/maps?q=${mapQuery}&t=k&z=17&output=embed`}
+                width="1312"
+                height="320"
+                className="block h-[250px] w-full border-0 sm:h-[320px]"
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                allowFullScreen
+              />
+              <a href={mapUrl} target="_blank" rel="noopener noreferrer" className="flex min-h-11 items-center justify-between gap-2 px-4 py-3 text-xs font-semibold text-burnt-orange hover:text-white">
+                Open location in Google Maps <ChevronRight className="h-4 w-4 shrink-0" aria-hidden="true" />
+              </a>
+            </div>
 
         {/* Bottom Legal bar */}
         <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500 font-sans">

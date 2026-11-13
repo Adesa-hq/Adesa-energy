@@ -1,8 +1,9 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import { ArrowRight, Users } from "lucide-react";
+import { useId, useState } from "react";
 import { useRouter } from "next/navigation";
 import { siteConfig } from "@/config/site";
 
@@ -10,12 +11,33 @@ const OurTeamSection = ({ isTeamPage = false }) => {
   const { section, members } = siteConfig.team;
   const router = useRouter();
 
+  const cardId = useId();
+  const [expanded, setExpanded] = useState({});
+  const reduceMotion = useReducedMotion();
+  const renderBio = (member, index) => (
+    <>
+      <p id={`${cardId}-bio-${index}`} className="font-sans text-slate-600 dark:text-slate-300 text-sm leading-relaxed">
+        {expanded[member.name] ? member.bio : truncateBio(member.bio)}
+      </p>
+      <button
+        type="button"
+        aria-expanded={Boolean(expanded[member.name])}
+        aria-controls={`${cardId}-bio-${index}`}
+        aria-label={`${expanded[member.name] ? "Read less" : "Read more"} about ${member.name}`}
+        onClick={() => setExpanded((previous) => ({ ...previous, [member.name]: !previous[member.name] }))}
+        className="mt-3 text-sm font-semibold text-burnt-orange underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 cursor-pointer"
+      >
+        {expanded[member.name] ? "Read less" : "Read more"}
+      </button>
+    </>
+  );
+
   const truncateBio = (bio, maxLength = 110) =>
     bio.length <= maxLength ? bio : bio.substring(0, maxLength) + "...";
 
   return (
     <section
-      className={`py-20 lg:py-28 ${
+      className={`pt-20 lg:pt-28 pb-8 lg:pb-10 ${
         isTeamPage
           ? "bg-white dark:bg-[#081126]"
           : "bg-slate-50 dark:bg-[#060b17]"
@@ -41,86 +63,47 @@ const OurTeamSection = ({ isTeamPage = false }) => {
           </p>
         </motion.div>
 
-        {isTeamPage ? (
-          /* Full-width team layout for /team page */
-          <div className="space-y-8 max-w-5xl mx-auto">
-            {members.map((member, index) => (
-              <motion.div
-                key={member.name}
-                initial={{ opacity: 0, y: 25 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="flex flex-col md:flex-row gap-8 items-center bg-slate-50 dark:bg-[#0E1A38] rounded-3xl p-6 sm:p-8 border border-slate-200/80 dark:border-white/10 shadow-sm hover:shadow-xl transition-all"
-              >
-                <div className="md:w-1/3 w-full shrink-0">
-                  <div className="relative w-full h-72 rounded-2xl overflow-hidden shadow-md">
-                    <Image
-                      src={member.image}
-                      alt={member.name}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 768px) 100vw, 33vw"
-                    />
-                  </div>
+        <motion.ul
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.15 }}
+          variants={{ hidden: {}, visible: { transition: { staggerChildren: reduceMotion ? 0 : 0.7 } } }}
+          className="flex flex-wrap justify-center items-start gap-6"
+        >
+          {members.map((member, index) => (
+            <motion.li
+              key={member.name}
+              variants={{
+                hidden: { opacity: reduceMotion ? 1 : 0, y: reduceMotion ? 0 : 22 },
+                visible: { opacity: 1, y: 0, transition: { duration: reduceMotion ? 0 : 0.65 } },
+              }}
+              className="w-full sm:w-[calc((100%_-_24px)/2)] lg:w-[calc((100%_-_72px)/4)] min-w-0"
+            >
+              <article className="group motion-safe:hover:-translate-y-1.5 hover:border-burnt-orange/50 overflow-hidden rounded-2xl border border-slate-200/80 dark:border-white/10 bg-white dark:bg-[#0E1A38] shadow-sm hover:shadow-xl transition-[transform,border-color,box-shadow] duration-300">
+                <div className="relative aspect-[4/5] overflow-hidden bg-[#f1f2f3]">
+                  <Image
+                    src={member.image}
+                    alt={member.name}
+                    fill
+                    className="object-cover object-[50%_25%] motion-safe:group-hover:scale-105 transition-transform duration-700"
+                    sizes="(max-width: 639px) calc(100vw - 32px), (max-width: 1023px) 45vw, 23vw"
+                  />
                 </div>
-
-                <div className="md:w-2/3 space-y-3 text-left">
-                  <span className="inline-block px-3 py-1 rounded-full text-xs font-semibold bg-burnt-orange/10 text-burnt-orange border border-burnt-orange/20">
-                    {member.role}
-                  </span>
-                  <h3 className="text-2xl font-heading font-bold text-slate-900 dark:text-white">
-                    {member.name}
-                  </h3>
-                  <p className="text-slate-600 dark:text-slate-300 leading-relaxed font-sans text-sm sm:text-base">
-                    {member.bio}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        ) : (
-          /* Grid layout for homepage */
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8">
-            {members.map((member, index) => (
-              <motion.div
-                key={member.name}
-                initial={{ opacity: 0, y: 25 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.08 }}
-                whileHover={{ y: -6 }}
-                className="rounded-3xl overflow-hidden border border-slate-200/80 dark:border-white/10 bg-white dark:bg-[#0E1A38] shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col justify-between"
-              >
-                <div>
-                  <div className="relative aspect-4/3 w-full overflow-hidden bg-slate-100 dark:bg-slate-800">
-                    <Image
-                      src={member.image}
-                      fill
-                      alt={member.name}
-                      className="object-cover transition-transform duration-500 hover:scale-105"
-                      sizes="(max-width: 768px) 100vw, 25vw"
-                    />
-                    <div className="absolute inset-x-0 bottom-0 bg-linear-to-t from-slate-950/85 via-slate-950/40 to-transparent p-4">
-                      <h3 className="text-base font-heading font-bold text-white leading-snug">
-                        {member.name}
-                      </h3>
-                      <p className="text-xs text-amber-300 font-medium">
-                        {member.role}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="p-5">
-                    <p className="font-sans text-slate-600 dark:text-slate-300 text-xs sm:text-sm leading-relaxed">
-                      {truncateBio(member.bio)}
+                <div className="border-t-2 border-burnt-orange/40 p-5">
+                  <div className="min-h-28">
+                    <h3 className="text-xl font-heading font-bold leading-snug text-slate-900 dark:text-white">
+                      {member.name}
+                    </h3>
+                    <p className="mt-2 text-sm font-medium text-burnt-orange leading-6">
+                      {member.role}
                     </p>
                   </div>
+                  {renderBio(member, index)}
                 </div>
-              </motion.div>
-            ))}
-          </div>
-        )}
+              </article>
+            </motion.li>
+          ))}
+        </motion.ul>
 
         {!isTeamPage && (
           <motion.div

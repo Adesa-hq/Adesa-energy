@@ -1,5 +1,6 @@
 import { ArrowUpRight, Clock3, Radio, RefreshCw } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 function formatPublishedAt(value) {
   return new Intl.DateTimeFormat("en-NG", {
@@ -13,6 +14,7 @@ function formatPublishedAt(value) {
 export default function LiveNewsSection({
   articles = [],
   unavailable = false,
+  curated = false,
   variant = "page",
 }) {
   const isHome = variant === "home";
@@ -30,20 +32,21 @@ export default function LiveNewsSection({
           <div className="max-w-3xl space-y-3">
             <div className="inline-flex items-center gap-2 rounded-full border border-emerald-400/25 bg-emerald-400/10 px-3.5 py-1.5 text-xs font-semibold tracking-wide text-emerald-300">
               <span className="relative flex h-2 w-2" aria-hidden="true">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-300 opacity-70" />
+                {!curated && <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-300 opacity-70" />}
                 <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
               </span>
-              Live Nigeria energy desk
+              {curated ? "Adesa in the news" : "Live Nigeria energy desk"}
             </div>
             <h2
               id={`live-news-title-${variant}`}
               className="text-balance font-heading text-3xl font-bold tracking-tight sm:text-4xl lg:text-5xl"
             >
-              Energy and CNG news, as it happens
+              {curated ? "Adesa Energy in the press" : "Energy and CNG news, as it happens"}
             </h2>
             <p className="max-w-2xl text-pretty text-sm leading-relaxed text-slate-300 sm:text-base">
-              Current reporting on Nigeria&apos;s fuel market, natural gas,
-              transport energy, and the shift to cleaner mobility.
+              {curated
+                ? "Explore independent coverage of Adesa Energy and our work towards cleaner mobility in Nigeria."
+                : "Current reporting on Nigeria’s fuel market, natural gas, transport energy, and the shift to cleaner mobility."}
             </p>
           </div>
 
@@ -63,8 +66,13 @@ export default function LiveNewsSection({
             {articles.map((article, index) => (
               <article
                 key={article.id}
-                className="group relative flex min-w-0 flex-col bg-[#0B1530] p-5 sm:p-6 lg:p-7"
+                className={`group relative flex min-w-0 flex-col bg-[#0B1530] p-5 sm:p-6 lg:p-7 ${index === articles.length - 1 && articles.length % 3 === 1 ? "md:col-start-2" : ""}`}
               >
+                {article.image && (
+                  <div className="relative mb-6 aspect-[16/10] overflow-hidden rounded-xl bg-slate-900">
+                    <Image src={article.image} alt={article.title} fill sizes="(max-width: 767px) 100vw, 33vw" className="object-cover transition-transform duration-500 group-hover:scale-105" />
+                  </div>
+                )}
                 <div className="mb-8 flex items-center justify-between gap-3 text-xs text-slate-400">
                   <span className="rounded-md bg-white/5 px-2.5 py-1 font-semibold text-sky-300">
                     {article.topic}
@@ -89,10 +97,10 @@ export default function LiveNewsSection({
                   <span className="max-w-[12rem] truncate font-semibold text-slate-300">
                     {article.source}
                   </span>
-                  <span className="flex items-center gap-1.5">
+                  {article.publishedAt && <span className="flex items-center gap-1.5">
                     <Clock3 className="h-3.5 w-3.5" aria-hidden="true" />
                     {formatPublishedAt(article.publishedAt)}
-                  </span>
+                  </span>}
                   <ArrowUpRight
                     className="ml-auto h-4 w-4 text-amber-300 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
                     aria-hidden="true"
@@ -125,9 +133,9 @@ export default function LiveNewsSection({
         )}
 
         <p className="mt-4 text-xs leading-relaxed text-slate-500">
-          Headlines are aggregated from Google News and Bing News with clear
-          publisher attribution. Adesa Energy does not reproduce or endorse
-          third-party reporting.
+          {curated
+            ? "Press coverage links open the original publisher’s website. All articles remain the property of their respective publishers."
+            : "Headlines are aggregated from Google News and Bing News with clear publisher attribution. Adesa Energy does not reproduce or endorse third-party reporting."}
         </p>
       </div>
     </section>

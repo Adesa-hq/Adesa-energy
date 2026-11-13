@@ -1,26 +1,20 @@
 "use client";
 
-import { Send, CheckCircle, XCircle, ChevronDown, Mail, Phone, MapPin, Clock } from "lucide-react";
+import { Send, CheckCircle, XCircle, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { contactSchema } from "@/lib/contact-schema.mjs";
+import ContactSecurity from "./ContactSecurity";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { siteConfig } from "@/config/site";
 import Link from "next/link";
 
-const contactSchema = z.object({
-  name: z.string().min(1, "Full name is required"),
-  email: z.string().email("Invalid email address"),
-  phone: z.string().optional().or(z.literal("")),
-  subject: z.string().min(1, "Please select or enter a subject"),
-  message: z.string().min(5, "Message must be at least 5 characters"),
-  consent: z.boolean().refine((val) => val === true, "Consent is required to proceed"),
-});
-
 const ContactForm = () => {
   const { form } = siteConfig.contact;
 
+  const [turnstileToken, setTurnstileToken] = useState("");
+  const [securityResetKey, setSecurityResetKey] = useState(0);
   const [submitStatus, setSubmitStatus] = useState(null);
   const [submitMessage, setSubmitMessage] = useState("");
 
@@ -34,20 +28,29 @@ const ContactForm = () => {
     defaultValues: {
       consent: false,
       subject: "",
+      website: "",
     },
   });
 
   const onSubmit = async (data) => {
+    setSubmitStatus(null);
+    setSubmitMessage("");
+    if (!turnstileToken) {
+      setSubmitStatus("error");
+      setSubmitMessage("Please complete the security check before sending your enquiry.");
+      return;
+    }
     try {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ ...data, turnstileToken }),
+        signal: AbortSignal.timeout(35000),
       });
 
       const result = await res.json();
 
-      if (!res.ok || result.status === "error") {
+      if (!res.ok || result.status !== "success") {
         setSubmitStatus("error");
         setSubmitMessage(result.message || "Failed to send message. Please try again.");
       } else {
@@ -55,19 +58,12 @@ const ContactForm = () => {
         setSubmitMessage(result.message || form.successMessage);
         reset();
       }
-
-      setTimeout(() => {
-        setSubmitStatus(null);
-        setSubmitMessage("");
-      }, 7000);
     } catch {
       setSubmitStatus("error");
       setSubmitMessage("Network connection error. Please try again.");
-
-      setTimeout(() => {
-        setSubmitStatus(null);
-        setSubmitMessage("");
-      }, 6000);
+    } finally {
+      setTurnstileToken("");
+      setSecurityResetKey((value) => value + 1);
     }
   };
 
@@ -96,6 +92,10 @@ const ContactForm = () => {
           onSubmit={handleSubmit(onSubmit)}
           className={`space-y-5 ${isSubmitting ? "opacity-50 pointer-events-none" : ""}`}
         >
+          <div className="hidden" aria-hidden="true">
+            <label htmlFor="contact-website">Leave this field empty</label>
+            <input id="contact-website" type="text" tabIndex={-1} autoComplete="off" {...register("website")} />
+          </div>
           {/* Name & Email */}
           <div className="grid md:grid-cols-2 gap-5">
             <div>
@@ -105,6 +105,7 @@ const ContactForm = () => {
               <input
                 type="text"
                 placeholder={form.fields.name.placeholder}
+                maxLength={120}
                 {...register("name")}
                 className={inputStyle}
               />
@@ -122,6 +123,7 @@ const ContactForm = () => {
               <input
                 type="email"
                 placeholder={form.fields.email.placeholder}
+                maxLength={254}
                 {...register("email")}
                 className={inputStyle}
               />
@@ -142,6 +144,7 @@ const ContactForm = () => {
               <input
                 type="tel"
                 placeholder={form.fields.phone.placeholder}
+                maxLength={40}
                 {...register("phone")}
                 className={inputStyle}
               />
@@ -185,7 +188,8 @@ const ContactForm = () => {
             <textarea
               rows="5"
               placeholder={form.fields.message.placeholder}
-              {...register("message")}
+              maxLength={5000}
+                {...register("message")}
               className={`${inputStyle} resize-y min-h-[120px]`}
             />
             {errors.message && (
@@ -219,12 +223,14 @@ const ContactForm = () => {
             </p>
           )}
 
+          <ContactSecurity onToken={setTurnstileToken} resetKey={securityResetKey} />
+
           {/* Submit CTA */}
           <motion.button
             whileHover={{ scale: 1.01 }}
             whileTap={{ scale: 0.99 }}
             type="submit"
-            disabled={isSubmitting}
+            disabled={isSubmitting || !turnstileToken}
             className="w-full bg-linear-to-r from-[#F37621] to-[#F59E0B] text-white py-4 rounded-xl font-heading font-bold text-sm shadow-md hover:shadow-orange-500/30 transition-all flex items-center justify-center gap-2 cursor-pointer disabled:opacity-60"
           >
             {isSubmitting ? (
@@ -247,6 +253,8 @@ const ContactForm = () => {
               initial={{ opacity: 0, y: 15 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
+              role={submitStatus === "error" ? "alert" : "status"}
+              aria-live="polite"
               className={`mt-6 p-4 rounded-2xl flex items-center gap-3 text-sm font-medium ${
                 submitStatus === "success"
                   ? "bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400"

@@ -5,7 +5,7 @@ import { siteConfig } from "@/config/site";
 
 const icons = { Flame, Leaf, Percent, Zap };
 
-const PriceCards = ({ savings = 60, petrol = 1200, cng = 450 }) => {
+const PriceCards = ({ savings = 60, petrol = siteConfig.calculator.prices.petrol, cng = 450 }) => {
   return (
     <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4">
       {siteConfig.calculator.priceCards.map((item, index) => {
@@ -19,7 +19,7 @@ const PriceCards = ({ savings = 60, petrol = 1200, cng = 450 }) => {
         } else if (item.valueKey === "cng") {
           displayValue = `₦${cng.toLocaleString()}`;
         } else {
-          displayValue = siteConfig.calculator.priceDisplay[item.valueKey] || "₦1,200";
+          displayValue = siteConfig.calculator.priceDisplay[item.valueKey] || `₦${siteConfig.calculator.prices.petrol.toLocaleString()}`;
         }
 
         return (

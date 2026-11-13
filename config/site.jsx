@@ -262,33 +262,27 @@ export const siteConfig = {
     members: [
       {
         name: "Femi Adeleye",
-        role: "Founder & CEO",
+        role: "Group Managing Director",
         bio: "Femi Adeleye is a visionary entrepreneur and energy advocate driving the adoption of Compressed Natural Gas (CNG) in Nigeria. With a background in Petroleum Engineering and deep experience in marketing and strategy, he brings a powerful blend of technical and business acumen to Adesa Energy. Femi leads the company's mission to make clean energy accessible through innovative conversion solutions and strategic partnerships. His long-term vision is to build Africa's leading force in clean energy mobility.",
-        image: "/Femi_Adeleye.png",
+        image: "/Femi_Adeleye_MD.jpeg",
       },
       {
-        name: "Solomon Adebayo",
-        role: "Chief Financial Officer",
-        bio: "Solomon Adebayo is a finance expert and business consultant with proven experience in accounting, taxation, and strategic advisory. As CFO of Adesa Energy, he oversees financial planning, modeling, and investor readiness. With a track record of supporting businesses locally and internationally, Solomon is instrumental in building scalable financial structures and driving the company's capital-raising initiatives to support expansion and innovation.",
-        image: "/Solomon_Adebayo.png",
+        name: "Blessing Gbadeyan",
+        role: "Group Chief Operating Officer",
+        bio: "Blessing Gbadeyan serves as Group Chief Operating Officer, coordinating operations and supporting the delivery of Adesa's business priorities. At Adesa Energy, her role brings focus to cross-functional collaboration, effective processes, and the execution of clean energy initiatives. She helps align day-to-day operations with the group's wider strategy, supporting consistent service delivery and sustainable growth as the business expands its energy solutions and partnerships.",
+        image: "/Blessing_Gbadeyan.png",
       },
       {
-        name: "Afolabi Araromi",
-        role: "Legal Adviser",
-        bio: "Afolabi Araromi is an experienced commercial lawyer and strategic business adviser with over a decade of practice in corporate law, regulatory compliance, and business structuring. As Legal Adviser at Adesa Energy, he provides legal oversight across all contracts, partnerships, and corporate governance matters. He is the Managing Partner at Trudo Legal, a boutique firm offering legal solutions across sectors including energy, construction, media, and technology. Afolabi has advised on landmark transactions and sits on multiple company boards. He is also a member of the Nigeria-Kazakhstan Business Council, established by the Ooni of Ife to foster economic cooperation. His deep understanding of business law and practical industry insights make him a critical voice in shaping Adesa Energy's legal and operational foundation.",
-        image: "/Afolabi_Araromi.png",
+        name: "Emmanuel Adeleye",
+        role: "Business Development and Partnership Executive",
+        bio: "Emmanuel Adeleye serves as Business Development and Partnership Executive at Adesa Energy, supporting the company's growth through business opportunities and strategic relationships. His role focuses on connecting with prospective clients and partners, understanding their energy needs, and helping shape opportunities for collaboration. Working with the wider team, Emmanuel supports proposals, stakeholder engagement, and the development of partnerships that advance Adesa Energy's mission to make cleaner energy solutions more accessible.",
+        image: "/Emmanuel_Adeleye.png",
       },
       {
-        name: "Timilehin Olatunji",
-        role: "Chief Operating Officer",
-        bio: "Olatunji Timilehin is a mechanical engineering graduate with a strong operational mindset and a talent for systems thinking. As COO at Adesa Energy, he manages cross-functional coordination, process optimization, and delivery of key projects. With a multidisciplinary approach to problem-solving and a keen eye for structure, he supports the company's mission to execute clean energy solutions efficiently at scale.",
-        image: "/Timilehin_Olatunji.png",
-      },
-      {
-        name: "Abdulkareem Nurat Mayowa",
-        role: "Company Secretary",
-        bio: "Mayowa is a dynamic project manager with a multidisciplinary background spanning education, public health, and business operations. At Adesa Energy, she oversees project planning, documentation, and execution while serving as the non-legal company secretary. Her attention to detail, strong communication skills, and passion for structure help ensure that internal processes and stakeholder engagement remain aligned with the company's growth vision.",
-        image: "/Nurat_Mayowa.png",
+        name: "Joyce Osemudiamen",
+        role: "Group Secretary",
+        bio: "Joyce Osemudiamen serves as Group Secretary, supporting the coordination, documentation, and communication that keep Adesa's businesses aligned. Her role supports organised records, meeting preparation, and follow-through on decisions across the group. At Adesa Energy, she helps maintain clear communication between leadership and stakeholders, providing administrative coordination that supports effective governance and the company's growing operations.",
+        image: "/Joyce_Osemudiamen.jpg",
       },
     ],
   },
@@ -448,7 +442,7 @@ export const siteConfig = {
       },
     ],
     prices: {
-      petrol: 1200, // NGN per liter
+      petrol: 1345, // NGN per liter
       cng: 450, // NGN per liter
     },
     co2PerLiter: 2.3, // kg CO2 per liter of petrol
@@ -461,7 +455,7 @@ export const siteConfig = {
       truck: 3.0,
     },
     priceDisplay: {
-      petrol: "₦1200/L",
+      petrol: "₦1,345/L",
       cng: "₦450/L",
       savings: "~50%",
       co2Reduction: "~30%",

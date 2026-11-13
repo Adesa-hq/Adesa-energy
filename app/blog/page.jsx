@@ -1,29 +1,36 @@
 import BlogSection from "@/components/Sections/BlogSection";
 import LiveNewsSection from "@/components/Sections/LiveNewsSection";
-import { getPosts } from "@/lib/posts";
+import { siteConfig } from "@/config/site";
+import { adesaPressArticles } from "@/lib/press";
 import { getNigeriaEnergyNews } from "@/lib/news";
 
-export default async function BlogPage({ searchParams }) {
-  const resolvedSearchParams = await searchParams;
-  const page = Number(resolvedSearchParams?.page || 1);
-  const tag = resolvedSearchParams?.tag || null;
+const pressPosts = adesaPressArticles.map((article) => ({
+  slug: article.id,
+  title: article.title,
+  url: article.url,
+  source: article.source,
+  excerpt: `Read ${article.source}'s coverage of Adesa Energy and its work towards cleaner mobility in Nigeria.`,
+  tag: "Company news",
+  tagStyle: "bg-burnt-orange/10 text-burnt-orange",
+  date: article.publishedAt
+    ? new Intl.DateTimeFormat("en-NG", { day: "numeric", month: "short", year: "numeric", timeZone: "Africa/Lagos" }).format(new Date(article.publishedAt))
+    : article.source,
+  image: article.image,
+}));
 
-  const [{ posts }, liveNews] = await Promise.all([
-    getPosts({ page, tag }),
-    getNigeriaEnergyNews({ limit: 9 }),
-  ]);
+export default async function BlogPage({ searchParams }) {
+  const params = await searchParams;
+  const liveNews = await getNigeriaEnergyNews({ limit: 9 });
 
   return (
     <div className="min-w-0">
-      <h1 className="sr-only">
-        Adesa Energy Blog — CNG Insights, News &amp; Guides
-      </h1>
-      <LiveNewsSection
-        articles={liveNews.articles}
-        unavailable={liveNews.unavailable}
+      <h1 className="sr-only">Adesa Energy Blog — CNG Insights, News &amp; Guides</h1>
+      <LiveNewsSection articles={[...liveNews.articles, ...adesaPressArticles]} unavailable={liveNews.unavailable} variant="page" />
+      <BlogSection
+        editorialPosts={[...siteConfig.blog.posts, ...pressPosts]}
+        initialTag={params?.tag}
         variant="page"
       />
-      <BlogSection editorialPosts={posts} variant="page" />
     </div>
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowRight, BookOpen, Calendar } from "lucide-react";
+import { ArrowRight, BookOpen, Calendar, Newspaper } from "lucide-react";
 import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -12,6 +12,7 @@ const POSTS_PER_PAGE = 8;
 export default function BlogSection({
   editorialPosts = siteConfig.blog.posts,
   variant = "page",
+  initialTag = "All",
 }) {
   const isBlogPage = variant === "page";
   const reduceMotion = useReducedMotion();
@@ -21,13 +22,13 @@ export default function BlogSection({
     () => ["All", ...new Set(editorialPosts.map((post) => post.tag))],
     [editorialPosts],
   );
-  const [activeTag, setActiveTag] = useState("All");
+  const [activeTag, setActiveTag] = useState(tags.includes(initialTag) ? initialTag : "All");
   const [visibleCount, setVisibleCount] = useState(POSTS_PER_PAGE);
 
   const filteredPosts = useMemo(() => {
     if (activeTag === "All") return restPosts;
-    return restPosts.filter((post) => post.tag === activeTag);
-  }, [activeTag, restPosts]);
+    return editorialPosts.filter((post) => post.tag === activeTag);
+  }, [activeTag, restPosts, editorialPosts]);
 
   const visiblePosts = isBlogPage
     ? filteredPosts.slice(0, visibleCount)
@@ -67,7 +68,7 @@ export default function BlogSection({
           )}
         </header>
 
-        {isBlogPage && featuredPost && (
+        {isBlogPage && activeTag === "All" && featuredPost && (
           <Link href={`/blog/${featuredPost.slug}`} className="group mb-12 block md:mb-16">
             <motion.article
               initial={
@@ -123,6 +124,7 @@ export default function BlogSection({
                 <button
                   key={tag}
                   type="button"
+                  aria-pressed={isActive}
                   onClick={() => {
                     setActiveTag(tag);
                     setVisibleCount(POSTS_PER_PAGE);
@@ -142,7 +144,13 @@ export default function BlogSection({
 
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
           {visiblePosts.map((post, index) => (
-            <Link key={post.slug} href={`/blog/${post.slug}`} className="group min-w-0">
+            <Link
+              key={post.slug}
+              href={post.url || `/blog/${post.slug}`}
+              target={post.url ? "_blank" : undefined}
+              rel={post.url ? "noopener noreferrer" : undefined}
+              className="group min-w-0"
+            >
               <motion.article
                 initial={
                   reduceMotion
@@ -155,6 +163,7 @@ export default function BlogSection({
                 className="flex h-full min-w-0 flex-col overflow-hidden rounded-3xl border border-slate-200/80 bg-slate-50 shadow-sm transition-[box-shadow,border-color] duration-300 group-hover:border-burnt-orange/30 group-hover:shadow-xl dark:border-white/10 dark:bg-[#0E1A38]"
               >
                 <div className="relative aspect-[16/10] overflow-hidden bg-slate-900">
+                  {post.image ? (
                   <Image
                     src={post.image}
                     alt={post.title}
@@ -162,6 +171,12 @@ export default function BlogSection({
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                   />
+                  ) : (
+                    <div className="flex h-full min-h-48 flex-col items-center justify-center gap-3 bg-[#0B1530] px-6 text-slate-300">
+                      <Newspaper className="h-10 w-10 text-burnt-orange" aria-hidden="true" />
+                      <span className="font-heading text-lg font-semibold">{post.source}</span>
+                    </div>
+                  )}
                   <div className="absolute inset-0 bg-linear-to-t from-slate-950/45 via-transparent to-transparent" />
                 </div>
 
@@ -179,7 +194,7 @@ export default function BlogSection({
                     {post.excerpt}
                   </p>
                   <span className="mt-auto inline-flex items-center gap-2 pt-6 font-heading text-sm font-bold text-burnt-orange">
-                    Read article
+                    {post.url ? `Read on ${post.source}` : "Read article"}
                     <ArrowRight className="h-4 w-4" aria-hidden="true" />
                   </span>
                 </div>

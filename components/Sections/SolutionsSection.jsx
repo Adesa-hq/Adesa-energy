@@ -36,7 +36,7 @@ const SolutionsSection = () => {
   return (
     <section
       id="solutions"
-      className="py-20 lg:py-28 bg-slate-50 dark:bg-[#060b17] transition-colors relative overflow-hidden"
+      className="pt-8 lg:pt-10 pb-20 lg:pb-28 bg-slate-50 dark:bg-[#060b17] transition-colors relative overflow-hidden"
     >
       {/* Ambient background decoration */}
       <div className="absolute top-1/3 right-0 w-[500px] h-[500px] bg-amber-500/5 dark:bg-amber-500/10 rounded-full blur-[140px] pointer-events-none -z-10" />
