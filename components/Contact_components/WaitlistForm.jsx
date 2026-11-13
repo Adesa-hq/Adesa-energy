@@ -4,34 +4,11 @@ import { Send, CheckCircle, XCircle, ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { conversionSchema as waitlistSchema } from "@/lib/conversion-schema.mjs";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { siteConfig } from "@/config/site";
 
 // Regex for valid Nigerian number: starts with 0 or +234, followed by 10 digits
-const nigeriaPhoneRegex = /^(?:0|\+234)[789][01]\d{8}$/;
-
-const waitlistSchema = z.object({
-  firstName: z.string().min(1, "First name is required"),
-  lastName: z.string().min(1, "Last name is required"),
-  phone: z.string().regex(nigeriaPhoneRegex, "Enter a valid Nigerian phone number (e.g. 08012345678)"),
-  vehicleType: z.string().min(1, "Vehicle type is required"),
-  location: z.string().min(1, "Location is required"),
-  vehicleYear: z
-    .string()
-    .refine(
-      (val) => Number(val) >= 1990 && Number(val) <= new Date().getFullYear(),
-      {
-        message: "Enter a valid vehicle year (1990 to present)",
-      },
-    ),
-  referralSource: z.string().min(1, "Referral source is required"),
-  numberOfVehicles: z.number().min(1, "Number of vehicles is required"),
-  interestType: z.string().min(1, "Interest type is required"),
-  profileType: z.string().min(1, "Profile type is required"),
-  consent: z.boolean().refine((val) => val === true, "Consent is required to proceed"),
-});
-
 const WaitlistForm = () => {
   const { form } = siteConfig.waitlist;
 
@@ -48,16 +25,19 @@ const WaitlistForm = () => {
   });
 
   const onSubmit = async (data) => {
+    setSubmitStatus(null);
+    setSubmitMessage("");
     try {
       const res = await fetch("/api/waitlist", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
+        signal: AbortSignal.timeout(35000),
       });
 
       const result = await res.json();
 
-      if (!res.ok || result.success === false) {
+      if (!res.ok || result.success !== true) {
         setSubmitStatus("error");
         setSubmitMessage(result.error || "Submission failed. Please try again.");
       } else {
@@ -66,18 +46,10 @@ const WaitlistForm = () => {
         reset();
       }
 
-      setTimeout(() => {
-        setSubmitStatus(null);
-        setSubmitMessage("");
-      }, 6000);
     } catch {
       setSubmitStatus("error");
       setSubmitMessage("Network connection error. Please try again.");
 
-      setTimeout(() => {
-        setSubmitStatus(null);
-        setSubmitMessage("");
-      }, 6000);
     }
   };
 

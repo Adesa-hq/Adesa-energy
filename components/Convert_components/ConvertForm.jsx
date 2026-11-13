@@ -4,36 +4,10 @@ import { Send, CheckCircle, XCircle, ChevronDown, ShieldCheck, Flame, Zap } from
 import { motion, AnimatePresence } from "framer-motion";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { z } from "zod";
+import { conversionSchema as convertSchema } from "@/lib/conversion-schema.mjs";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { siteConfig } from "@/config/site";
 import Link from "next/link";
-
-const nigeriaPhoneRegex = /^(?:0|\+234)[789][01]\d{8}$/;
-
-const convertSchema = z.object({
-  firstName: z.string().min(1, "First name is required"),
-  lastName: z.string().min(1, "Last name is required"),
-  phone: z
-    .string()
-    .regex(nigeriaPhoneRegex, "Enter a valid Nigerian phone number (e.g. 08012345678 or +2348012345678)"),
-  email: z.string().email("Enter a valid email").optional().or(z.literal("")),
-  vehicleType: z.string().min(1, "Please select your vehicle type"),
-  location: z.string().min(1, "Please select your preferred conversion centre"),
-  vehicleYear: z
-    .string()
-    .refine(
-      (val) => Number(val) >= 1990 && Number(val) <= new Date().getFullYear(),
-      {
-        message: "Enter a valid vehicle year (1990 to present)",
-      },
-    ),
-  referralSource: z.string().min(1, "Please tell us how you heard about us"),
-  numberOfVehicles: z.number().min(1, "Number of vehicles must be at least 1"),
-  interestType: z.string().min(1, "Please select an interest category"),
-  profileType: z.string().min(1, "Please select a profile type"),
-  consent: z.boolean().refine((val) => val === true, "Consent is required to proceed"),
-});
 
 const ConvertForm = () => {
   const { form } = siteConfig.convert;
@@ -56,16 +30,19 @@ const ConvertForm = () => {
   });
 
   const onSubmit = async (data) => {
+    setSubmitStatus(null);
+    setSubmitMessage("");
     try {
       const res = await fetch("/api/convert", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
+        signal: AbortSignal.timeout(35000),
       });
 
       const result = await res.json();
 
-      if (!res.ok || result.success === false) {
+      if (!res.ok || result.success !== true) {
         setSubmitStatus("error");
         setSubmitMessage(result.error || "Submission failed. Please try again.");
       } else {
@@ -74,18 +51,10 @@ const ConvertForm = () => {
         reset();
       }
 
-      setTimeout(() => {
-        setSubmitStatus(null);
-        setSubmitMessage("");
-      }, 7000);
     } catch {
       setSubmitStatus("error");
       setSubmitMessage("Network connection error. Please try again.");
 
-      setTimeout(() => {
-        setSubmitStatus(null);
-        setSubmitMessage("");
-      }, 6000);
     }
   };
 
